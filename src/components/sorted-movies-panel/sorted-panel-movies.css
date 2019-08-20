@@ -1,0 +1,23 @@
+#sort-panel-wrapp {
+  margin: 5px;
+  background: #141E30;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.sorted-panel-label {
+  color: rgb(255, 255, 255);
+  padding: 8px 30px;
+  background: linear-gradient(to right, #141E30, #20334a);
+}
+
+.ant-radio-button-wrapper-checked {
+  background: #1890ff2e !important;
+}

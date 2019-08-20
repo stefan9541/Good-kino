@@ -1,0 +1,85 @@
+.movie-name-and-add-to-favorite-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: linear-gradient(to right, #243B55, #141E30);
+}
+.video-player-header {
+  background: linear-gradient(to right, #243b54, #373B44);
+  color: #ffffff;
+  padding: 8px 10px;
+}
+.movie-name {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.movie-description-wrap {
+  display: flex;
+  padding: 12px 10px;
+  background: url("/img/bg-header.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.movie-poster {
+  width: 215px;
+  height: 300px;
+}
+.movie-poster img {
+  width: 100%;
+  height: 100%;
+}
+
+/* description list  */
+.description-list {
+  list-style: none;
+}
+.description-list li {
+  color: #fff;
+  font-size: 16px;
+  white-space: pre-wrap
+}
+.description-list li b {
+  color: #00aeef;
+  margin-right: 5px;
+}
+.description-list li:not(:nth-child(1)) {
+  padding: 5px 0;
+}
+
+.bottom-line {
+  background: linear-gradient(to right, #243B55, #141E30);
+  height: 10px;
+}
+
+/* rate-block */
+
+.rate-block-wrap {
+  background: #2d2d2d;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+.rate-block-wrap span {
+  color: #fff;
+}
+.ant-rate {
+  color: #00aeef !important;
+  display: flex;
+  align-items: center
+}
+.ant-rate-star {
+  margin-right: 5px !important;
+  font-size: 16px !important;
+}
+
+/* plot-block */
+
+.plot-block-wrap {
+  background: linear-gradient(to right, #434343, #1b2b40);
+  padding: 15px 7px 25px 10px;
+  color: #fff;
+}

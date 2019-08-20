@@ -1,0 +1,26 @@
+#search-input-wrap {
+  margin-bottom: 0;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form-input {
+  flex-grow: 1;
+}
+
+.search-form-input input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.search-form-button {
+  margin-bottom: 0;
+}
+.search-form-button button {
+  border-top-left-radius: 0;
+  margin-bottom: 0;
+  border-bottom-left-radius: 0
+}

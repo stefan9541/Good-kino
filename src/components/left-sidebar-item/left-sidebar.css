@@ -1,0 +1,19 @@
+#left-sidebar {
+  background: linear-gradient(to right, #434343, #000000);
+}
+
+.left-sidebar-sub-menu ul  {
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29) !important;
+}
+.left-sidebar-sub-menu ul li:hover {
+    background-color: rgba(139,199,255, 0.3) !important;
+}
+.sub-menu-icon-wrap {
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+}
+.sub-menu-icon {
+  width: 15%;
+  height: 50%;
+}

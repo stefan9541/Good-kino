@@ -1,0 +1,7 @@
+#search-result-item {
+  border-radius: 3px;
+  width: 330px;
+}
+#search-result-item li:hover {
+  background-color: rgba(139,199,255, 0.3) !important;;
+}

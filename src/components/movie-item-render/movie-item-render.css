@@ -1,0 +1,84 @@
+.movie-type-wrap>div {
+  background: #141E30;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  margin: 5px;
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.movie-type-wrap span {
+  padding: 7px 30px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.movie-type-wrap span:first-child {
+  background: #141E30;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #141E30, #20334a);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #141E30, #20334a);
+  border-radius: 5px;
+  width: 165px;
+}
+
+.movie-type-wrap a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.movie-wrap {
+  padding: 5px;
+  ;
+}
+
+.poster-wrap {
+  height: 225px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.poster-wrap img {
+  width: 100%;
+  height: 100%;
+  transition: transform .1s linear;
+}
+
+.poster-wrap:hover img {
+  transform: scale(1.1)
+}
+
+.title-wrap {
+  background-color: #00aeef;
+  height: 45px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.title-wrap a {
+  color: #fff;
+}
+
+.movie-released-wrap {
+  background-color: #5252529c;
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
+  margin-top: 7px;
+  margin-bottom: 10px;
+}
+
+.movie-released-wrap a {
+  text-decoration: underline;
+}
+
+.movie-released-wrap span {
+  color: #b5b0b0;
+  ;
+}

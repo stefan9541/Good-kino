@@ -1,0 +1,16 @@
+#main-content {
+  width: 1000px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#left-side-bar-container {
+  padding: 5px;
+  background-color: #2d2d2d42;
+}
+
+#home-page-movies-wrap {
+  /* padding: 5px; */
+  background-color: #2d2d2d42;
+}

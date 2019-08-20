@@ -1,0 +1,38 @@
+header {
+  /* width: 100%; */
+  background: url(./bg-header.jpg) no-repeat center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#header-item-wrap {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.home-logo img {
+  width: 90%;
+}
+
+.auth-profile-wrap {
+  display: flex;
+  margin-left: 13px;
+  justify-content: space-between
+}
+
+.auth-profile-wrap div:first-child {
+  margin-left: 75px;
+} 
+
+.input-search-wrap {
+  margin-left: 25px;
+}
+
+.ant-form-explain {
+  position: absolute !important;
+}

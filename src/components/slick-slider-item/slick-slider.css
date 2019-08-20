@@ -1,0 +1,40 @@
+#slider-container {
+  background: url("https://media.gettyimages.com/videos/empty-blue-cinema-hall-with-vip-seats-video-id473390851?s=640x640") no-repeat;
+  background-position: center -385px;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 350px;
+}
+#slider {
+  width: 1000px;
+  margin: 45px auto 35px auto ;
+}
+#slider-container div > h3 {
+  color: #fff;
+}
+
+.slider-item-wrap {
+  border: 2px solid transparent;
+}
+
+.slider-poster-wrap {
+  height: 235px;
+  overflow: hidden;
+}
+.slider-poster-wrap img {
+  width: 100%;
+  transition: transform .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  height: 100%;
+  border: 1px solid rgb(187, 181, 181)
+}
+.slider-poster-wrap img:hover {
+  transform: scale(1.1)
+}
+
+.slider-title-name-wrap a {
+  width: 100%;
+  padding: 5px;
+  display: block;
+  color: #fff;
+  font-weight: 500;
+}

@@ -1,0 +1,74 @@
+#extended-sample-panel {
+  display: flex;
+  background: linear-gradient(to right, #434343, #000000);
+}
+
+.extended-form-label {
+  display: block;
+  color: #fff;
+  padding: 10px 5px;
+  margin-top: 5px;
+}
+
+.extended-form-label span {
+  background: linear-gradient(to right, #00baff 0%, #00aeefc4 100%);
+  background-clip: text;
+  font-size: 16px;
+  ;
+  color: transparent;
+}
+
+.extended-form-label div {
+  line-height: 0;
+}
+
+#extended-sample-panel ul {
+  width: 100%;
+  background: linear-gradient(to right, #434343, #000000);
+}
+
+.extended-panel-select {
+  display: block;
+}
+
+.extended-panel-select>div,
+.extended-form-item button {
+  background: #232526;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #414345, #232526);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #414345, #232526);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border: 1px solid rgba(58, 86, 97, 0.88);
+  color: #fff;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.extended-panel-select span {
+  color: #fff;
+}
+
+.extended-input-number {
+  background: linear-gradient(to right, #414345, #232526);
+  border: 1px solid rgba(58, 86, 97, 0.88);
+  width: 100%;
+  color: #fff;
+  margin: 5px 0;
+}
+
+.extended-form-item {
+  margin-bottom: 0;
+}
+.extended-form-item button span {
+  color: #00aeef;
+}
+
+.extended-form-item:hover button,
+.extended-form-item button:active,
+.extended-form-item button:focus {
+  border-color: #40a9ff;
+  border-right-width: 1px !important;
+  background: linear-gradient(to right, #414345, #232526) !important;
+}
