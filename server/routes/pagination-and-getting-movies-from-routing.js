@@ -8,13 +8,14 @@ const paginationAndGettingMoviesFromRouting = () => {
     const movieByType = req.query.movieByType;
     const movieByGenre = req.query.movieByGenre;
     const topType = req.query.topType || "";
-    const yearValue = req.query.yearValue.split("-")[0];
+    const yearValue = req.query.yearValue;
     const sortedBy = req.query.sortedBy;
     const page = req.query.page;
     const word = req.query.word;
     const limit = 40;
     const offset = Number((page - 1) * limit);
     const currentPage = Math.ceil(offset / limit);
+    (yearValue) ? yearValue.split("-")[0] : null;
 
     const searchOptions = {
       Type: String(movieByType)
