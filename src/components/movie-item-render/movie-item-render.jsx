@@ -5,6 +5,10 @@ import SortedPanelMovies from "../sorted-movies-panel"
 
 import "./movie-item-render.css"
 
+function fixedEncodeURIComponent(str) {
+  return encodeURI(str).replace(/%20/g, '+')
+}
+
 const MovieItemRender = ({ signature, movies = [], watchAll, sortedPanel }) => {
   return (
     <React.Fragment>
@@ -23,10 +27,13 @@ const imgError = (event) => {
 const MovieWrap = ({ movies }) => {
   return (
     (movies || []).map(({ Poster, Title, Genre, Released, Type }, idx) => {
+      const splitGenre = Genre.split(",")[0];
+      const titlePath = `${Type}/${splitGenre}/${Title}`;
+      const currentPath = fixedEncodeURIComponent(titlePath);
       return (
         <Col key={`${Title}+ ${idx}`} className="movie-wrap" span={6}>
           <div className={"poster-wrap"}>
-            <Link to={"/pp3"}>
+            <Link to={currentPath}>
               <img onError={imgError} src={Poster}  alt={`${Title} movie poster`} />
             </Link>
           </div>
