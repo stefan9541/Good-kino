@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button } from 'antd/lib/radio';
-import { Icon, Slider, Menu } from 'antd';
+import { Icon, Menu } from 'antd';
 import Video from "../video"
+import VideoControlPanel from '../video-control-panel';
 
 import "./video-player.css"
 
@@ -85,6 +85,10 @@ class VideoPlayer extends Component {
     this.setState({ volume: value, toogleQualityMenu: false })
     videoRef.current.volume = value / 100;
   }
+  
+  volumeToolTip = (value) => {
+    return `${value}%`
+  }
 
   fullScreenMode = () => {
     const videoCurrent = customRef.current;
@@ -142,16 +146,6 @@ class VideoPlayer extends Component {
     return (
       <React.Fragment>
         <div ref={customRef} className="custom-video-player-wrapp">
-          {/* <div className="video-wrapp">
-            <div style={{ display: onLoadVisibleBlock }} className="play-button-wrapp">
-              <button onClick={this.hidePreviousPlayButton}>
-                <Icon type="play-circle" />
-              </button>
-            </div>
-            <video onTimeUpdate={this.getCurrentTime} onClick={this.tooglePlayVideo} ref={videoRef} >
-              <source type="video/mp4" src={'/multimedia/tony-tone.mp4'} />
-            </video >
-          </div> */}
           <Video
             ref={videoRef}
             getCurrentTime={this.getCurrentTime}
@@ -162,32 +156,25 @@ class VideoPlayer extends Component {
 
           <div className="custom-control-panel-wrap">
             <div className="custom-controls">
-              <div className="play-pause-button">
-                <Button onClick={this.tooglePlayVideo}>
-                  {playPauseIcon}
-                </Button>
-              </div>
-              <div className="current-time">
-                {currentTimeFormat}
-              </div>
-              <div className="slider-duration">
-                <Slider
-                  onChange={this.rewindVideo}
-                  value={this.state.currentTime}
-                  max={this.state.duration}
-                  tipFormatter={this.toolTipFormat}
-                  onAfterChange={this.handleAfterChange}
-                />
-              </div>
-              <div className="duration-time">
-                {durationFormat}
-              </div>
-              <div className="volume-icon">
-                {volumeIcon}
-              </div>
-              <div className="volume-slider">
-                <Slider value={volume} onChange={this.handleVolumeChange} />
-              </div>
+              <VideoControlPanel
+                // volume slider
+                volumeValue={volume}
+                volumeToolTip={this.volumeToolTip}
+                handleVolumeChange={this.handleVolumeChange}
+                volumeIcon={volumeIcon}
+                // video slider
+                handleRewindVideo={this.rewindVideo}
+                rewindVideoValue={this.state.currentTime}
+                maxDurationVideo={this.state.duration}
+                toolTipFormat={this.toolTipFormat}
+                handleOnAfterChange={this.handleAfterChange}
+                // other text value
+                durationVideo={durationFormat}
+                currentTimeVideo={currentTimeFormat}
+                playPauseIcon={playPauseIcon}
+                // play pause button
+                tooglePlayVideo={this.tooglePlayVideo}
+              />
 
               <div onClick={this.toogleQualityMenu} className="quality-change">
                 <div style={{ display: visibleQualityMenu }} className="overlay-qality">
