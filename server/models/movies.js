@@ -89,6 +89,10 @@ const moviesModel = new Schema({
   },
   imdbID: {
     type: String
+  },
+  movies: {
+    type: Schema.Types.ObjectId,
+    ref: "multimedia"
   }
 });
 
