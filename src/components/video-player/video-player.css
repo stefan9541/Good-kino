@@ -1,4 +1,4 @@
-video {
+/* video {
   width: 100%;
   height: 100%;
 }
@@ -6,9 +6,9 @@ video {
 .video-wrapp {
   padding: 10px;
   width: 100%;
-}
+} */
 
-.play-button-wrapp {
+/* .play-button-wrapp {
   width: 100%;
   height: 100%;
   z-index: 555123;
@@ -16,13 +16,8 @@ video {
   top: 0;
   left: 0;
   background-color: #fff;
-}
+} */
 
-.video-player-header {
-  background: linear-gradient(to right, #243b54, #373B44);
-  color: #ffffff;
-  padding: 8px 10px;
-}
 
 .custom-video-player-wrapp {
   display: flex;

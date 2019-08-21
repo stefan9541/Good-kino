@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'antd/lib/radio';
 import { Icon, Slider, Menu } from 'antd';
+import Video from "../video"
 
 import "./video-player.css"
 
@@ -141,16 +142,23 @@ class VideoPlayer extends Component {
     return (
       <React.Fragment>
         <div ref={customRef} className="custom-video-player-wrapp">
-          <div className="video-wrapp">
+          {/* <div className="video-wrapp">
             <div style={{ display: onLoadVisibleBlock }} className="play-button-wrapp">
               <button onClick={this.hidePreviousPlayButton}>
                 <Icon type="play-circle" />
               </button>
             </div>
-            <video onTimeUpdate={this.getCurrentTime} onSeeking={this.playing} onClick={this.tooglePlayVideo} ref={videoRef} >
+            <video onTimeUpdate={this.getCurrentTime} onClick={this.tooglePlayVideo} ref={videoRef} >
               <source type="video/mp4" src={'/multimedia/tony-tone.mp4'} />
             </video >
-          </div>
+          </div> */}
+          <Video
+            ref={videoRef}
+            getCurrentTime={this.getCurrentTime}
+            tooglePlayVideo={this.tooglePlayVideo}
+            hidePreviousPlayButton={this.hidePreviousPlayButton}
+            onLoadVisibleBlock={onLoadVisibleBlock}
+          />
 
           <div className="custom-control-panel-wrap">
             <div className="custom-controls">
