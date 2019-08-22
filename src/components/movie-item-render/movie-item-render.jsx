@@ -28,7 +28,7 @@ const MovieWrap = ({ movies }) => {
   return (
     (movies || []).map(({ Poster, Title, Genre, Released, Type }, idx) => {
       const splitGenre = Genre.split(",")[0];
-      const titlePath = `${Type}/${splitGenre}/${Title}`;
+      const titlePath = `/${Type}/${splitGenre}/${Title}`;
       const currentPath = fixedEncodeURIComponent(titlePath);
       return (
         <Col key={`${Title}+ ${idx}`} className="movie-wrap" span={6}>
