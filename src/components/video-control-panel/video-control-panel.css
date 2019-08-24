@@ -9,7 +9,10 @@
   height: 18px;
 }
 .play-pause-button:hover button {
-  height: 18px;
+  box-shadow: none;
+  background: transparent
+}
+.play-pause-button button:focus {
   box-shadow: none;
   background: transparent
 }

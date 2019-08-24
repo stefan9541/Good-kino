@@ -1,0 +1,23 @@
+.quality-change {
+  margin: 0 15px;
+  height: 18px;
+  position: relative;
+}
+
+.quality-change svg {
+  color: #157edf;
+  width: 18px;
+  height: 18px;
+}
+
+.quality-change:hover svg {
+  transform: scale(1.1);
+  cursor: pointer
+}
+
+.overlay-qality {
+  display: block;
+  position: absolute;
+  top: -165px;
+  left: -25px;
+}

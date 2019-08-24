@@ -60,4 +60,11 @@ export default class GoodKinoService {
       throw err;
     }
   }
+  fetchVideoForPlayer = async (movieId, quality) => {
+    try {
+      return await axios.get("/api/current-quality", { params: { movieId, quality } })
+    } catch (error) {
+      throw error
+    }
+  }
 }

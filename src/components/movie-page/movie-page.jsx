@@ -19,7 +19,8 @@ const MoviePage = (props) => {
     imdbRating,
     imdbVotes,
     Released,
-    Genre
+    Genre,
+    _id
   } = props.movieDescription;
   const replacedYear = (Year) ? Year.replace(new RegExp("–", "ig"), "") : null
 
@@ -92,7 +93,7 @@ const MoviePage = (props) => {
         {props.movieDescription.Title}
       </div>
       <Col >
-        <VideoPlayer />
+        <VideoPlayer movieId={_id} />
       </Col>
 
     </Col>

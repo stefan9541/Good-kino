@@ -16,4 +16,4 @@ const multimediaModel = new Schema({
   }
 })
 
-module.exports = mongoose.model("multimedia", multimediaModel)
+module.exports = mongoose.model("multimedias", multimediaModel)

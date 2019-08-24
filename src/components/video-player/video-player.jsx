@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import withGoodKinoService from "../hoc"
 import { Icon, Menu } from 'antd';
 import Video from "../video"
 import VideoControlPanel from '../video-control-panel';
+import QualityChange from "../quality-change"
 
 import "./video-player.css"
 
@@ -11,13 +13,18 @@ const videoRef = React.createRef();
 
 class VideoPlayer extends Component {
 
+  _isMounted = false
+
   state = {
     tooglePlay: false,
     toogleQualityMenu: false,
     visiblePlayButton: true,
     duration: 0,
     currentTime: 0,
-    volume: 50
+    volume: 50,
+    currentQuality: "480",
+    videoPath: "",
+    err: null
   }
 
   formatTime = (time) => {
@@ -50,6 +57,10 @@ class VideoPlayer extends Component {
     return toolTipFormat
   }
 
+  volumeToolTip = (value) => {
+    return `${value}%`
+  }
+
   rewindVideo = (value) => {
     videoRef.current.pause();
     this.setState({ currentTime: Math.floor(value), toogleQualityMenu: false })
@@ -58,6 +69,11 @@ class VideoPlayer extends Component {
   handleAfterChange = (value) => {
     videoRef.current.currentTime = Math.floor(value);
     videoRef.current.play()
+  }
+
+  handleVolumeChange = (value) => {
+    this.setState({ volume: value, toogleQualityMenu: false })
+    videoRef.current.volume = value / 100;
   }
 
   tooglePlayVideo = () => {
@@ -79,15 +95,6 @@ class VideoPlayer extends Component {
       duration
     })
     videoRef.current.play()
-  }
-
-  handleVolumeChange = (value) => {
-    this.setState({ volume: value, toogleQualityMenu: false })
-    videoRef.current.volume = value / 100;
-  }
-  
-  volumeToolTip = (value) => {
-    return `${value}%`
   }
 
   fullScreenMode = () => {
@@ -126,6 +133,33 @@ class VideoPlayer extends Component {
     this.setState({ toogleQualityMenu: !this.state.toogleQualityMenu })
   }
 
+  handleFetchVideoforPlayer = (quality) => {
+    const { fetchVideoForPlayer } = this.props.goodKinoService
+    const { movieId } = this.props;
+    // const { currentQuality } = this.state;
+    fetchVideoForPlayer(movieId, quality || "480")
+      .then(({ data }) => {
+        if (this._isMounted) {
+          this.setState({
+            visiblePlayButton: true,
+            tooglePlay: true,
+          })
+          videoRef.current.src = data.path
+          videoRef.current.pause()
+          videoRef.current.currentTime = 0;
+        }
+      })
+      .catch(err => this.setState({ err }))
+  }
+
+  componentDidMount() {
+    this._isMounted = true
+    this.handleFetchVideoforPlayer()
+  }
+  componentWillUnmount() {
+    this._isMounted = false
+  }
+
   render() {
     const { tooglePlay,
       visiblePlayButton,
@@ -133,6 +167,7 @@ class VideoPlayer extends Component {
       currentTime,
       duration,
       volume } = this.state;
+
     const volumeIcon = (volume === 0)
       ? <i><img src="/svg-icon/123.svg" alt="" /></i>
       : <Icon type="sound" theme="filled" />;
@@ -147,7 +182,9 @@ class VideoPlayer extends Component {
       <React.Fragment>
         <div ref={customRef} className="custom-video-player-wrapp">
           <Video
+            videoPath={this.state.videoPath}
             ref={videoRef}
+            fetchVideoforPlayer={this.handleFetchVideoforPlayer}
             getCurrentTime={this.getCurrentTime}
             tooglePlayVideo={this.tooglePlayVideo}
             hidePreviousPlayButton={this.hidePreviousPlayButton}
@@ -176,12 +213,11 @@ class VideoPlayer extends Component {
                 tooglePlayVideo={this.tooglePlayVideo}
               />
 
-              <div onClick={this.toogleQualityMenu} className="quality-change">
-                <div style={{ display: visibleQualityMenu }} className="overlay-qality">
-                  {menu}
-                </div>
-                <Icon type="setting" />
-              </div>
+              <QualityChange
+                toogleQualityMenu={this.toogleQualityMenu}
+                onQualityChange={this.handleFetchVideoforPlayer}
+                visible={visibleQualityMenu}
+              />
 
               <div onClick={this.fullScreenMode} className="fullscreen-button">
                 <Icon type="fullscreen" />
@@ -194,17 +230,4 @@ class VideoPlayer extends Component {
   }
 }
 
-const menu = (
-  <Menu onClick={(item) => console.log(item)}>
-    <Menu.Item key="0">
-      480p
-    </Menu.Item>
-    <Menu.Item key="1">
-      720p
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="3">1080</Menu.Item>
-  </Menu>
-)
-
-export default VideoPlayer;
+export default withGoodKinoService()(VideoPlayer);

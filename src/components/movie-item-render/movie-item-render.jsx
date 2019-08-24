@@ -7,24 +7,27 @@ import "./movie-item-render.css"
 
 function fixedEncodeURIComponent(str) {
   return encodeURI(str).replace(/%20/g, '+')
-}
+};
+
+const imgError = (event) => {
+  event.target.src = "https://ispwp.com/img/image-not-available-big.jpg"
+};
 
 const MovieItemRender = ({ signature, movies = [], watchAll, sortedPanel }) => {
+  const type = (movies[0]) ? movies[0].Type : "";
   return (
     <React.Fragment>
       {
         (sortedPanel) ? <SortedPanelMovies /> : null
       }
-      <MovieType signature={signature} watchAll={watchAll} />
-      <MovieWrap movies={movies} />
+      <MovieType type={type} signature={signature} watchAll={watchAll} />
+      <MovieRender movies={movies} />
     </React.Fragment>
   );
 }
-const imgError = (event) => {
-  event.target.src = "https://ispwp.com/img/image-not-available-big.jpg"
-}
 
-const MovieWrap = ({ movies }) => {
+
+const MovieRender = ({ movies }) => {
   return (
     (movies || []).map(({ Poster, Title, Genre, Released, Type }, idx) => {
       const splitGenre = Genre.split(",")[0];
@@ -34,7 +37,7 @@ const MovieWrap = ({ movies }) => {
         <Col key={`${Title}+ ${idx}`} className="movie-wrap" span={6}>
           <div className={"poster-wrap"}>
             <Link to={currentPath}>
-              <img onError={imgError} src={Poster}  alt={`${Title} movie poster`} />
+              <img onError={imgError} src={Poster} alt={`${Title} movie poster`} />
             </Link>
           </div>
 
@@ -59,7 +62,7 @@ const MovieWrap = ({ movies }) => {
 }
 
 
-const MovieType = ({ signature, watchAll }) => {
+const MovieType = ({ signature, watchAll, type }) => {
   return (
     <Col className={"movie-type-wrap"} span={24}>
       <div>
@@ -69,7 +72,7 @@ const MovieType = ({ signature, watchAll }) => {
         {
           (watchAll) ?
             <span>
-              <Link to="/">
+              <Link to={`/${type}`}>
                 Смотреть Все
               </Link>
             </span> : null

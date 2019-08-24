@@ -40,7 +40,6 @@ class MoviePageContainer extends Component {
       return <PageNotFound />
     }
 
-    console.log(this.props)
     return (
       <MoviePage movieDescription={this.props.movie} />
     );
