@@ -11,10 +11,16 @@ function fixedEncodeURIComponent(str) {
 class SearchInputResultItem extends Component {
 
   render() {
-    const { visible, handleMenuClick, handleVisibleChange, item, loading } = this.props
+    const { visible, handleMenuClick, handleVisibleChange, item, loading, word, handleSubmit } = this.props
     return (
       <Dropdown
-        overlay={<MenuItem handleMenuClick={handleMenuClick} item={item} loading={loading} />}
+        overlay={<MenuItem word={word}
+          handleMenuClick={handleMenuClick}
+          handleSubmit={handleSubmit}
+          item={item}
+          loading={loading}
+          {...this.props}
+        />}
         trigger={["click"]}
         onVisibleChange={handleVisibleChange}
         visible={visible}
@@ -26,7 +32,8 @@ class SearchInputResultItem extends Component {
   }
 }
 
-const MenuItem = ({ item, loading, handleMenuClick }) => {
+const MenuItem = ({ item, loading, handleMenuClick, word, history }) => {
+  console.log(word)
   let resultHint;
 
   if (item.length < 1) {
@@ -34,7 +41,7 @@ const MenuItem = ({ item, loading, handleMenuClick }) => {
   } else if (item.length <= 5) {
     resultHint = null;
   } else {
-    resultHint = `Смотреть все результаты найдено (${item.length})`
+    resultHint = <Link to={`/search?word=${word}`}>Смотреть все результаты найдено ({item.length})</Link>
   };
 
   if (loading) {
@@ -54,8 +61,8 @@ const MenuItem = ({ item, loading, handleMenuClick }) => {
           const genre = Genre.split(",")[0];
           const linkHref = `/${Type}/${genre}/${Title}`;
           return (
-            <Menu.Item style={{height: "auto"}} key={_id}>
-              <Link style={{whiteSpace:"pre-wrap"}} to={fixedEncodeURIComponent(linkHref)}>
+            <Menu.Item style={{ height: "auto" }} key={_id}>
+              <Link style={{ whiteSpace: "pre-wrap" }} to={fixedEncodeURIComponent(linkHref)}>
                 <span>
                   {Title}
                 </span>

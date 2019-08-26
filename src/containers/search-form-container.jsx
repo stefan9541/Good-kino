@@ -14,11 +14,17 @@ import * as moviesDataAction from "../actions/pagination-routes-action";
 
 class SearchFormContainer extends Component {
 
+  state = {
+    inputValue: ""
+  }
+
   handleSubmit = (e, value) => {
     e.preventDefault();
     const { history } = this.props;
     const parseParams = queryStr.parse(this.props.location.search);
-    history.push(`/search?word=${value || parseParams.word}`);
+    if (value.length >= 2) {
+      history.push(`/search?word=${value || parseParams.word}`);
+    }
   };
 
   handleMenuClick = () => {
@@ -36,6 +42,7 @@ class SearchFormContainer extends Component {
     } = this.props;
 
     const inputValue = e.target.value;
+    this.setState({inputValue})
 
     searchInputRequst();
     if (inputValue.length >= 2) {
@@ -64,6 +71,7 @@ class SearchFormContainer extends Component {
 
   render() {
     const { word } = queryStr.parse(this.props.location.search);
+    const { history } = queryStr.parse(this.props);
     const { visible, searchData, loading } = this.props;
     return (
       <React.Fragment>
@@ -75,6 +83,7 @@ class SearchFormContainer extends Component {
         />
         <SearchInputResultItem
           item={searchData}
+          word={this.state.inputValue}
           handleMenuClick={this.handleMenuClick}
           loading={loading}
           visible={visible}

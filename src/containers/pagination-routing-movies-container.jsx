@@ -62,7 +62,10 @@ class PaginationRoutingMoviesContainer extends Component {
         </div>
       )
     }
+    if (data.length < 1 ) return <div style={{color: "white", fontSize:"18px"}}>По вашим критерия ничего не найдено Попробуйте выбрать что нибудь другое</div>
+
     if (error) return <ErrorIndicator />
+
 
     return (
       <React.Fragment>
@@ -83,7 +86,7 @@ class PaginationRoutingMoviesContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.paginationRouteReducer.paginationRoutesData,
+    data: state.paginationRouteReducer.movies,
     loading: state.paginationRouteReducer.loading,
     error: state.paginationRouteReducer.error,
   }

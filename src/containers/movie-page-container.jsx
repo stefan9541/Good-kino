@@ -48,7 +48,7 @@ class MoviePageContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    movie: state.paginationRouteReducer.paginationRoutesData,
+    movie: state.paginationRouteReducer.movies,
     loading: state.paginationRouteReducer.loading,
     error: state.paginationRouteReducer.error
   }

@@ -1,18 +1,18 @@
 export const movieForPaginationRouteRequest = () => {
   return {
-    type: "MOVIE_FOR_PAGINATION_ROUTE_REQUEST"
+    type: "FETCH_MOVIE_FROM_PAGINATION_ROUTE_REQUEST"
   }
 }
 
 export const movieForPaginationRouteSuccess = movies => {
   return {
-    type: "MOVIE_FOR_PAGINATION_ROUTE_SUCCESS",
+    type: "FETCH_MOVIE_FROM_PAGINATION_ROUTE_SUCCESS",
     payload: movies
   }
 }
 export const movieForPaginationRouteFailure = err => {
   return {
-    type: "MOVIE_FOR_PAGINATION_ROUTE_FAILURE",
+    type: "FETCH_MOVIE_FROM_PAGINATION_ROUTE_FAILURE",
     payload: err
   }
 }

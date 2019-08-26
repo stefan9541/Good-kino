@@ -1,27 +1,27 @@
 const initialState = {
-  paginationRoutesData: [],
+  movies: [],
   loading: true,
   error: null
 }
 
 const paginationRouteReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "MOVIE_FOR_PAGINATION_ROUTE_REQUEST":
+    case "FETCH_MOVIE_FROM_PAGINATION_ROUTE_REQUEST":
       return {
-        paginationRoutesData: [],
+        movies: [],
         loading: true,
         error: null,
       }
-    case "MOVIE_FOR_PAGINATION_ROUTE_SUCCESS":
+    case "FETCH_MOVIE_FROM_PAGINATION_ROUTE_SUCCESS":
       return {
-        paginationRoutesData: action.payload,
+        movies: action.payload,
         loading: false,
         error: null
       }
 
-    case "MOVIE_FOR_PAGINATION_ROUTE_FAILURE":
+    case "FETCH_MOVIE_FROM_PAGINATION_ROUTE_FAILURE":
       return {
-        paginationRoutesData: [],
+        movies: [],
         loading: false,
         error: action.payload,
       }
