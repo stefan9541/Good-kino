@@ -62,24 +62,22 @@ class PaginationRoutingMoviesContainer extends Component {
         </div>
       )
     }
-    if (data.length < 1 ) return <div style={{color: "white", fontSize:"18px"}}>По вашим критерия ничего не найдено Попробуйте выбрать что нибудь другое</div>
+    if (data.length < 1) return <div style={{ color: "white", fontSize: "18px" }}>По вашим критерия ничего не найдено Попробуйте выбрать что нибудь другое</div>
 
     if (error) return <ErrorIndicator />
 
 
     return (
-      <React.Fragment>
-        <ErrorBoundry>
-          <MovieItemRender sortedPanel={sortedPanel} movies={data.result} signature={`${data.signature || ""}`} />
-          {
-            (totalCount > 40) ?
-              <PaginationComponent
-                current={currentPage}
-                total={totalCount}
-              /> : null
-          }
-        </ErrorBoundry>
-      </React.Fragment>
+      <ErrorBoundry>
+        <MovieItemRender sortedPanel={sortedPanel} movies={data.result} signature={`${data.signature || ""}`} />
+        {
+          (totalCount > 40) ?
+            <PaginationComponent
+              current={currentPage}
+              total={totalCount}
+            /> : null
+        }
+      </ErrorBoundry>
     )
   }
 }

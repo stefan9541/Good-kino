@@ -5,24 +5,23 @@ const moviesModel = require("../models/movies");
 
 const paginationAndGettingMoviesFromRouting = () => {
   router.get("/routing-movies", (req, res) => {
-    const movieByType = req.query.movieByType;
-    const movieByGenre = req.query.movieByGenre;
-    const topType = req.query.topType || "";
-    const yearValue = req.query.yearValue;
-    const sortedBy = req.query.sortedBy;
-    const page = req.query.page;
-    const word = req.query.word;
+    const { movieByType,
+      movieByGenre,
+      topType = "",
+      yearValue,
+      sortedBy,
+      page,
+      word } = req.query
     const limit = 40;
-    const offset = Number((page - 1) * limit);
+    const offset = +(page - 1) * limit;
     const currentPage = Math.ceil(offset / limit);
-    (yearValue) ? yearValue.split("-")[0] : null;
 
     const searchOptions = {
       Type: String(movieByType)
     };
 
-    (movieByGenre) ? searchOptions.Genre = { $regex: movieByGenre, $options: "ig" } : null;
-    (yearValue) ? searchOptions.Year = { $regex: yearValue, $options: "ig" } : null;
+    movieByGenre ? searchOptions.Genre = { $regex: movieByGenre, $options: "ig" } : null;
+    yearValue ? searchOptions.Year = { $regex: yearValue, $options: "ig" } : null;
 
     const signature = `смотреть все ${movieByType} ${topType || movieByGenre || ""}`
 

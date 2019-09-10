@@ -7,8 +7,8 @@ import SlickSliderItem from "../components/slick-slider-item"
 class SlickSLiderContainer extends Component {
 
   setting = {
-    infinite: true,
-    speed: 2000,
+    infinite: false,
+    speed: 1000,
     touchMove: false,
     slidesToShow: 5,
     slidesToScroll: 5

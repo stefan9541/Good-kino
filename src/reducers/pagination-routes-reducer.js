@@ -1,7 +1,8 @@
 const initialState = {
   movies: [],
   loading: true,
-  error: null
+  error: null,
+  movieId: null
 }
 
 const paginationRouteReducer = (state = initialState, action) => {

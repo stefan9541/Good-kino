@@ -6,7 +6,6 @@ const ObjectId  = require("mongoose").Types.ObjectId;
 const qualityMovie = () => {
   router.get("/current-quality", (req, res) => {
     const { movieId, quality } = req.query;
-    console.log(req.query)
     multimediaModel.findOne({
       owner: ObjectId(movieId),
       quality: quality

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { compose } from "redux"
 import withGoodKinoService from "../hoc"
-import { Icon, Menu } from 'antd';
+import { Icon, } from 'antd';
 import Video from "../video"
 import VideoControlPanel from '../video-control-panel';
 import QualityChange from "../quality-change"
@@ -64,10 +65,10 @@ class VideoPlayer extends Component {
   rewindVideo = (value) => {
     videoRef.current.pause();
     this.setState({ currentTime: Math.floor(value), toogleQualityMenu: false })
+    videoRef.current.currentTime = Math.floor(value);
   }
 
-  handleAfterChange = (value) => {
-    videoRef.current.currentTime = Math.floor(value);
+  handleAfterChange = () => {
     videoRef.current.play()
   }
 
@@ -168,6 +169,7 @@ class VideoPlayer extends Component {
       duration,
       volume } = this.state;
 
+
     const volumeIcon = (volume === 0)
       ? <i><img src="/svg-icon/123.svg" alt="" /></i>
       : <Icon type="sound" theme="filled" />;
@@ -179,55 +181,54 @@ class VideoPlayer extends Component {
     const durationFormat = this.formatTime(duration);
     const currentTimeFormat = this.formatTime(currentTime);
     return (
-      <React.Fragment>
-        <div ref={customRef} className="custom-video-player-wrapp">
-          <Video
-            videoPath={this.state.videoPath}
-            ref={videoRef}
-            fetchVideoforPlayer={this.handleFetchVideoforPlayer}
-            getCurrentTime={this.getCurrentTime}
-            tooglePlayVideo={this.tooglePlayVideo}
-            hidePreviousPlayButton={this.hidePreviousPlayButton}
-            onLoadVisibleBlock={onLoadVisibleBlock}
-          />
+      <div ref={customRef} className="custom-video-player-wrapp">
+        <Video
+          videoPath={this.state.videoPath}
+          ref={videoRef}
+          getCurrentTime={this.getCurrentTime}
+          tooglePlayVideo={this.tooglePlayVideo}
+          hidePreviousPlayButton={this.hidePreviousPlayButton}
+          onLoadVisibleBlock={onLoadVisibleBlock}
+        />
 
-          <div className="custom-control-panel-wrap">
-            <div className="custom-controls">
-              <VideoControlPanel
-                // volume slider
-                volumeValue={volume}
-                volumeToolTip={this.volumeToolTip}
-                handleVolumeChange={this.handleVolumeChange}
-                volumeIcon={volumeIcon}
-                // video slider
-                handleRewindVideo={this.rewindVideo}
-                rewindVideoValue={this.state.currentTime}
-                maxDurationVideo={this.state.duration}
-                toolTipFormat={this.toolTipFormat}
-                handleOnAfterChange={this.handleAfterChange}
-                // other text value
-                durationVideo={durationFormat}
-                currentTimeVideo={currentTimeFormat}
-                playPauseIcon={playPauseIcon}
-                // play pause button
-                tooglePlayVideo={this.tooglePlayVideo}
-              />
+        <div className="custom-control-panel-wrap">
+          <div className="custom-controls">
+            <VideoControlPanel
+              // volume slider
+              volumeValue={volume}
+              volumeToolTip={this.volumeToolTip}
+              handleVolumeChange={this.handleVolumeChange}
+              volumeIcon={volumeIcon}
+              // video slider
+              handleRewindVideo={this.rewindVideo}
+              rewindVideoValue={this.state.currentTime}
+              maxDurationVideo={this.state.duration}
+              toolTipFormat={this.toolTipFormat}
+              handleOnAfterChange={this.handleAfterChange}
+              // other text value
+              durationVideo={durationFormat}
+              currentTimeVideo={currentTimeFormat}
+              playPauseIcon={playPauseIcon}
+              // play pause button
+              tooglePlayVideo={this.tooglePlayVideo}
+            />
 
-              <QualityChange
-                toogleQualityMenu={this.toogleQualityMenu}
-                onQualityChange={this.handleFetchVideoforPlayer}
-                visible={visibleQualityMenu}
-              />
+            <QualityChange
+              toogleQualityMenu={this.toogleQualityMenu}
+              onQualityChange={this.handleFetchVideoforPlayer}
+              visible={visibleQualityMenu}
+            />
 
-              <div onClick={this.fullScreenMode} className="fullscreen-button">
-                <Icon type="fullscreen" />
-              </div>
+            <div onClick={this.fullScreenMode} className="fullscreen-button">
+              <Icon type="fullscreen" />
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
-export default withGoodKinoService()(VideoPlayer);
+export default compose(
+  withGoodKinoService(),
+)(VideoPlayer);

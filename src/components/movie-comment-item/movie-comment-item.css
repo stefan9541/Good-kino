@@ -1,0 +1,45 @@
+.comment-header {
+  background-color: #2d2d2d;
+  padding: 7px 15px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between
+}
+
+.user-name {
+  color: #ffffff
+}
+
+.comment-date {
+  color: #888888;
+  margin-left: 10px;
+}
+
+.like-dislike-button span {
+  margin: 0 10px;
+  color: #fff
+}
+
+.like-dislike-button i {
+  font-size: 16px;
+}
+
+.like-dislike-button i:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.comment-body {
+  display: flex;
+  padding: 15px;
+  background-color: #242424;
+}
+
+.comment-text {
+  color: #fff;
+  margin-left: 25px;
+}
+
+.ant-form-item {
+  margin-bottom: 24px !important;
+}

@@ -16,7 +16,7 @@ class HomePageContainer extends Component {
     const { movieForHomePageRequest,
       movieForHomePageSuccess,
       movieForHomePageFailure } = this.props;
-      movieForHomePageRequest()
+    movieForHomePageRequest()
     getMovieFromHomePage()
       .then(res => {
         movieForHomePageSuccess(res.data)

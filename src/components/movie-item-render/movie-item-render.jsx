@@ -28,10 +28,11 @@ const MovieItemRender = ({ signature, movies = [], watchAll, sortedPanel }) => {
 
 
 const MovieRender = ({ movies }) => {
+  console.log("asd")
   return (
     (movies || []).map(({ Poster, Title, Genre, Released, Type }, idx) => {
-      const splitGenre = Genre.split(",")[0];
-      const titlePath = `/${Type}/${splitGenre}/${Title}`;
+      // const splitGenre = Genre.split(",")[0];
+      const titlePath = `/${Type}/${"asd"}/${Title}`;
       const currentPath = fixedEncodeURIComponent(titlePath);
       return (
         <Col key={`${Title}+ ${idx}`} className="movie-wrap" span={6}>

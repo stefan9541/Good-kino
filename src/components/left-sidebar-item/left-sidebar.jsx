@@ -39,7 +39,6 @@ const LeftSidebarItem = ({ sideBarItems }) => {
                   )
                 })
               }
-
             </SubMenu>
           )
         })

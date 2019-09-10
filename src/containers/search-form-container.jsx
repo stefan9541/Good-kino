@@ -71,7 +71,6 @@ class SearchFormContainer extends Component {
 
   render() {
     const { word } = queryStr.parse(this.props.location.search);
-    const { history } = queryStr.parse(this.props);
     const { visible, searchData, loading } = this.props;
     return (
       <React.Fragment>

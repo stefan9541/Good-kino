@@ -1,11 +1,17 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-inline-comments */
 import React from 'react';
-import { Col, Button, Icon, Rate } from "antd"
-import { Link } from "react-router-dom"
+import { Col, Rate } from "antd";
 
-import "./movie-page.css"
+import "./movie-page.css";
 import VideoPlayer from '../video-player';
+import MovieDescription from "../movie-description";
+import MovieNameAndAddToFavorite from "../movie-name-add-to-favorite";
+// import MovieComment from "../movie-comment"
 
-const MoviePage = (props) => {
+const MoviePage = props => {
   const {
     Actors,
     Country,
@@ -22,54 +28,31 @@ const MoviePage = (props) => {
     Genre,
     _id
   } = props.movieDescription;
-  const replacedYear = (Year) ? Year.replace(new RegExp("–", "ig"), "") : null
+  const replacedYear = (Year) ? Year.replace(new RegExp("–", "ig"), "") : null;
 
   return (
-    <Col span={18}>
-      <Col className={"movie-name-and-add-to-favorite-wrap"}>
-        <Col className={"movie-name"}>
-          <span>{Title}</span>
-        </Col>
-        <Col className="add-to-favorite">
-          <Button>
-            <Icon type="heart"></Icon>
-          </Button>
-        </Col>
-      </Col>
+    // <Col span={18}>
+    <React.Fragment>
 
-      <Col className="movie-description-wrap">
-        <Col span={7} className="movie-poster">
-          <img src={Poster} alt={"movie poster"} />
-        </Col>
-        <Col className="movie-description">
-          <ul className="description-list">
-            <li>
-              <b>Рейтинги:</b> imdb: {imdbRating}  <small>({imdbVotes})</small>
-            </li>
-            <li>
-              <b>Год Выпуска:</b> <Link to={`/${Type}/year/${replacedYear}`}>{replacedYear}</Link>
-            </li>
-            <li>
-              <b>Дата выхода:</b> {Released}
-            </li>
-            <li>
-              <b>Страна:</b> {Country}
-            </li>
-            <li>
-              <b>Продолжительность:</b> {Runtime}
-            </li>
-            <li>
-              <b>Жанр:</b> {Genre}
-            </li>
-            <li>
-              <b>Режиссер:</b> {Director}
-            </li>
-            <li>
-              <b>В ролях:</b> {Actors}
-            </li>
-          </ul>
-        </Col>
-      </Col>
+
+      <MovieNameAndAddToFavorite
+        title={Title}
+      />
+
+      <MovieDescription
+        genre={Genre}
+        released={Released}
+        year={replacedYear}
+        type={Type}
+        actors={Actors}
+        poster={Poster}
+        runtime={Runtime}
+        imdbRating={imdbRating}
+        imdbVotes={imdbVotes}
+        country={Country}
+        director={Director}
+      />
+
       <Col className="bottom-line">
         {/* blue-line */}
       </Col>
@@ -92,12 +75,17 @@ const MoviePage = (props) => {
       <div className="video-player-header">
         {props.movieDescription.Title}
       </div>
-      <Col >
-        <VideoPlayer movieId={_id} />
+      <Col>
+        <VideoPlayer movieId={_id}/>
       </Col>
 
-    </Col>
-  );
-}
+      {/* commentaries list */}
 
-export default MoviePage
+      {/* <MovieComment movieId={_id} /> */}
+
+    </React.Fragment>
+    // </Col>
+  );
+};
+
+export default MoviePage;

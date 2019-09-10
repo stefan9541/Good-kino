@@ -4,7 +4,8 @@ const paginationAndGettingMoviesFromRouting = require("./pagination-and-getting-
 const searchFormRoute = require("./search-form-router");
 const filterFormRouter = require("./filter-form-router");
 const moviePageRouter = require("./movie-page-router");
-const qualityMovie = require("./quality-movie");
+const qualityMovieRouter = require("./quality-movie");
+const commentariesRouter = require("./commentaries-router");
 
 const routes = (app) => {
   app.use("/api", leftSidebarRoute());
@@ -13,7 +14,8 @@ const routes = (app) => {
   app.use("/api", searchFormRoute());
   app.use("/api", filterFormRouter());
   app.use("/api", moviePageRouter());
-  app.use("/api", qualityMovie());
+  app.use("/api", qualityMovieRouter());
+  app.use("/api", commentariesRouter());
 }
 
 module.exports = routes

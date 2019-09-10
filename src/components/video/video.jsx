@@ -14,7 +14,7 @@ class Video extends React.Component {
       hidePreviousPlayButton,
       onLoadVisibleBlock,
       innerRef,
-      videoPath
+      videoPath,
     } = this.props;
 
     return (

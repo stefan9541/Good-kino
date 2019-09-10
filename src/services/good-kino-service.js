@@ -67,4 +67,24 @@ export default class GoodKinoService {
       throw error
     }
   }
+
+  fetchCommentaries = async (movieId, page) => {
+    try {
+      return await axios.get("/api/get-commentaries", { params: { movieId, page } })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  postCommentaries = async (commentar) => {
+    try {
+      return await axios.post("/api/post-commentaries", {
+        ...commentar,
+        body: commentar.commentText,
+        author: commentar.nickname
+      })
+    } catch (error) {
+      throw error
+    }
+  }
 }
