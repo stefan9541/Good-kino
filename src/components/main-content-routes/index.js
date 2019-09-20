@@ -1,3 +1,3 @@
-import MainContentRoutes from "./main-content-routes"
+import MainContentRoutes from "./main-content-routes";
 
 export default MainContentRoutes;

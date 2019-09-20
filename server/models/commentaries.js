@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+
+const { Schema } = mongoose;
 
 const commentariesModel = new Schema({
   movieId: {
@@ -20,4 +21,4 @@ const commentariesModel = new Schema({
   }
 });
 
-module.exports = mongoose.model("commentaries", commentariesModel)
+module.exports = mongoose.model("commentaries", commentariesModel);

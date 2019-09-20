@@ -1,25 +1,25 @@
-import React from 'react';
-import { Row, Col } from "antd"
+import React from "react";
+import { Row, Col } from "antd";
 
-import LeftSideBarContainer from "../../containers/left-sidebar-container"
+import LeftSideBarContainer from "../../containers/left-sidebar-container";
 
-import "./layout.css"
+import "./layout.css";
 
-const Layout = (props) => {
+const Layout = props => {
   const { sidebar } = props;
 
   if (!sidebar) {
     return (
-      <Row id={"main-content"}>
+      <Row id="main-content">
         <Col span={24}>
           {props.children}
         </Col>
       </Row>
-    )
-  };
+    );
+  }
 
   return (
-    <Row id={"main-content"}>
+    <Row id="main-content">
       <Col span={5} id="left-side-bar-container">
         <LeftSideBarContainer />
       </Col>
@@ -29,6 +29,6 @@ const Layout = (props) => {
       </Col>
     </Row>
   );
-}
+};
 
 export default Layout;

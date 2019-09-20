@@ -1,21 +1,21 @@
-import React from 'react';
-import { Col, Icon, Button } from "antd"
+import React from "react";
+import { Col, Icon, Button } from "antd";
 
-import "./movie-name-add-to-favorite.css"
+import "./movie-name-add-to-favorite.css";
 
-const MovieNameAndAddToFavorite = ({title}) => {
+const MovieNameAndAddToFavorite = ({ title }) => {
   return (
-    <Col className={"movie-name-and-add-to-favorite-wrap"}>
-      <Col className={"movie-name"}>
+    <Col className="movie-name-and-add-to-favorite-wrap">
+      <Col className="movie-name">
         <span>{title}</span>
       </Col>
       <Col className="add-to-favorite">
         <Button>
-          <Icon type="heart"></Icon>
+          <Icon type="heart" />
         </Button>
       </Col>
     </Col>
   );
-}
+};
 
 export default MovieNameAndAddToFavorite;

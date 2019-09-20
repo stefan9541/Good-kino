@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Col, Button, Spin } from "antd";
+import React, { Component } from "react";
+import { Col, Button } from "antd";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import withGoodKinoService from "../hoc";
@@ -16,47 +16,52 @@ import MovieCommentItem from "../movie-comment-item";
 import "./movie-comments.css";
 
 class MovieComment extends Component {
-
   state = {
     loading: false,
     iconLoading: false,
     commentariesPage: 0
   }
 
-  fetchCommentaries = () => {
+  componentDidMount() {
+    this.fetchingData();
+    console.log("privet")
+
+  }
+
+  fetchingData = () => {
     const { fetchCommentaries } = this.props.goodKinoService;
     const {
       movieId,
-      fetchCommentariesRequest,
       fetchCommentariesSuccess,
-      fetchCommentariesFailure } = this.props;
+      fetchCommentariesFailure,
+      fetchCommentariesRequest
+    } = this.props;
 
     fetchCommentariesRequest();
-    if (movieId) {
+    fetchCommentaries(movieId)
+      .then(res => fetchCommentariesSuccess(res.data))
+      .catch(err => fetchCommentariesFailure(err));
+  }
+
+  handleFetchNewCommentaries = () => {
+    {
+      const { fetchCommentaries } = this.props.goodKinoService;
+      const { fetchNewCommentaries, movieId } = this.props;
+      this.setState({ loading: true });
       fetchCommentaries(movieId)
-        .then(res => fetchCommentariesSuccess(res.data))
-        .catch(err => fetchCommentariesFailure(err));
-    }
-  }
-
-  componentDidMount() {
-    this.fetchCommentaries();
-  }
-
-
-  componentDidUpdate(prevProps) {
-    if (this.props.movieId !== prevProps.movieId) {
-      this.fetchCommentaries()
+        .then(res => {
+          fetchNewCommentaries(res.data);
+          this.setState({ loading: false });
+        });
     }
   }
 
   render() {
     const { commentaries } = this.props;
-    console.log(commentaries);
     return (
       <Col id="comment-wrapp">
         <span className="comment-value">
-          {`Всего комментариев ${commentaries.length}`}
+          {`Total comments ${commentaries.length}`}
         </span>
 
         <MovieCommentFormContainer movieId={this.props.movieId} />
@@ -65,24 +70,11 @@ class MovieComment extends Component {
 
         <Button
           type="primary"
-          onClick={() => {
-            const { fetchCommentaries } = this.props.goodKinoService;
-            const { fetchNewCommentaries } = this.props;
-            this.setState({ loading: true });
-            fetchCommentaries()
-              .then(res => {
-                fetchNewCommentaries(res.data);
-                this.setState({ loading: false });
-              });
-          }}
+          disabled={this.state.loading}
+          onClick={this.handleFetchNewCommentaries}
         >
-          Click me!
+          Load more comments
         </Button>
-        <br />
-        {
-          (this.state.loading) ? <Spin style={{ marginBottom: " 100px" }} size="large" /> : null
-        }
-
       </Col>
     );
   }

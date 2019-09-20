@@ -1,3 +1,3 @@
-import ScrollUpButton from "./scroll-up-button"
+import ScrollUpButton from "./scroll-up-button";
 
-export default ScrollUpButton
+export default ScrollUpButton;

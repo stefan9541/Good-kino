@@ -1,20 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // eslint-disable-next-line import/no-extraneous-dependencies
 const express = require("express");
+
 const router = express.Router();
 const commentariesModel = require("../models/commentaries");
 
-const ObjectId = require("mongoose").Types.ObjectId;
+const { ObjectId } = require("mongoose").Types;
 
-module.exports = function () {
-
+module.exports = () => {
   router.get("/get-commentaries", (req, res) => {
-    console.log(req.query);
     commentariesModel.find({
       movieId: ObjectId(req.query.movieId)
     })
       .then(commentaries => {
-        commentaries.reverse(),
+        commentaries.reverse();
         res.json(commentaries);
       });
   });

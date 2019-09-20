@@ -1,17 +1,20 @@
 const express = require("express");
+
 const router = express.Router();
 
 const genreModel = require("../models/genres");
 
 const leftSidebarRoute = () => {
   router.get("/privet", (req, res) => {
-    genreModel.find({}, function(err, result) {
-      if (err) res.json({err: true, label: "bad response"});
+    genreModel.find({}, (err, result) => {
+      if (err) {
+        res.status(404);
+      }
       res.json(result);
-    })
+    });
   });
 
   return router;
-}
+};
 
 module.exports = leftSidebarRoute;

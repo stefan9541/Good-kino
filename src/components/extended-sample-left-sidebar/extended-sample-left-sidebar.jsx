@@ -1,34 +1,35 @@
-import React, { Component } from 'react';
-import { Menu, InputNumber, Form, Button, Select } from "antd";
+import React, { Component } from "react";
+import {
+  Menu, InputNumber, Form, Button, Select
+} from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
-import "./extended-sample-left-sidebar.css"
+import "./extended-sample-left-sidebar.css";
 
 const { Option } = Select;
 
 class ExtendedSampleLeftSidebar extends Component {
-
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const { getFieldsValue } = this.props.form;
     const { history } = this.props;
     const { byType, byGenre, year } = getFieldsValue();
-    const url = `/filter?byType=${byType}&byGenre=${byGenre}&year=${year}`
-    history.push(url)
+    const url = `/filter?byType=${byType}&byGenre=${byGenre}&year=${year}`;
+    history.push(url);
   }
 
-  handleSelectChange = (value) => {
-    const { resetFields } = this.props.form
-    console.log(value)
-    resetFields(['byGenre'])
+  handleSelectChange = () => {
+    const { resetFields } = this.props.form;
+    resetFields(["byGenre"]);
   }
 
   render() {
     const { getFieldDecorator, getFieldValue } = this.props.form;
-    const { items } = this.props
+    const { items } = this.props;
     const selectValueByType = getFieldValue("byType");
+    const currentYear = new Date().getFullYear();
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -63,7 +64,7 @@ class ExtendedSampleLeftSidebar extends Component {
               По жанрам
             </Form.Item>
 
-            {/*if value of select(by-type) === films, render only films genre*/}
+            {/* if value of select(by-type) === films, render only films genre */}
 
             <Form.Item className="extended-form-item">
               {
@@ -78,9 +79,9 @@ class ExtendedSampleLeftSidebar extends Component {
                             item.links.map(({ label }) => {
                               return (
                                 <Option value={label}>{label}</Option>
-                              )
+                              );
                             })
-                          )
+                          );
                         }
                       })
                     }
@@ -92,11 +93,12 @@ class ExtendedSampleLeftSidebar extends Component {
             <Form.Item className="extended-form-item extended-form-label">
               Годам
             </Form.Item>
+
             <Form.Item className="extended-form-item">
               {
                 getFieldDecorator("year", {
-                  rules: [{ min: "1950", max: "2019", type: "number" }],
-                  initialValue: "2019"
+                  rules: [{ min: "1950", max: currentYear, type: "number", message: " " }],
+                  initialValue: "2015"
                 })(
                   <InputNumber className="extended-input-number" />
                 )
@@ -113,13 +115,13 @@ class ExtendedSampleLeftSidebar extends Component {
       </Form>
     );
   }
-};
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     items: state.leftSidebarReducer.leftSidebarItems
-  }
-}
+  };
+};
 
 export default compose(
   withRouter,

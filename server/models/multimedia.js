@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+
+const { Schema } = mongoose;
 
 const multimediaModel = new Schema({
   owner: {
@@ -14,6 +15,6 @@ const multimediaModel = new Schema({
     type: String,
     required: true
   }
-})
+});
 
-module.exports = mongoose.model("multimedias", multimediaModel)
+module.exports = mongoose.model("multimedias", multimediaModel);

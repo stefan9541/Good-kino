@@ -1,27 +1,26 @@
-import React, { Component } from 'react';
-import { compose } from "redux"
-import { connect } from "react-redux"
-import withGoodKinoService from "../components/hoc"
-import {
-  movieForHomePageRequest,
-  movieForHomePageSuccess,
-  movieForHomePageFailure
-} from "../actions/home-apge-action"
-import MovieItemRender from "../components/movie-item-render"
+import React, { Component } from "react";
+import { compose, bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import withGoodKinoService from "../components/hoc";
+import * as movieDataActions from "../actions/movie-data-action";
+
+import MovieItemRender from "../components/movie-item-render";
 
 class HomePageContainer extends Component {
-
   componentDidMount() {
+    const reducerName = "home-page";
     const { getMovieFromHomePage } = this.props.goodKinoService;
-    const { movieForHomePageRequest,
-      movieForHomePageSuccess,
-      movieForHomePageFailure } = this.props;
-    movieForHomePageRequest()
+    const {
+      fetchMovieDataRequest,
+      fetchMovieDataSuccess,
+      fetchMovieDataFailure
+    } = this.props;
+    fetchMovieDataRequest(reducerName);
     getMovieFromHomePage()
       .then(res => {
-        movieForHomePageSuccess(res.data)
+        fetchMovieDataSuccess(res.data, reducerName);
       })
-      .catch(err => movieForHomePageFailure(err));
+      .catch(err => fetchMovieDataFailure(err, reducerName));
   }
 
   render() {
@@ -30,33 +29,33 @@ class HomePageContainer extends Component {
       films = [],
       anime = [],
       series = []] = (homePageData || []).map(({ doc }) => {
-        return (doc || []).slice(0, 8).sort(() => .5 - Math.random())
+        return (doc || []).slice(0, 8)
+          .sort(() => 0.5 - Math.random());
       });
 
     return (
       <React.Fragment>
-        <MovieItemRender movies={cartoon} signature={"Новые Мультфильмы"} watchAll={true} />
-        <MovieItemRender movies={films} signature={"Новые Фильмы"} watchAll={true} />
-        <MovieItemRender movies={anime} signature={"Новые Аниме"} watchAll={true} />
-        <MovieItemRender movies={series} signature={"Новые Сериалы"} watchAll={true} />
+        <MovieItemRender movies={cartoon} signature="Новые Мультфильмы" watchAll />
+        <MovieItemRender movies={films} signature="Новые Фильмы" watchAll />
+        <MovieItemRender movies={anime} signature="Новые Аниме" watchAll />
+        <MovieItemRender movies={series} signature="Новые Сериалы" watchAll />
       </React.Fragment>
     );
   }
 }
 
-const mapDispatchToProps = {
-  movieForHomePageRequest,
-  movieForHomePageSuccess,
-  movieForHomePageFailure
-}
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ ...movieDataActions }, dispatch);
+};
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    homePageData: state.homePageReducer.homePageData
-  }
-}
+    homePageData: state.homePage.movies,
+    loading: state.homePage.loading
+  };
+};
 
 export default compose(
   withGoodKinoService(),
   connect(mapStateToProps, mapDispatchToProps)
-)(HomePageContainer)
+)(HomePageContainer);

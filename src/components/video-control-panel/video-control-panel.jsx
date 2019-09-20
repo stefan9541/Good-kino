@@ -1,9 +1,9 @@
-import React from 'react';
-import { Button, Slider } from 'antd';
+import React from "react";
+import { Button, Slider } from "antd";
 
-import "./video-control-panel.css"
+import "./video-control-panel.css";
 
-const VideoControlPanel = (props) => {
+const VideoControlPanel = props => {
   const {
     volumeValue,
     handleVolumeChange,
@@ -18,7 +18,7 @@ const VideoControlPanel = (props) => {
     playPauseIcon,
     tooglePlayVideo,
     volumeToolTip
-  } = props
+  } = props;
   return (
     <React.Fragment>
       <div className="play-pause-button">
@@ -45,13 +45,14 @@ const VideoControlPanel = (props) => {
         {volumeIcon}
       </div>
       <div className="volume-slider">
-        <Slider 
-        value={volumeValue} 
-        tipFormatter={volumeToolTip}
-        onChange={handleVolumeChange} />
+        <Slider
+          value={volumeValue}
+          tipFormatter={volumeToolTip}
+          onChange={handleVolumeChange}
+        />
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default VideoControlPanel;

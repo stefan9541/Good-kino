@@ -1,11 +1,11 @@
 const initialState = {
   leftSidebarItems: [],
-  err: null,
-}
+  err: null
+};
 
 const leftSidebarReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LEFT_SIDEBAR_REQUEST" :
+    case "LEFT_SIDEBAR_REQUEST":
       return {
         ...state,
         leftSidebarItems: action.payload
@@ -14,11 +14,11 @@ const leftSidebarReducer = (state = initialState, action) => {
       return {
         ...state,
         err: action.payload
-      }
-  
+      };
+
     default:
       return state;
   }
-}
+};
 
 export default leftSidebarReducer;

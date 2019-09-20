@@ -1,15 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-inline-comments */
-import React from 'react';
+import React from "react";
 import { Col, Rate } from "antd";
 
 import "./movie-page.css";
-import VideoPlayer from '../video-player';
+import VideoPlayer from "../video-player";
 import MovieDescription from "../movie-description";
 import MovieNameAndAddToFavorite from "../movie-name-add-to-favorite";
-// import MovieComment from "../movie-comment"
 
 const MoviePage = props => {
   const {
@@ -33,7 +28,6 @@ const MoviePage = props => {
   return (
     // <Col span={18}>
     <React.Fragment>
-
 
       <MovieNameAndAddToFavorite
         title={Title}
@@ -76,12 +70,8 @@ const MoviePage = props => {
         {props.movieDescription.Title}
       </div>
       <Col>
-        <VideoPlayer movieId={_id}/>
+        <VideoPlayer movieId={_id} />
       </Col>
-
-      {/* commentaries list */}
-
-      {/* <MovieComment movieId={_id} /> */}
 
     </React.Fragment>
     // </Col>

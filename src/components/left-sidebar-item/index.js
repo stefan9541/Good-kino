@@ -1,3 +1,3 @@
-import LeftSidebarItem from "./left-sidebar"
+import LeftSidebarItem from "./left-sidebar";
 
-export default LeftSidebarItem
+export default LeftSidebarItem;

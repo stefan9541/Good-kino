@@ -1,3 +1,3 @@
-import SearchInputResultItem from "./search-input-result-item"
+import SearchInputResultItem from "./search-input-result-item";
 
-export default SearchInputResultItem
+export default SearchInputResultItem;

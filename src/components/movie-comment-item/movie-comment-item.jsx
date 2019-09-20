@@ -1,9 +1,11 @@
 import React from 'react';
-import { Col, Icon, Avatar, Tooltip } from "antd"
+import {
+  Col, Icon, Avatar, Tooltip
+} from "antd";
 
-import "./movie-comment-item.css"
+import "./movie-comment-item.css";
 
-const MovieCommentItem = (props) => {
+const MovieCommentItem = props => {
   const { commentaries } = props;
   return (
     (commentaries || []).map(({ createdAt, author, body, _id }, index) => {
@@ -31,7 +33,7 @@ const MovieCommentItem = (props) => {
           </Col>
           <Col className="comment-body">
             <div className="user-avatar">
-              <Avatar size={64} icon={"user"} />
+              <Avatar size={64} icon="user" />
             </div>
             <div className="comment-text">
               <span>

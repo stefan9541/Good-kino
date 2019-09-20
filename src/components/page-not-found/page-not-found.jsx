@@ -1,43 +1,42 @@
-import React from 'react';
-import {withRouter} from "react-router"
+import React from "react";
+import { withRouter } from "react-router-dom";
 
-import "./page-not-found.css"
+import "./page-not-found.css";
 
 
-const PageNotFound = (props) => {
-
+const PageNotFound = props => {
   const onButtonClick = () => {
-    const {history} = props
-    history.push("/")
+    const { history } = props;
+    history.push("/");
   };
 
-  console.log(props)
+  console.log(props);
   return (
     <div className="container">
       <div className="error">
         <p className="p">4</p>
         <span className="dracula">
           <div className="con">
-            <div className="hair"></div>
-            <div className="hair-r"></div>
-            <div className="head"></div>
-            <div className="eye"></div>
-            <div className="eye eye-r"></div>
-            <div className="mouth"></div>
-            <div className="blod"></div>
-            <div className="blod blod2"></div>
+            <div className="hair" />
+            <div className="hair-r" />
+            <div className="head" />
+            <div className="eye" />
+            <div className="eye eye-r" />
+            <div className="mouth" />
+            <div className="blod" />
+            <div className="blod blod2" />
           </div>
         </span>
         <p className="p">4</p>
 
         <div className="page-ms">
           <p className="page-msg"> Oops, the page you're looking for Disappeared </p>
-          <button onClick={onButtonClick} className="go-back">Go Home</button>
+          <button type="button" onClick={onButtonClick} className="go-back">Go Home</button>
         </div>
       </div>
     </div>
 
-  )
-}
+  );
+};
 
 export default withRouter(PageNotFound);

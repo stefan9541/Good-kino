@@ -1,3 +1,3 @@
-import MovieCommentForm from "./movie-comment-form"
+import MovieCommentForm from "./movie-comment-form";
 
 export default MovieCommentForm;

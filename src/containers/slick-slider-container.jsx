@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { compose } from "redux"
-import { connect } from "react-redux"
-import SlickSliderItem from "../components/slick-slider-item"
+import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import SlickSliderItem from "../components/slick-slider-item";
 
 
 class SlickSLiderContainer extends Component {
-
   setting = {
     infinite: false,
     speed: 1000,
@@ -15,16 +14,17 @@ class SlickSLiderContainer extends Component {
   }
 
   render() {
-    const { sliderItem  } = this.props;
+    const { sliderItem } = this.props;
     const [cartoon = [],
       anime = [],
       movies = [],
       series = []] = (sliderItem || []).map(({ doc }) => (doc || []).slice(0, 5));
 
     const sliderItems = cartoon.concat(anime, movies, series)
-      .sort(function () {
-        return .5 - Math.random()
+      .sort(() => {
+        return 0.5 - Math.random();
       });
+
 
     return (
       <SlickSliderItem items={sliderItems} setting={this.setting} />
@@ -33,13 +33,13 @@ class SlickSLiderContainer extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    sliderItem: state.homePageReducer.homePageData
-  }
-}
+    sliderItem: state.homePage.movies
+  };
+};
 
 
 export default compose(
   connect(mapStateToProps)
-)(SlickSLiderContainer)
+)(SlickSLiderContainer);

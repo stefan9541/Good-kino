@@ -1,3 +1,3 @@
-import MoviePage from "./movie-page"
+import MoviePage from "./movie-page";
 
-export default MoviePage
+export default MoviePage;

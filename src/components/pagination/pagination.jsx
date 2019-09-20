@@ -1,56 +1,55 @@
-import React from 'react';
-import { Pagination, Col, Icon } from "antd"
-import { Link } from "react-router-dom"
-import { withRouter } from "react-router";
+import React from "react";
+import { Pagination, Col, Icon } from "antd";
+import { Link, withRouter } from "react-router-dom";
+// import { withRouter } from 'react-router-dom';
 import qstr from "query-string";
 
-import "./pagination.css"
+import "./pagination.css";
 
 class PaginationComponent extends React.Component {
-
-  handlePageClick = (page) => {
-    window.scrollTo(0, 0)
-    // console.log(page)
-    // const { history } = this.props
-    // const { location: { pathname } } = this.props
-    // history.push(`${pathname}?page=${page}`)
-
-  }
-
-  createParamsToHref = (objWithParams) => {
-    let str = ""
-    for (const key in objWithParams) {
-      str += `&${key}=${objWithParams[key]}`
-    }
-    return str
+  handlePageClick = () => {
+    window.scrollTo(0, 0);
   }
 
   itemRender = (current, type) => {
     const { location: { pathname, search } } = this.props;
-    const searchParam = qstr.parse(search)
+    let params = "";
+    const searchParam = qstr.parse(search);
     delete searchParam.page;
-    const params = this.createParamsToHref(searchParam);
 
+    if (Object.entries(searchParam).length === 0) {
+      params = "";
+    } else {
+      params = `&${qstr.stringify(searchParam)}`;
+    }
 
     switch (type) {
       case "page":
-        return <Link to={`${pathname}?page=${current}${params}`}>{current}</Link>
+        return <Link to={`${pathname}?page=${current}${params}`}>{current}</Link>;
       case "prev":
-        return <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
-          <Icon type="left" />
-        </Link>;
+        return (
+          <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
+            <Icon type="left" />
+          </Link>
+        );
       case "next":
-        return <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
-          <Icon type="right" />
-        </Link>;
+        return (
+          <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
+            <Icon type="right" />
+          </Link>
+        );
       case "jump-prev":
-        return <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
-          <Icon type="double-left" />
-        </Link>;
+        return (
+          <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
+            <Icon type="double-left" />
+          </Link>
+        );
       case "jump-next":
-        return <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
-          <Icon type="double-right" />
-        </Link>;
+        return (
+          <Link className="ant-pagination-item-link" to={`${pathname}?page=${current}${params}`}>
+            <Icon type="double-right" />
+          </Link>
+        );
       default:
         break;
     }
@@ -71,7 +70,6 @@ class PaginationComponent extends React.Component {
         />
       </Col>
     );
-
   }
 }
 

@@ -1,3 +1,3 @@
-import VideoControlPanel from "./video-control-panel"
+import VideoControlPanel from "./video-control-panel";
 
 export default VideoControlPanel;

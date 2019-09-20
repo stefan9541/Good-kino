@@ -1,9 +1,9 @@
 import {
-    GoodKinoServiceProvider,
-    GoodKinoServiceConsumer
-} from "./good-kibo-service-context"
+  GoodKinoServiceProvider,
+  GoodKinoServiceConsumer
+} from "./good-kibo-service-context";
 
 export {
-    GoodKinoServiceProvider,
-    GoodKinoServiceConsumer
-}
+  GoodKinoServiceProvider,
+  GoodKinoServiceConsumer
+};

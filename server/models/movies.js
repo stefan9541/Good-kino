@@ -1,5 +1,6 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+
+const { Schema } = mongoose;
 
 const moviesModel = new Schema({
   Title: {
@@ -53,14 +54,14 @@ const moviesModel = new Schema({
     default: []
   },
   Metascore: {
-    type: String,
+    type: String
   },
   imdbRating: {
     type: String,
     required: true
   },
   imdbVotes: {
-    type: Number,
+    type: Number
     // required: true
   },
   Type: {
@@ -89,7 +90,7 @@ const moviesModel = new Schema({
   },
   imdbID: {
     type: String
-  },
+  }
 });
 
-module.exports = mongoose.model("movies", moviesModel)
+module.exports = mongoose.model("movies", moviesModel);

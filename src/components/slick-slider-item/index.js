@@ -1,3 +1,3 @@
-import SlickSliderItem from "./slick-slider-item"
+import SlickSliderItem from "./slick-slider-item";
 
 export default SlickSliderItem;

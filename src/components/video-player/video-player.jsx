@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-import { compose } from "redux"
-import withGoodKinoService from "../hoc"
-import { Icon, } from 'antd';
-import Video from "../video"
-import VideoControlPanel from '../video-control-panel';
-import QualityChange from "../quality-change"
+import React, { Component } from "react";
+import { compose } from "redux";
+import { Icon } from "antd";
+import withGoodKinoService from "../hoc";
+import Video from "../video";
+import VideoControlPanel from "../video-control-panel";
+import QualityChange from "../quality-change";
 
-import "./video-player.css"
+import "./video-player.css";
 
 // const = React.createRef()
 const customRef = React.createRef();
 const videoRef = React.createRef();
 
 class VideoPlayer extends Component {
-
   _isMounted = false
 
   state = {
@@ -28,7 +27,16 @@ class VideoPlayer extends Component {
     err: null
   }
 
-  formatTime = (time) => {
+  componentDidMount() {
+    this._isMounted = true;
+    this.handleFetchVideoforPlayer();
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  formatTime = time => {
     const hours = Math.floor(time / 3600);
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time - minutes * 60);
@@ -36,51 +44,51 @@ class VideoPlayer extends Component {
     let secondValue;
 
     if (minutes < 10) {
-      minuteValue = '0' + minutes;
+      minuteValue = `0${minutes}`;
     } else {
       minuteValue = minutes;
     }
 
     if (seconds < 10) {
-      secondValue = '0' + seconds;
+      secondValue = `0${seconds}`;
     } else {
       secondValue = seconds;
     }
 
-    return (hours > 0) ?
-      hours + ":" + minuteValue + ':' + secondValue
-      : minuteValue + ':' + secondValue;
+    return (hours > 0)
+      ? `${hours}:${minuteValue}:${secondValue}`
+      : `${minuteValue}:${secondValue}`;
   }
 
-  toolTipFormat = (value) => {
+  toolTipFormat = value => {
     const { duration } = this.state;
-    const toolTipFormat = `${this.formatTime(value)} : ${this.formatTime(duration)}`
-    return toolTipFormat
+    const toolTipFormat = `${this.formatTime(value)} : ${this.formatTime(duration)}`;
+    return toolTipFormat;
   }
 
-  volumeToolTip = (value) => {
-    return `${value}%`
+  volumeToolTip = value => {
+    return `${value}%`;
   }
 
-  rewindVideo = (value) => {
+  rewindVideo = value => {
     videoRef.current.pause();
-    this.setState({ currentTime: Math.floor(value), toogleQualityMenu: false })
+    this.setState({ currentTime: Math.floor(value), toogleQualityMenu: false });
     videoRef.current.currentTime = Math.floor(value);
   }
 
   handleAfterChange = () => {
-    videoRef.current.play()
+    videoRef.current.play();
   }
 
-  handleVolumeChange = (value) => {
-    this.setState({ volume: value, toogleQualityMenu: false })
+  handleVolumeChange = value => {
+    this.setState({ volume: value, toogleQualityMenu: false });
     videoRef.current.volume = value / 100;
   }
 
   tooglePlayVideo = () => {
     if (videoRef.current.paused) {
-      this.setState({ tooglePlay: true, toogleQualityMenu: false })
-      videoRef.current.play()
+      this.setState({ tooglePlay: true, toogleQualityMenu: false });
+      videoRef.current.play();
     } else {
       this.setState({ tooglePlay: false, toogleQualityMenu: false });
       videoRef.current.pause();
@@ -94,16 +102,16 @@ class VideoPlayer extends Component {
       tooglePlay: true,
       toogleQualityMenu: false,
       duration
-    })
-    videoRef.current.play()
+    });
+    videoRef.current.play();
   }
 
   fullScreenMode = () => {
     const videoCurrent = customRef.current;
-    this.setState({ toogleQualityMenu: false })
+    this.setState({ toogleQualityMenu: false });
 
-    if (!document.fullscreenElement &&    // alternative standard method
-      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {  // current working methods
+    if (!document.fullscreenElement // alternative standard method
+      && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) { // current working methods
       if (videoCurrent.requestFullscreen) {
         videoCurrent.requestFullscreen();
       } else if (videoCurrent.msRequestFullscreen) {
@@ -113,61 +121,53 @@ class VideoPlayer extends Component {
       } else if (videoCurrent.webkitRequestFullscreen) {
         videoCurrent.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
       }
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
     }
   }
 
   getCurrentTime = () => {
-    this.setState({ currentTime: Math.floor(videoRef.current.currentTime) })
+    this.setState({ currentTime: Math.floor(videoRef.current.currentTime) });
   }
 
   toogleQualityMenu = () => {
-    this.setState({ toogleQualityMenu: !this.state.toogleQualityMenu })
+    this.setState({ toogleQualityMenu: !this.state.toogleQualityMenu });
   }
 
-  handleFetchVideoforPlayer = (quality) => {
-    const { fetchVideoForPlayer } = this.props.goodKinoService
+  handleFetchVideoforPlayer = quality => {
+    const { fetchVideoForPlayer } = this.props.goodKinoService;
     const { movieId } = this.props;
     // const { currentQuality } = this.state;
-    fetchVideoForPlayer(movieId, quality || "480")
+    fetchVideoForPlayer(movieId, quality || "720")
       .then(({ data }) => {
         if (this._isMounted) {
           this.setState({
             visiblePlayButton: true,
-            tooglePlay: true,
-          })
-          videoRef.current.src = data.path
-          videoRef.current.pause()
+            tooglePlay: true
+          });
+          videoRef.current.src = data.path;
+          videoRef.current.pause();
           videoRef.current.currentTime = 0;
         }
       })
-      .catch(err => this.setState({ err }))
-  }
-
-  componentDidMount() {
-    this._isMounted = true
-    this.handleFetchVideoforPlayer()
-  }
-  componentWillUnmount() {
-    this._isMounted = false
+      .catch(err => this.setState({ err }));
   }
 
   render() {
-    const { tooglePlay,
+    const {
+      tooglePlay,
       visiblePlayButton,
       toogleQualityMenu,
       currentTime,
       duration,
-      volume } = this.state;
+      volume
+    } = this.state;
 
 
     const volumeIcon = (volume === 0)
@@ -176,7 +176,7 @@ class VideoPlayer extends Component {
     const playPauseIcon = (tooglePlay)
       ? <Icon type="pause-circle" />
       : <Icon type="play-circle" theme="filled" />;
-    const onLoadVisibleBlock = (visiblePlayButton) ? "block" : "none";
+    const onLoadVisibleBlock = (visiblePlayButton) ? "flex" : "none";
     const visibleQualityMenu = (toogleQualityMenu) ? "block" : "none";
     const durationFormat = this.formatTime(duration);
     const currentTimeFormat = this.formatTime(currentTime);

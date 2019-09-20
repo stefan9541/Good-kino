@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { compose, bindActionCreators } from "redux"
-import { connect } from "react-redux"
-import withGoodKinoService from "../components/hoc"
-import * as commentariesAction from "../actions/commentaries-action"
+import React, { Component } from "react";
+import { compose, bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import withGoodKinoService from "../components/hoc";
+import * as commentariesAction from "../actions/commentaries-action";
 
-import MovieCommentForm from '../components/movie-comment-form';
+import MovieCommentForm from "../components/movie-comment-form";
 
 class MovieCommentFormContainer extends Component {
-
   componentWillUnmount() {
     const { visibleSubmitButton } = this.props;
-    visibleSubmitButton(false)
+    visibleSubmitButton(false);
   }
 
   handleSubmit = (e, err, values) => {
@@ -21,42 +20,44 @@ class MovieCommentFormContainer extends Component {
       movieId,
       saveNickname
     } = this.props;
-    if (err) return;
+    if (err) {
+      return;
+    }
 
     if (saveNickname) {
-      localStorage.setItem("nickname", values.nickname)
+      localStorage.setItem("nickname", values.nickname);
     }
 
     postCommentaries({ ...values, movieId })
-      .then(res => addNewCommentar({ ...res.data }))
+      .then(res => addNewCommentar({ ...res.data }));
   };
 
   handleFocus = () => {
-    const { visibleSubmitButton } = this.props
-    visibleSubmitButton(true)
+    const { visibleSubmitButton } = this.props;
+    visibleSubmitButton(true);
   }
 
   handleButtonClick = () => {
-    const { visibleSubmitButton } = this.props
-    visibleSubmitButton(false)
+    const { visibleSubmitButton } = this.props;
+    visibleSubmitButton(false);
   }
 
   handleTextAreaChange = ({ target: { value } }) => {
-    const { disableSubmitButton } = this.props
+    const { disableSubmitButton } = this.props;
     if (value.trim().length === 0) {
-      disableSubmitButton(true)
+      disableSubmitButton(true);
     } else {
-      disableSubmitButton(false)
+      disableSubmitButton(false);
     }
   }
 
-  handleSwitchChecked = (checked) => {
-    const { saveNicknameToLocalstorage } = this.props
-    saveNicknameToLocalstorage(checked)
+  handleSwitchChecked = checked => {
+    const { saveNicknameToLocalstorage } = this.props;
+    saveNicknameToLocalstorage(checked);
   }
 
   render() {
-    const { visibleSubmit, disableSubmit } = this.props
+    const { visibleSubmit, disableSubmit } = this.props;
 
     return (
       <MovieCommentForm
@@ -72,18 +73,18 @@ class MovieCommentFormContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     newCommentar: state.commentariesReducer.newCommentar,
     disableSubmit: state.commentariesReducer.disableSubmitButton,
     visibleSubmit: state.commentariesReducer.visibleSubmitButton,
-    saveNickname: state.commentariesReducer.saveNicknameToLocalStorage,
-  }
-}
+    saveNickname: state.commentariesReducer.saveNicknameToLocalStorage
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ ...commentariesAction }, dispatch)
-}
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ ...commentariesAction }, dispatch);
+};
 
 export default compose(
   withGoodKinoService(),

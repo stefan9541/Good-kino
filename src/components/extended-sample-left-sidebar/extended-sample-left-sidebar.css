@@ -59,8 +59,9 @@
 }
 
 .extended-form-item {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
+
 .extended-form-item button span {
   color: #00aeef;
 }

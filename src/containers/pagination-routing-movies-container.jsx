@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { compose, bindActionCreators } from "redux"
 import { connect } from "react-redux"
-import * as moviesAction from "../actions/pagination-routes-action"
+import * as movieDataActions from "../actions/movie-data-action";
 import MovieItemRender from "../components/movie-item-render"
 import ErrorBoundry from "../components/error-boundry"
 import ErrorIndicator from "../components/error-indicator"
@@ -13,11 +13,12 @@ import { Spin } from 'antd';
 class PaginationRoutingMoviesContainer extends Component {
 
   gettingData = () => {
+    const reducerName = "pagination-route";
     const { fetchingData } = this.props;
     const {
-      movieForPaginationRouteFailure,
-      movieForPaginationRouteRequest,
-      movieForPaginationRouteSuccess
+      fetchMovieDataFailure,
+      fetchMovieDataRequest,
+      fetchMovieDataSuccess
     } = this.props;
     const { location } = this.props;
     const { match: { params } } = this.props;
@@ -32,11 +33,11 @@ class PaginationRoutingMoviesContainer extends Component {
       ...params || ""
     };
 
-    movieForPaginationRouteRequest();
+    fetchMovieDataRequest(reducerName);
 
     fetchingData(dataParams)
-      .then(res => movieForPaginationRouteSuccess(res.data))
-      .catch(err => movieForPaginationRouteFailure(err));
+      .then(res => fetchMovieDataSuccess(res.data, reducerName))
+      .catch(err => fetchMovieDataFailure(err, reducerName));
   }
 
   componentDidMount() {
@@ -47,6 +48,13 @@ class PaginationRoutingMoviesContainer extends Component {
     if (prevProps.match.params !== this.props.match.params) {
       this.gettingData()
     }
+  }
+
+  componentWillUnmount() {
+    const {
+      fetchMovieDataRequest,
+    } = this.props;
+    fetchMovieDataRequest("pagination-route");
   }
 
 
@@ -84,15 +92,15 @@ class PaginationRoutingMoviesContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.paginationRouteReducer.movies,
-    loading: state.paginationRouteReducer.loading,
-    error: state.paginationRouteReducer.error,
+    data: state.paginationRoute.movies,
+    loading: state.paginationRoute.loading,
+    error: state.paginationRoute.error,
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ ...moviesAction }, dispatch)
+  return bindActionCreators({ ...movieDataActions }, dispatch)
 }
 
 export default compose(

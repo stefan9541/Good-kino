@@ -1,3 +1,3 @@
-import NavigationMenu from "./navigation-menu"
+import NavigationMenu from "./navigation-menu";
 
-export default NavigationMenu
+export default NavigationMenu;

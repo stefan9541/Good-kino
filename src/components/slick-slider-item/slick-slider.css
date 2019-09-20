@@ -1,4 +1,5 @@
 #slider-container {
+  display: flex;
   background: url("https://media.gettyimages.com/videos/empty-blue-cinema-hall-with-vip-seats-video-id473390851?s=640x640") no-repeat;
   background-position: center -385px;
   background-attachment: fixed;

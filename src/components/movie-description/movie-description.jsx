@@ -1,10 +1,10 @@
-import React from 'react';
-import { Col } from 'antd';
-import { Link } from "react-router-dom"
+import React from "react";
+import { Col } from "antd";
+import { Link } from "react-router-dom";
 
-import "./movie-description.css"
+import "./movie-description.css";
 
-const MovieDescription = (props) => {
+const MovieDescription = props => {
   const {
     genre,
     released,
@@ -17,11 +17,11 @@ const MovieDescription = (props) => {
     imdbVotes,
     country,
     director
-  } = props
+  } = props;
   return (
     <Col className="movie-description-wrap">
       <Col span={7} className="movie-poster">
-        <img src={poster} alt={"movie poster"} />
+        <img src={poster} alt="movie poster" />
       </Col>
       <Col className="movie-description">
         <ul className="description-list">
@@ -53,6 +53,6 @@ const MovieDescription = (props) => {
       </Col>
     </Col>
   );
-}
+};
 
 export default MovieDescription;

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Button} from "antd"
+import React, { Component } from "react";
+import { Button } from "antd";
 
 class AuthAndProfile extends Component {
-  render() { 
+  render() {
     return (
       <React.Fragment>
         <div>
-          <Button  ghost>
+          <Button ghost>
             Войти
           </Button>
         </div>
@@ -16,8 +16,8 @@ class AuthAndProfile extends Component {
           </Button>
         </div>
       </React.Fragment>
-     );
+    );
   }
 }
- 
+
 export default AuthAndProfile;

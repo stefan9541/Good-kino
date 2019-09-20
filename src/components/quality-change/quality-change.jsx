@@ -1,7 +1,7 @@
-import React from 'react';
-import { Icon, Menu } from "antd"
+import React from "react";
+import { Icon, Menu } from "antd";
 
-import "./quality-change.css"
+import "./quality-change.css";
 
 const QualityChange = ({ toogleQualityMenu, visible, onQualityChange }) => {
   return (
@@ -12,23 +12,23 @@ const QualityChange = ({ toogleQualityMenu, visible, onQualityChange }) => {
       <Icon type="setting" />
     </div>
   );
-}
+};
 
-const QualityMenu = (props) => {
+const QualityMenu = props => {
   return (
-    <Menu onClick={(item,) => props.onQualityChange(item.key)}>
+    <Menu onClick={item => props.onQualityChange(item.key)}>
       <Menu.Divider />
       <Menu.Item key="480">
         480p
-    </Menu.Item>
+      </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="720">
         720p
-    </Menu.Item>
+      </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="1080">1080</Menu.Item>
     </Menu>
-  )
-}
+  );
+};
 
 export default QualityChange;

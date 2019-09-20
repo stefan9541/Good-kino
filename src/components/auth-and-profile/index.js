@@ -1,3 +1,3 @@
-import AuthAndProfile from "./auth-profile.jsx"
+import AuthAndProfile from "./auth-profile.jsx";
 
-export default AuthAndProfile
+export default AuthAndProfile;

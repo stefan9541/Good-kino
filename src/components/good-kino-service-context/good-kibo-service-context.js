@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
 
 const {
-    Provider: GoodKinoServiceProvider,
-    Consumer: GoodKinoServiceConsumer
+  Provider: GoodKinoServiceProvider,
+  Consumer: GoodKinoServiceConsumer
 } = React.createContext();
 
 export {
-    GoodKinoServiceProvider,
-    GoodKinoServiceConsumer
-}
+  GoodKinoServiceProvider,
+  GoodKinoServiceConsumer
+};

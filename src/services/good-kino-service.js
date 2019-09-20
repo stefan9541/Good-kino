@@ -3,88 +3,89 @@ import axios from "axios";
 export default class GoodKinoService {
   getLinkForLeftSideBar = async () => {
     try {
-      return await axios.get("/api/privet")
+      return await axios.get("/api/privet");
     } catch (error) {
-      throw new Error(`sry bad response ${error}`)
+      throw new Error(`sry bad response ${error}`);
     }
   }
 
   getMovieFromHomePage = async () => {
     try {
-      return await axios.get("/api/home-page")
+      return await axios.get("/api/home-page");
     } catch (error) {
-      throw new Error(`sry bar response plz try again ${error}`)
+      throw new Error(`sry bar response plz try again ${error}`);
     }
   }
 
-  getMovieFromRoutingAndPagination = async (routerParams) => {
+  getMovieFromRoutingAndPagination = async routerParams => {
     try {
       return await axios.get("/api/routing-movies", {
         params: {
           ...routerParams
         }
-      })
+      });
     } catch (err) {
-      throw new Error("tebe pizda bratok")
+      throw new Error("tebe pizda bratok");
     }
   };
 
-  postMoviesForInputSearch = async (inputValue) => {
+  postMoviesForInputSearch = async inputValue => {
     try {
       return await axios.post("/api/search-form", { value: inputValue });
     } catch (error) {
-      return error
+      return error;
     }
   };
 
-  getMoviesForInputSearch = async (inputValue) => {
+  getMoviesForInputSearch = async inputValue => {
     try {
       return await axios.get("/api/search-form", { params: { inputValue } });
     } catch (error) {
-      return error
+      return error;
     }
   };
 
-  fetchMovieFromFilterPanel = async (values) => {
+  fetchMovieFromFilterPanel = async values => {
     try {
-      return await axios.get("/api/filter", { params: { ...values } })
+      return await axios.get("/api/filter", { params: { ...values } });
     } catch (error) {
-      throw new Error("pizdec bratok")
+      throw new Error("pizdec bratok");
     }
   }
 
-  fetchOneMovie = async (movieName) => {
+  fetchOneMovie = async movieName => {
     try {
-      return await axios.get("/api/get-only-one-movie", { params: { movieName } })
+      return await axios.get("/api/get-only-one-movie", { params: { movieName } });
     } catch (err) {
-      throw err;
+      throw new Error("smth wrong bad");
     }
   }
+
   fetchVideoForPlayer = async (movieId, quality) => {
     try {
-      return await axios.get("/api/current-quality", { params: { movieId, quality } })
+      return await axios.get("/api/current-quality", { params: { movieId, quality } });
     } catch (error) {
-      throw error
+      throw new Error("smth wrong bad");
     }
   }
 
   fetchCommentaries = async (movieId, page) => {
     try {
-      return await axios.get("/api/get-commentaries", { params: { movieId, page } })
+      return await axios.get("/api/get-commentaries", { params: { movieId, page } });
     } catch (error) {
-      throw error
+      throw new Error("smth wrong bad");
     }
   }
 
-  postCommentaries = async (commentar) => {
+  postCommentaries = async commentar => {
     try {
       return await axios.post("/api/post-commentaries", {
         ...commentar,
         body: commentar.commentText,
         author: commentar.nickname
-      })
+      });
     } catch (error) {
-      throw error
+      throw new Error("smth wrong bad");
     }
   }
 }

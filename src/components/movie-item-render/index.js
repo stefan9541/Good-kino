@@ -1,3 +1,3 @@
-import MovieItemRender from "./movie-item-render"
- 
+import MovieItemRender from "./movie-item-render";
+
 export default MovieItemRender;
