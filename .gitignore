@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /public/multimedia
+/package-lock.json
 /.pnp
 .pnp.js
 
