@@ -9,7 +9,7 @@ const { TextArea } = Input;
 
 class MovieCommentForm extends Component {
   render() {
-    const { getFieldDecorator, validateFields } = this.props.form;
+    const { getFieldDecorator, validateFields, resetFields } = this.props.form;
     const {
       handleSwitchChecked,
       handleFocus,
@@ -25,7 +25,7 @@ class MovieCommentForm extends Component {
           autoComplete="off"
           onSubmit={e => {
             validateFields((err, values) => {
-              handleSubmit(e, err, values);
+              handleSubmit(e, err, values, resetFields);
             });
           }}
         >

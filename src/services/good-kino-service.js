@@ -37,14 +37,6 @@ export default class GoodKinoService {
     }
   };
 
-  getMoviesForInputSearch = async inputValue => {
-    try {
-      return await axios.get("/api/search-form", { params: { inputValue } });
-    } catch (error) {
-      return error;
-    }
-  };
-
   fetchMovieFromFilterPanel = async values => {
     try {
       return await axios.get("/api/filter", { params: { ...values } });
@@ -78,6 +70,7 @@ export default class GoodKinoService {
   }
 
   postCommentaries = async commentar => {
+    console.log(commentar)
     try {
       return await axios.post("/api/post-commentaries", {
         ...commentar,

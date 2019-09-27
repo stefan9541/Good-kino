@@ -15,16 +15,12 @@ class SlickSLiderContainer extends Component {
 
   render() {
     const { sliderItem } = this.props;
-    const [cartoon = [],
+    const [movies = [],
       anime = [],
-      movies = [],
+      cartoon = [],
       series = []] = (sliderItem || []).map(({ doc }) => (doc || []).slice(0, 5));
 
-    const sliderItems = cartoon.concat(anime, movies, series)
-      .sort(() => {
-        return 0.5 - Math.random();
-      });
-
+    const sliderItems = cartoon.concat(anime, movies, series);
 
     return (
       <SlickSliderItem items={sliderItems} setting={this.setting} />

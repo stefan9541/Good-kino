@@ -5,6 +5,7 @@ import withGoodKinoService from "../components/hoc";
 import * as movieDataActions from "../actions/movie-data-action";
 
 import MovieItemRender from "../components/movie-item-render";
+import { Spin } from "antd";
 
 class HomePageContainer extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class HomePageContainer extends Component {
       fetchMovieDataSuccess,
       fetchMovieDataFailure
     } = this.props;
-    fetchMovieDataRequest(reducerName);
+    // fetchMovieDataRequest(reducerName);
     getMovieFromHomePage()
       .then(res => {
         fetchMovieDataSuccess(res.data, reducerName);
@@ -24,14 +25,16 @@ class HomePageContainer extends Component {
   }
 
   render() {
-    const { homePageData = [] } = this.props;
-    const [cartoon = [],
-      films = [],
+    const { homePageData = [], loading } = this.props;
+    const [
       anime = [],
-      series = []] = (homePageData || []).map(({ doc }) => {
-        return (doc || []).slice(0, 8)
-          .sort(() => 0.5 - Math.random());
-      });
+      cartoon = [],
+      films = [],
+      series = []] = (homePageData || []).map(({ doc }) => doc.slice(0, 8));
+
+    if (loading) {
+      return <Spin />;
+    }
 
     return (
       <React.Fragment>

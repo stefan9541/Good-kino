@@ -1,11 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// eslint-disable-next-line import/no-extraneous-dependencies
 const express = require("express");
+const { ObjectId } = require("mongoose").Types;
 
 const router = express.Router();
 const commentariesModel = require("../models/commentaries");
 
-const { ObjectId } = require("mongoose").Types;
 
 module.exports = () => {
   router.get("/get-commentaries", (req, res) => {

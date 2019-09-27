@@ -12,12 +12,13 @@ class MovieCommentFormContainer extends Component {
     visibleSubmitButton(false);
   }
 
-  handleSubmit = (e, err, values) => {
+  handleSubmit = (e, err, values, resetFields) => {
     e.preventDefault();
     const { postCommentaries } = this.props.goodKinoService;
     const {
       addNewCommentar,
       movieId,
+      disableSubmitButton,
       saveNickname
     } = this.props;
     if (err) {
@@ -27,9 +28,14 @@ class MovieCommentFormContainer extends Component {
     if (saveNickname) {
       localStorage.setItem("nickname", values.nickname);
     }
+    console.log(values, movieId)
 
     postCommentaries({ ...values, movieId })
-      .then(res => addNewCommentar({ ...res.data }));
+      .then(res => {
+        addNewCommentar({ ...res.data });
+        resetFields("commentText");
+        disableSubmitButton(true);
+      });
   };
 
   handleFocus = () => {

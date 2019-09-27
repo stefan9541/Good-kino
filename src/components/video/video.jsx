@@ -2,8 +2,6 @@
 import React from "react";
 import { Icon } from "antd";
 
-
-// const videoRef = React.createRef();
 import "./video.css";
 
 class Video extends React.Component {
@@ -13,6 +11,7 @@ class Video extends React.Component {
       tooglePlayVideo,
       hidePreviousPlayButton,
       onLoadVisibleBlock,
+      handleOnEnded,
       innerRef,
       videoPath
     } = this.props;
@@ -27,6 +26,7 @@ class Video extends React.Component {
         <video
           onTimeUpdate={getCurrentTime}
           onClick={tooglePlayVideo}
+          onEnded={handleOnEnded}
           ref={innerRef}
         >
           <source type="video/mp4" src={videoPath} />

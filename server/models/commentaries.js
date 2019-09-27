@@ -5,7 +5,8 @@ const { Schema } = mongoose;
 const commentariesModel = new Schema({
   movieId: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    index: true
   },
   author: {
     type: String,

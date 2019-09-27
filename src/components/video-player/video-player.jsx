@@ -106,6 +106,16 @@ class VideoPlayer extends Component {
     videoRef.current.play();
   }
 
+  handleOnEnded = () => {
+    this.setState({
+      tooglePlay: false,
+      currentTime: 0,
+      visiblePlayButton: true
+    }, () => {
+      videoRef.current.pause();
+    });
+  }
+
   fullScreenMode = () => {
     const videoCurrent = customRef.current;
     this.setState({ toogleQualityMenu: false });
@@ -183,6 +193,7 @@ class VideoPlayer extends Component {
     return (
       <div ref={customRef} className="custom-video-player-wrapp">
         <Video
+          handleOnEnded={this.handleOnEnded}
           videoPath={this.state.videoPath}
           ref={videoRef}
           getCurrentTime={this.getCurrentTime}

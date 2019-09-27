@@ -4,6 +4,7 @@
 
 .search-form {
   display: flex;
+  margin-bottom: -24px !important;
   align-items: center;
 }
 

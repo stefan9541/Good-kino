@@ -19,13 +19,17 @@ class SearchFormContainer extends Component {
 
   handleSubmit = (e, err, value) => {
     e.preventDefault();
-    const { history } = this.props;
+    const { history, searchItemResultVisible } = this.props;
     const parseParams = queryStr.parse(this.props.location.search);
     if (err) {
       return;
     }
     if (value.length >= 2) {
+      searchItemResultVisible(false);
       history.push(`/search?word=${value || parseParams.word}`);
+    }
+    if (document && document.activeElement) {
+      document.activeElement.blur();
     }
   };
 

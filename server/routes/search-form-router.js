@@ -26,43 +26,6 @@ const searchFormRouter = () => {
       });
   });
 
-  router.get("/search-form", (req, res) => {
-    const { inputValue } = req.query;
-    const { page } = req.query;
-    const limit = 40;
-    const offset = Number((page - 1) * limit);
-    const currentPage = Math.ceil(offset / limit);
-
-    const label = {
-      signature: `Результаты Поиска ${inputValue}`
-    };
-
-    moviesModel.find(
-      {
-        Title: { $regex: inputValue, $options: "ig" }
-      },
-      {
-        Poster: 1,
-        Title: 1,
-        Genre: 1,
-        Released: 1,
-        Type: 1
-      }
-    )
-      .skip(offset)
-      .limit(limit)
-      .exec((err, result) => {
-        moviesModel.countDocuments({ Title: { $regex: inputValue, $options: "ig" } }, (err, count) => {
-          res.json({
-            result, count, currentPage, ...label
-          });
-        });
-        if (err) {
-          res.status(404);
-        }
-      });
-  });
-
   return router;
 };
 

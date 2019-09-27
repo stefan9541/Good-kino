@@ -30,6 +30,9 @@ const homeRouter = () => {
       }
     ])
       .exec((err, movies) => {
+        if (err) {
+          res.sendStatus(404);
+        }
         res.json(movies);
       });
   });

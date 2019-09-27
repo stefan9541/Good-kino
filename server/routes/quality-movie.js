@@ -8,7 +8,7 @@ const qualityMovie = () => {
   router.get("/current-quality", (req, res) => {
     const { movieId, quality } = req.query;
     multimediaModel.findOne({
-      owner: ObjectId(movieId),
+      // owner: ObjectId(movieId),
       quality
     }, (err, data) => {
       res.json(data);

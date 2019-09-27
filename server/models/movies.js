@@ -93,4 +93,6 @@ const moviesModel = new Schema({
   }
 });
 
+moviesModel.index({ Title: 1 });
+
 module.exports = mongoose.model("movies", moviesModel);

@@ -22,10 +22,14 @@ class MovieComment extends Component {
     commentariesPage: 0
   }
 
+  timer = null
+
   componentDidMount() {
     this.fetchingData();
-    console.log("privet")
+  }
 
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   fetchingData = () => {
@@ -44,16 +48,18 @@ class MovieComment extends Component {
   }
 
   handleFetchNewCommentaries = () => {
-    {
-      const { fetchCommentaries } = this.props.goodKinoService;
-      const { fetchNewCommentaries, movieId } = this.props;
-      this.setState({ loading: true });
-      fetchCommentaries(movieId)
-        .then(res => {
-          fetchNewCommentaries(res.data);
+    clearTimeout(this.timer);
+
+    const { fetchCommentaries } = this.props.goodKinoService;
+    const { fetchNewCommentaries, movieId } = this.props;
+    this.setState({ loading: true });
+    fetchCommentaries(movieId)
+      .then(res => {
+        fetchNewCommentaries(res.data);
+        this.timer = setTimeout(() => {
           this.setState({ loading: false });
-        });
-    }
+        }, 1000);
+      });
   }
 
   render() {
@@ -69,6 +75,7 @@ class MovieComment extends Component {
         <MovieCommentItem commentaries={commentaries} />
 
         <Button
+          className="load-more-commentaries-btn"
           type="primary"
           disabled={this.state.loading}
           onClick={this.handleFetchNewCommentaries}
