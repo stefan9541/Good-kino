@@ -70,7 +70,6 @@ export default class GoodKinoService {
   }
 
   postCommentaries = async commentar => {
-    console.log(commentar)
     try {
       return await axios.post("/api/post-commentaries", {
         ...commentar,

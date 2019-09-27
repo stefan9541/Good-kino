@@ -48,7 +48,6 @@ export const visibleSubmitButton = visibleButton => {
 };
 
 export const saveNicknameToLocalstorage = saveNickname => {
-  console.log(saveNickname);
   return {
     type: "SAVE_NICKNAME_TO_LOCALSTORAGE",
     payload: saveNickname

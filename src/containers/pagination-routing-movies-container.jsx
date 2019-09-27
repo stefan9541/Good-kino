@@ -67,8 +67,6 @@ class PaginationRoutingMoviesContainer extends Component {
     const { result = [] } = data;
     const [items, itemCount = null] = result;
     const currentPage = (data.currentPage + 1) || null;
-    console.log(result);
-    console.log(items);
 
     if (loading) {
       return (

@@ -10,7 +10,6 @@ const PageNotFound = props => {
     history.push("/");
   };
 
-  console.log(props);
   return (
     <div className="container">
       <div className="error">

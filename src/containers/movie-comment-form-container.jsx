@@ -28,7 +28,6 @@ class MovieCommentFormContainer extends Component {
     if (saveNickname) {
       localStorage.setItem("nickname", values.nickname);
     }
-    console.log(values, movieId)
 
     postCommentaries({ ...values, movieId })
       .then(res => {
