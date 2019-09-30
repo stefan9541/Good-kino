@@ -40,11 +40,12 @@ const filterFormRouter = () => {
 
     Promise.all([data, dataCount])
       .then(result => res.json({ result, signature, currentPage }))
-      .catch(err => res.sendStatus(404));
+      .catch(() => res.sendStatus(404));
   });
 
   return router;
 };
+
 
 module.exports = filterFormRouter;
 

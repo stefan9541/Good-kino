@@ -16,12 +16,20 @@ app.use((req, res, next) => {
   next();
 });
 
+const path = require("path");
+
+// connect all routes
+routes(app);
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "build")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 http.createServer(app)
   .listen(config.port, () => {
     //  mongoose connect
 
-    // connect all routes
-    routes(app);
 
     mongoose.connection
       .on("error", error => console.log(error))
@@ -31,4 +39,3 @@ http.createServer(app)
     mongoose.connect(config.mongoUri, { useNewUrlParser: true, dbName: "Stepan", useCreateIndex: true });
     console.log(`========== server are listen ${config.port} port =========`);
   });
-
