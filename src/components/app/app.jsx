@@ -1,25 +1,25 @@
-import React from "react"
-import { Row } from "antd"
+import React from "react";
+import { Row } from "antd";
 
-import "./app.css"
-import 'antd/dist/antd.css';
+import "./app.css";
+import "antd/dist/antd.css";
 
-import Header from "../header"
-import ScrollUpButtonComponent from "../../components/scroll-up-button"
-import MainContentRoutes from "../main-content-routes"
+import Header from "../header";
+import ScrollUpButtonComponent from "../scroll-up-button";
+import MainContentRoutes from "../main-content-routes";
 
 const App = () => {
-	return (
-		<Row id="container">
+  return (
+    <Row id="container">
 
-			<Header />
+      <Header />
 
-			<ScrollUpButtonComponent />
+      <ScrollUpButtonComponent />
 
-			<MainContentRoutes />
+      <MainContentRoutes />
 
-		</Row>
-	)
-}
+    </Row>
+  );
+};
 
 export default App;
