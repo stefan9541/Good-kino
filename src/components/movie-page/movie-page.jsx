@@ -72,7 +72,7 @@ const MoviePage = props => {
       <Col>
         <VideoPlayer movieId={_id} />
       </Col>
-      {"asdasdasd"}
+      {"asddd"}
     </React.Fragment>
     // </Col>
   );
