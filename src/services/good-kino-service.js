@@ -25,7 +25,7 @@ export default class GoodKinoService {
         }
       });
     } catch (err) {
-      throw new Error("tebe pizda bratok");
+      throw new Error(`sry bar response plz try again ${err}`);
     }
   };
 
@@ -41,7 +41,7 @@ export default class GoodKinoService {
     try {
       return await axios.get("/api/filter", { params: { ...values } });
     } catch (error) {
-      throw new Error("pizdec bratok");
+      throw new Error(`sry bar response plz try again ${error}`);
     }
   }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Col, Icon, Avatar, Tooltip
+  Col, Icon, Avatar
 } from "antd";
 
 import "./movie-comment-item.css";

@@ -22,7 +22,6 @@ class VideoPlayer extends Component {
     duration: 0,
     currentTime: 0,
     volume: 50,
-    currentQuality: "480",
     videoPath: "",
     err: null
   }
@@ -30,10 +29,21 @@ class VideoPlayer extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.handleFetchVideoforPlayer();
+
+    window.addEventListener("click", this.hideQulityMenu);
   }
 
   componentWillUnmount() {
+    window.removeEventListener("click", this.hideQulityMenu);
     this._isMounted = false;
+  }
+
+  hideQulityMenu = e => {
+    if (e.target.className.animVal !== "") {
+      this.setState(() => {
+        return { toogleQualityMenu: false };
+      });
+    }
   }
 
   formatTime = time => {

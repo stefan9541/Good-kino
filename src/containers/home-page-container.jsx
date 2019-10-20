@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Spin } from "antd";
 import withGoodKinoService from "../components/hoc";
 import * as movieDataActions from "../actions/movie-data-action";
 
 import MovieItemRender from "../components/movie-item-render";
-import { Spin } from "antd";
 
 class HomePageContainer extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class HomePageContainer extends Component {
       fetchMovieDataSuccess,
       fetchMovieDataFailure
     } = this.props;
-    // fetchMovieDataRequest(reducerName);
+    fetchMovieDataRequest(reducerName);
     getMovieFromHomePage()
       .then(res => {
         fetchMovieDataSuccess(res.data, reducerName);

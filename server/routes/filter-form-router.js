@@ -39,8 +39,11 @@ const filterFormRouter = () => {
       .exec();
 
     Promise.all([data, dataCount])
-      .then(result => res.json({ result, signature, currentPage }))
-      .catch(err => res.sendStatus(404));
+      .then(result => {
+        res.set("Cache-Control", "public, max-age=31557600");
+        res.json({ result, signature, currentPage });
+      })
+      .catch(() => res.sendStatus(404));
   });
 
   return router;

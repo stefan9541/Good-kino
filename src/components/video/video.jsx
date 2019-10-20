@@ -35,7 +35,7 @@ class Video extends React.Component {
     );
   }
 }
-// = React.forwardRef((props, ref) =>
+
 export default React.forwardRef((props, ref) => {
   return <Video innerRef={ref} {...props} />;
 });

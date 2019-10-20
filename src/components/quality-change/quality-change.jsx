@@ -16,7 +16,10 @@ const QualityChange = ({ toogleQualityMenu, visible, onQualityChange }) => {
 
 const QualityMenu = props => {
   return (
-    <Menu onClick={item => props.onQualityChange(item.key)}>
+    <Menu
+      defaultSelectedKeys={["720"]}
+      onClick={item => props.onQualityChange(item.key)}
+    >
       <Menu.Divider />
       <Menu.Item key="480">
         480p

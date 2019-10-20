@@ -41,6 +41,7 @@ const paginationAndGettingMoviesFromRouting = () => {
           if (err || !items.length) {
             res.sendStatus(404);
           }
+          res.set("Cache-Control", "public, max-age=31557600");
           const result = [[...items], 33];
           res.json({ result, signature });
         });
@@ -85,6 +86,7 @@ const paginationAndGettingMoviesFromRouting = () => {
 
       Promise.all([data, dataCountDocuments])
         .then(result => {
+          res.set("Cache-Control", "public, max-age=31557600");
           res.json({ result, currentPage, signature });
         })
         .catch(err => res.sendStatus(404));
