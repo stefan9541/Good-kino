@@ -72,7 +72,6 @@ const MoviePage = props => {
       <Col>
         <VideoPlayer movieId={_id} />
       </Col>
-
     </React.Fragment>
     // </Col>
   );
