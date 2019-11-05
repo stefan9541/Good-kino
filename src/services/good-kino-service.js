@@ -1,9 +1,14 @@
 import axios from "axios";
 
+axios.defaults.baseURL = (process.env.NODE_ENV === "development")
+  ? "http://localhost:8080/api" : "http://localhost:8050";
+
+const { baseURL } = axios.defaults;
+
 export default class GoodKinoService {
   getLinkForLeftSideBar = async () => {
     try {
-      return await axios.get("/api/privet");
+      return await axios.get(`${baseURL}/siderbar-link`);
     } catch (error) {
       throw new Error(`sry bad response ${error}`);
     }
@@ -11,7 +16,7 @@ export default class GoodKinoService {
 
   getMovieFromHomePage = async () => {
     try {
-      return await axios.get("/api/home-page");
+      return await axios.get(`${baseURL}/home-page`);
     } catch (error) {
       throw new Error(`sry bar response plz try again ${error}`);
     }
@@ -19,7 +24,7 @@ export default class GoodKinoService {
 
   getMovieFromRoutingAndPagination = async routerParams => {
     try {
-      return await axios.get("/api/routing-movies", {
+      return await axios.get(`${baseURL}/routing-movies`, {
         params: {
           ...routerParams
         }
@@ -31,7 +36,7 @@ export default class GoodKinoService {
 
   postMoviesForInputSearch = async inputValue => {
     try {
-      return await axios.post("/api/search-form", { value: inputValue });
+      return await axios.post(`${baseURL}/search-form`, { value: inputValue });
     } catch (error) {
       return error;
     }
@@ -39,23 +44,19 @@ export default class GoodKinoService {
 
   fetchMovieFromFilterPanel = async values => {
     try {
-      return await axios.get("/api/filter", { params: { ...values } });
+      return await axios.get(`${baseURL}/filter`, { params: { ...values } });
     } catch (error) {
       throw new Error(`sry bar response plz try again ${error}`);
     }
   }
 
-  fetchOneMovie = async movieName => {
-    try {
-      return await axios.get("/api/get-only-one-movie", { params: { movieName } });
-    } catch (err) {
-      throw new Error("smth wrong bad");
-    }
+  fetchOneMovie = movieName => {
+    return axios.get(`${baseURL}/get-only-one-movie`, { params: { movieName } });
   }
 
   fetchVideoForPlayer = async (movieId, quality) => {
     try {
-      return await axios.get("/api/current-quality", { params: { movieId, quality } });
+      return await axios.get(`${baseURL}/current-quality`, { params: { movieId, quality } });
     } catch (error) {
       throw new Error("smth wrong bad");
     }
@@ -63,7 +64,7 @@ export default class GoodKinoService {
 
   fetchCommentaries = async (movieId, page) => {
     try {
-      return await axios.get("/api/get-commentaries", { params: { movieId, page } });
+      return await axios.get(`${baseURL}/get-commentaries`, { params: { movieId, page } });
     } catch (error) {
       throw new Error("smth wrong bad");
     }
@@ -71,7 +72,7 @@ export default class GoodKinoService {
 
   postCommentaries = async commentar => {
     try {
-      return await axios.post("/api/post-commentaries", {
+      return await axios.post(`${baseURL}/post-commentaries`, {
         ...commentar,
         body: commentar.commentText,
         author: commentar.nickname
