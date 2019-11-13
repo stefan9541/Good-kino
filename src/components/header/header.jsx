@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import AuthAndProfile from "../auth-and-profile";
 import WrappedSearchFormContainer from "../../containers/search-form-container";
 import NavigationMenu from "../navigation-menu";
-
+import GetAuthenticatedUser from "../../containers/get-authenticated-user";
 import "./header.css";
 
 const Header = () => {
   return (
     <header>
+      <GetAuthenticatedUser />
       <Row id="header-item-wrap">
         <Col className="home-logo" span={7}>
           <Link to="/">

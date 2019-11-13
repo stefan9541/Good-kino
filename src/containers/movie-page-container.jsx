@@ -61,6 +61,7 @@ class MoviePageContainer extends Component {
     }
 
     if (error) {
+      console.log(error)
       return <PageNotFound />;
     }
 

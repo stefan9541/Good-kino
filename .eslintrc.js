@@ -44,7 +44,6 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'arrow-body-style': 'off',
-    
   },
   'globals': {
     'expectObservable': true,

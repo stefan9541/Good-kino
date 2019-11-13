@@ -16,7 +16,7 @@ export default class GoodKinoService {
 
   getMovieFromHomePage = async () => {
     try {
-      return await axios.get(`${baseURL}/home-page`);
+      return await axios.get(`${baseURL}/home-page`, { withCredentials: true });
     } catch (error) {
       throw new Error(`sry bar response plz try again ${error}`);
     }
@@ -80,5 +80,9 @@ export default class GoodKinoService {
     } catch (error) {
       throw new Error("smth wrong bad");
     }
+  }
+
+  getAuthenticatedUser = () => {
+    return axios.get("http://localhost:8080/api/authenticated-user", { withCredentials: true });
   }
 }

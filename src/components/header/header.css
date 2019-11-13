@@ -22,7 +22,7 @@ header {
 .auth-profile-wrap {
   display: flex;
   margin-left: 13px;
-  justify-content: space-between
+  justify-content: center
 }
 
 .auth-profile-wrap div:first-child {

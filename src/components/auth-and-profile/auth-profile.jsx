@@ -1,23 +1,60 @@
 import React, { Component } from "react";
 import { Button } from "antd";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import AuthModal from "../auth-modal";
 
 class AuthAndProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleCancel = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
   render() {
+    const { user } = this.props;
     return (
       <React.Fragment>
         <div>
-          <Button ghost>
-            Войти
-          </Button>
+          {
+            (user) ? <div>{user.userName}</div>
+              : (
+                <Button onClick={this.showModal} ghost>
+                  Войти
+                </Button>
+              )
+          }
         </div>
         <div>
-          <Button type="primary" ghost>
-            Регистрация
-          </Button>
+          <AuthModal
+            visible={this.state.visible}
+            handleCancel={this.handleCancel}
+          />
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default AuthAndProfile;
+const mapStateToProps = state => {
+  return {
+    user: state.userData.movies
+  };
+};
+
+export default compose(
+  connect(mapStateToProps)
+)(AuthAndProfile);

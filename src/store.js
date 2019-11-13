@@ -21,6 +21,7 @@ function createNamedWrapperReducer(reducerFunction, reducerName) {
 
 const reducers = combineReducers({
   leftSidebarReducer,
+  userData: createNamedWrapperReducer(movieDataReducer, "user-data"),
   homePage: createNamedWrapperReducer(movieDataReducer, "home-page"),
   paginationRoute: createNamedWrapperReducer(movieDataReducer, "pagination-route"),
   moviePage: createNamedWrapperReducer(movieDataReducer, "movie-page"),
