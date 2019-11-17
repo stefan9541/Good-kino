@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  Col, Input, Form, Icon, Switch
+  Col, Input, Form
 } from "antd";
 
 import "./movie-comment-form.css";
@@ -11,7 +11,6 @@ class MovieCommentForm extends Component {
   render() {
     const { getFieldDecorator, validateFields, resetFields } = this.props.form;
     const {
-      handleSwitchChecked,
       handleFocus,
       handleTextAreaChange,
       handleButtonClick,
@@ -29,35 +28,6 @@ class MovieCommentForm extends Component {
             });
           }}
         >
-          <Col className="comment-nickname-wrapp">
-            <Col span={8}>
-              <Form.Item required>
-                {getFieldDecorator("nickname", {
-                  rules: [{ min: 3, required: true }],
-                  initialValue: localStorage.getItem("nickname") || ""
-                })(
-                  <Input
-                    prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-                    placeholder="your nickname"
-                  />
-                )}
-              </Form.Item>
-            </Col>
-            <Col offset={1}>
-              <Form.Item>
-                <span style={{ color: "aliceblue", marginRight: "10px" }}>
-                  Save nickname
-                </span>
-                <Switch
-                  className="save-nickname-switch"
-                  defaultChecked
-                  onChange={handleSwitchChecked}
-                  checkedChildren={<Icon type="check" />}
-                  unCheckedChildren={<Icon type="close" />}
-                />
-              </Form.Item>
-            </Col>
-          </Col>
           <Form.Item>
             {
               getFieldDecorator("commentText", {

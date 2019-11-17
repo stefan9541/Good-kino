@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import withGoodKinoService from "../components/hoc";
+import { withGoodKinoService } from "../components/hoc";
 import LeftSideBarItemRender from "../components/left-sidebar-item";
 import ExtendedSampleLeftSidebar from "../components/extended-sample-left-sidebar";
 import {

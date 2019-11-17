@@ -1,17 +1,24 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import withGoodKinoService from "../hoc";
+import { withGoodKinoService } from "../hoc";
 import HomePageContainer from "../../containers/home-page-container";
 import SlickSLiderContainer from "../../containers/slick-slider-container";
 import PaginationRoutingMoviesContainer from "../../containers/pagination-routing-movies-container";
 import MoviePageContainer from "../../containers/movie-page-container";
+import UserFavoriteMovies from "../user-favorite-movies";
+
 import PageNotFound from "../page-not-found";
 import Layout from "../layout";
 
 
 const MainContentRoutes = props => {
-  const { getMovieFromRoutingAndPagination, fetchMovieFromFilterPanel, fetchOneMovie } = props.goodKinoService;
+  const {
+    getMovieFromRoutingAndPagination,
+    fetchMovieFromFilterPanel,
+    fetchOneMovie,
+    getMovieFromHomePage
+  } = props.goodKinoService;
   return (
     <React.Fragment>
       <Route path="/" exact component={SlickSLiderContainer} />
@@ -23,7 +30,7 @@ const MainContentRoutes = props => {
           render={() => {
             return (
               <Layout sidebar>
-                <HomePageContainer />
+                <HomePageContainer fetchingData={getMovieFromHomePage} />
               </Layout>
             )
           }}
@@ -104,7 +111,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  {...props}
+                  fetchingData={getMovieFromRoutingAndPagination}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -218,6 +229,15 @@ const MainContentRoutes = props => {
             );
           }}
         />
+
+        <Route
+          render={props => {
+            return (
+              <Layout>
+                <UserFavoriteMovies />
+              </Layout>
+            )
+          }} />
 
         <Route render={() => {
           return (

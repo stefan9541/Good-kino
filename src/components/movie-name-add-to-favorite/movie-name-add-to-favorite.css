@@ -12,3 +12,21 @@
   font-weight: 500;
   letter-spacing: 1px;
 }
+
+.add-to-favorite i {
+  font-size: 22px;
+}
+
+.add-to-favorite-btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.add-to-favorite-btn:hover,
+.add-to-favorite-btn:focus {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

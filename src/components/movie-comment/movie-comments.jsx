@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col, Button } from "antd";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import withGoodKinoService from "../hoc";
+import { withGoodKinoService } from "../hoc";
 import {
   fetchCommentariesRequest,
   fetchCommentariesSuccess,
@@ -35,25 +35,28 @@ class MovieComment extends Component {
   fetchingData = () => {
     const { fetchCommentaries } = this.props.goodKinoService;
     const {
-      movieId,
+      movie: { film: { _id } },
       fetchCommentariesSuccess,
       fetchCommentariesFailure,
       fetchCommentariesRequest
     } = this.props;
 
     fetchCommentariesRequest();
-    fetchCommentaries(movieId)
+    fetchCommentaries(_id)
       .then(res => fetchCommentariesSuccess(res.data))
       .catch(err => fetchCommentariesFailure(err));
   }
 
   handleFetchNewCommentaries = () => {
     clearTimeout(this.timer);
-
     const { fetchCommentaries } = this.props.goodKinoService;
-    const { fetchNewCommentaries, movieId } = this.props;
+    const {
+      fetchNewCommentaries,
+      movie: { film: { _id } }
+    } = this.props;
+
     this.setState({ loading: true });
-    fetchCommentaries(movieId)
+    fetchCommentaries(_id)
       .then(res => {
         fetchNewCommentaries(res.data);
         this.timer = setTimeout(() => {
@@ -63,14 +66,14 @@ class MovieComment extends Component {
   }
 
   render() {
-    const { commentaries } = this.props;
+    const { commentaries, movie } = this.props;
     return (
       <Col id="comment-wrapp">
         <span className="comment-value">
           {`Total comments ${commentaries.length}`}
         </span>
 
-        <MovieCommentFormContainer movieId={this.props.movieId} />
+        <MovieCommentFormContainer movieId={movie.film._id} />
 
         <MovieCommentItem commentaries={commentaries} />
 
@@ -90,8 +93,9 @@ class MovieComment extends Component {
 const mapStateToProps = state => {
   return {
     commentaries: state.commentariesReducer.commentaries,
+    movie: state.moviePage.movies,
     loading: state.commentariesReducer.loading,
-    error: state.commentariesReducer.error
+    error: state.commentariesReducer.error,
   };
 };
 

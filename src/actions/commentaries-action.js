@@ -46,10 +46,3 @@ export const visibleSubmitButton = visibleButton => {
     payload: visibleButton
   };
 };
-
-export const saveNicknameToLocalstorage = saveNickname => {
-  return {
-    type: "SAVE_NICKNAME_TO_LOCALSTORAGE",
-    payload: saveNickname
-  };
-};

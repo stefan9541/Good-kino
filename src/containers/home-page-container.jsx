@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Spin } from "antd";
-import withGoodKinoService from "../components/hoc";
 import * as movieDataActions from "../actions/movie-data-action";
 
 import MovieItemRender from "../components/movie-item-render";
@@ -10,14 +9,16 @@ import MovieItemRender from "../components/movie-item-render";
 class HomePageContainer extends Component {
   componentDidMount() {
     const reducerName = "home-page";
-    const { getMovieFromHomePage } = this.props.goodKinoService;
+    const { fetchingData } = this.props;
     const {
       fetchMovieDataRequest,
       fetchMovieDataSuccess,
       fetchMovieDataFailure
     } = this.props;
+
     fetchMovieDataRequest(reducerName);
-    getMovieFromHomePage()
+
+    fetchingData()
       .then(res => {
         fetchMovieDataSuccess(res.data, reducerName);
       })
@@ -59,6 +60,5 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-  withGoodKinoService(),
   connect(mapStateToProps, mapDispatchToProps)
 )(HomePageContainer);

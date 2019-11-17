@@ -1,24 +1,24 @@
 import { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import * as getAuthenticatedUserActions from "../actions/movie-data-action";
-import withGoodKinoService from "../components/hoc";
+import * as getAuthenticatedUserActions from "../actions/user-actions";
+import { withGoodKinoService } from "../components/hoc";
 
 class GetAuthenticatedUser extends Component {
   componentDidMount() {
-    const reducerName = "user-data";
     const { getAuthenticatedUser } = this.props.goodKinoService;
     const {
-      fetchMovieDataRequest,
-      fetchMovieDataSuccess,
-      fetchMovieDataFailure
+      fetchUserDataRequest,
+      fetchUserDataSuccess,
+      fetchUserovieDataFailure
     } = this.props;
-    fetchMovieDataRequest(reducerName);
+
+    fetchUserDataRequest();
     getAuthenticatedUser()
       .then(res => {
-        fetchMovieDataSuccess(res.data, reducerName);
+        fetchUserDataSuccess(res.data);
       })
-      .catch(err => fetchMovieDataFailure(err, reducerName));
+      .catch(err => fetchUserovieDataFailure(err));
   }
 
   render() {

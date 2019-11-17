@@ -21,12 +21,12 @@ class PaginationRoutingMoviesContainer extends Component {
     }
   }
 
-  componentWillUnmount() {
-    const {
-      fetchMovieDataRequest
-    } = this.props;
-    fetchMovieDataRequest("pagination-route");
-  }
+  // componentWillUnmount() {
+  //   const {
+  //     fetchMovieDataRequest
+  //   } = this.props;
+  //   fetchMovieDataRequest("pagination-route");
+  // }
 
   gettingData = () => {
     const reducerName = "pagination-route";

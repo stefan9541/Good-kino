@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { Icon } from "antd";
-import withGoodKinoService from "../hoc";
+import { withGoodKinoService } from "../hoc";
 import Video from "../video";
 import VideoControlPanel from "../video-control-panel";
 import QualityChange from "../quality-change";
@@ -13,17 +13,20 @@ const customRef = React.createRef();
 const videoRef = React.createRef();
 
 class VideoPlayer extends Component {
-  _isMounted = false
+  constructor(props) {
+    super(props);
+    this.state = {
+      tooglePlay: false,
+      toogleQualityMenu: false,
+      visiblePlayButton: true,
+      duration: 0,
+      currentTime: 0,
+      volume: 50,
+      videoPath: "",
+      err: null
+    };
 
-  state = {
-    tooglePlay: false,
-    toogleQualityMenu: false,
-    visiblePlayButton: true,
-    duration: 0,
-    currentTime: 0,
-    volume: 50,
-    videoPath: "",
-    err: null
+    this._isMounted = false;
   }
 
   componentDidMount() {

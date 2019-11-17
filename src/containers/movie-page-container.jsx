@@ -54,14 +54,12 @@ class MoviePageContainer extends Component {
 
   render() {
     const { error, loading } = this.props;
-    const film = this.props.movie.film || "asd";
 
     if (loading) {
       return <Spin />;
     }
 
     if (error) {
-      console.log(error)
       return <PageNotFound />;
     }
 
@@ -73,7 +71,7 @@ class MoviePageContainer extends Component {
             <MovieItemRender signature="Watch more free movies" movies={this.props.movie.similarFilm} />
           </Col>
         </Row>
-        <MovieComment movieId={this.props.movie.film._id || []} />
+        <MovieComment />
       </Col>
     );
   }

@@ -75,7 +75,9 @@ export default class GoodKinoService {
       return await axios.post(`${baseURL}/post-commentaries`, {
         ...commentar,
         body: commentar.commentText,
-        author: commentar.nickname
+        author: commentar.author,
+        userAvatar: commentar.userAvatar,
+        userId: commentar.userId
       });
     } catch (error) {
       throw new Error("smth wrong bad");
@@ -83,6 +85,18 @@ export default class GoodKinoService {
   }
 
   getAuthenticatedUser = () => {
-    return axios.get("http://localhost:8080/api/authenticated-user", { withCredentials: true });
+    return axios.get(`${baseURL}/authenticated-user`, { withCredentials: true });
+  };
+
+  patchMovieToFavorite = movieId => {
+    return axios.patch(`${baseURL}/user/add-favorite-movie`,
+      { movieId },
+      { withCredentials: true });
+  };
+
+  removeMovieFromFavorite = movieId => {
+    return axios.patch(`${baseURL}/user/remove-favorite-movie`,
+      { movieId },
+      { withCredentials: true });
   }
 }

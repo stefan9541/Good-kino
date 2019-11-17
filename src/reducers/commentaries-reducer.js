@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   disableSubmitButton: true,
   visibleSubmitButton: false,
-  saveNicknameToLocalStorage: true
 };
 
 const commentariesReducer = (state = initialState, action) => {
@@ -54,11 +53,6 @@ const commentariesReducer = (state = initialState, action) => {
       return {
         ...state,
         visibleSubmitButton: payload
-      };
-    case "SAVE_NICKNAME_TO_LOCALSTORAGE":
-      return {
-        ...state,
-        saveNicknameToLocalStorage: payload
       };
 
     default:

@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import queryStr from "query-string";
-import withGoodKinoService from "../components/hoc";
+import { withGoodKinoService } from "../components/hoc";
 import SearchInputResultItem from "../components/search-input-result-item";
 import SearchInput from "../components/search-input";
 

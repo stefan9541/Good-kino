@@ -3,6 +3,7 @@ import leftSidebarReducer from "./reducers/left-side-bar-reducer";
 import movieDataReducer from "./reducers/movie-data-reducer";
 import searchInputReducer from "./reducers/input-search-reducer";
 import commentariesReducer from "./reducers/commentaries-reducer";
+import userReducer from "./reducers/user-reducer";
 
 
 //  reusing reducers logic
@@ -21,7 +22,7 @@ function createNamedWrapperReducer(reducerFunction, reducerName) {
 
 const reducers = combineReducers({
   leftSidebarReducer,
-  userData: createNamedWrapperReducer(movieDataReducer, "user-data"),
+  userReducer,
   homePage: createNamedWrapperReducer(movieDataReducer, "home-page"),
   paginationRoute: createNamedWrapperReducer(movieDataReducer, "pagination-route"),
   moviePage: createNamedWrapperReducer(movieDataReducer, "movie-page"),

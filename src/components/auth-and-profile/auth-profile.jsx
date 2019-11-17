@@ -3,6 +3,7 @@ import { Button } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AuthModal from "../auth-modal";
+import UserProfile from "../user-profile";
 
 class AuthAndProfile extends Component {
   constructor(props) {
@@ -30,7 +31,9 @@ class AuthAndProfile extends Component {
       <React.Fragment>
         <div>
           {
-            (user) ? <div>{user.userName}</div>
+            (user) ? (
+              <UserProfile user={user} />
+            )
               : (
                 <Button onClick={this.showModal} ghost>
                   Войти
@@ -38,12 +41,10 @@ class AuthAndProfile extends Component {
               )
           }
         </div>
-        <div>
-          <AuthModal
-            visible={this.state.visible}
-            handleCancel={this.handleCancel}
-          />
-        </div>
+        <AuthModal
+          visible={this.state.visible}
+          handleCancel={this.handleCancel}
+        />
       </React.Fragment>
     );
   }
@@ -51,7 +52,7 @@ class AuthAndProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.userData.movies
+    user: state.userReducer.user
   };
 };
 

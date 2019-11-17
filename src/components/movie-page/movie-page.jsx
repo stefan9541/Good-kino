@@ -30,6 +30,7 @@ const MoviePage = props => {
     <React.Fragment>
 
       <MovieNameAndAddToFavorite
+        movieId={_id}
         title={Title}
       />
 
