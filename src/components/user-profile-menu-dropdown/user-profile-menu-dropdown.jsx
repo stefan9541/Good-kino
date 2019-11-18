@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Menu, Dropdown } from "antd";
 import { Link } from "react-router-dom";
 
-import "./user-profile.css";
+import "./user-profile-menu-dropdown.css";
 
 const menu = (
   <Menu className="user-profile-menu">
@@ -16,11 +16,10 @@ const menu = (
         Избранные
       </Link>
     </Menu.Item>
-    <Menu.Item key="3">3rd menu item</Menu.Item>
   </Menu>
 );
 
-const UserProfile = ({ user }) => {
+const UserProfileMenuDropdown = ({ user }) => {
   return (
     <Dropdown
       overlay={menu}
@@ -32,4 +31,4 @@ const UserProfile = ({ user }) => {
   );
 };
 
-export default UserProfile;
+export default UserProfileMenuDropdown;

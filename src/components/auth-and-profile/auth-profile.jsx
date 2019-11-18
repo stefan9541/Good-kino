@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AuthModal from "../auth-modal";
-import UserProfile from "../user-profile";
+import UserProfileMenuDropdown from "../user-profile-menu-dropdown";
 
 class AuthAndProfile extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class AuthAndProfile extends Component {
         <div>
           {
             (user) ? (
-              <UserProfile user={user} />
+              <UserProfileMenuDropdown user={user} />
             )
               : (
                 <Button onClick={this.showModal} ghost>

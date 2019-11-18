@@ -98,5 +98,10 @@ export default class GoodKinoService {
     return axios.patch(`${baseURL}/user/remove-favorite-movie`,
       { movieId },
       { withCredentials: true });
+  };
+
+  getFavoriteMovies = params => {
+    return axios.get(`${baseURL}/user/get-favorite-movies`,
+      { withCredentials: true, params });
   }
 }

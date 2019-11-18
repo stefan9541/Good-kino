@@ -60,6 +60,7 @@ class PaginationComponent extends React.Component {
     return (
       <Col span={24}>
         <Pagination
+          hideOnSinglePage
           className="pagination-container"
           itemRender={this.itemRender}
           onChange={this.handlePageClick}

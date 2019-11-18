@@ -21,12 +21,12 @@ class PaginationRoutingMoviesContainer extends Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   const {
-  //     fetchMovieDataRequest
-  //   } = this.props;
-  //   fetchMovieDataRequest("pagination-route");
-  // }
+  componentWillUnmount() {
+    const {
+      fetchMovieDataRequest
+    } = this.props;
+    fetchMovieDataRequest("pagination-route");
+  }
 
   gettingData = () => {
     const reducerName = "pagination-route";
@@ -60,7 +60,6 @@ class PaginationRoutingMoviesContainer extends Component {
   render() {
     const {
       data,
-      sortedPanel,
       loading,
       error
     } = this.props;
@@ -94,18 +93,14 @@ class PaginationRoutingMoviesContainer extends Component {
     return (
       <ErrorBoundry>
         <MovieItemRender
-          sortedPanel={sortedPanel}
+          sortedPanel
           movies={items || []}
           signature={data.signature || ""}
         />
-        {
-          (itemCount > 40)
-            ? (
-              <PaginationComponent
-                current={currentPage}
-                total={itemCount}
-              />
-            ) : null
+        <PaginationComponent
+          current={currentPage}
+          total={itemCount}
+        />
         }
       </ErrorBoundry>
     );

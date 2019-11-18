@@ -1,40 +1,27 @@
 import React from "react";
-import { Row, Col } from "antd";
-import { connect } from "react-redux";
+import { Row } from "antd";
 import { Switch, Route } from "react-router-dom";
-import MovieItemRender from "../movie-item-render";
+import FavoriteMoviesContainer from "../../containers/favorite-movies-container";
 
 const UserFavoriteMovies = props => {
   return (
     <Row>
-      <Col span={18}>
-        <Switch>
-          <Route
-            path="/favorite"
-            render={(props) => {
-              return (
-                <span>PRIVET</span>
-              )
-            }}
-          />
-          <Route
-            path="/continue"
-            render={(props) => {
-              return (
-                <span>DOSVIDANIE</span>
-              )
-            }}
-          />
-        </Switch>
-      </Col>
+      <Switch>
+        <Route
+          path="/favorite"
+          component={FavoriteMoviesContainer}
+        />
+        <Route
+          path="/continue"
+          render={(props) => {
+            return (
+              <span>DOSVIDANIE</span>
+            )
+          }}
+        />
+      </Switch>
     </Row>
   );
 };
 
-const mapState = state => {
-  return {
-    movies: state.paginationRoute.movies
-  };
-};
-
-export default connect(mapState)(UserFavoriteMovies);
+export default UserFavoriteMovies;

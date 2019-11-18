@@ -5,7 +5,7 @@
 .user-profile-menu {
   background: linear-gradient(to right, #434343, #000000);
 }
-.user-profile-menu li {
+.user-profile-menu li a {
   color: #fff;
 }
 

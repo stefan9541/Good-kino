@@ -24,6 +24,7 @@ const reducers = combineReducers({
   leftSidebarReducer,
   userReducer,
   homePage: createNamedWrapperReducer(movieDataReducer, "home-page"),
+  favoritePage: createNamedWrapperReducer(movieDataReducer, "favorite-page"),
   paginationRoute: createNamedWrapperReducer(movieDataReducer, "pagination-route"),
   moviePage: createNamedWrapperReducer(movieDataReducer, "movie-page"),
   searchInputReducer,

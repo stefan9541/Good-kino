@@ -53,7 +53,7 @@ const MovieRender = ({ movies }) => {
           </div>
 
           <div className="movie-released-wrap">
-            <Link to="/">
+            <Link to={`/${Type}`}>
               {Type}
             </Link>
             <span>

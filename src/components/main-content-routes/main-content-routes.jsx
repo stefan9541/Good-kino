@@ -231,13 +231,14 @@ const MainContentRoutes = props => {
         />
 
         <Route
-          render={props => {
+          render={() => {
             return (
-              <Layout>
+              <Layout rightSidebar>
                 <UserFavoriteMovies />
               </Layout>
             )
-          }} />
+          }}
+        />
 
         <Route render={() => {
           return (
