@@ -103,5 +103,10 @@ export default class GoodKinoService {
   getFavoriteMovies = params => {
     return axios.get(`${baseURL}/user/get-favorite-movies`,
       { withCredentials: true, params });
+  };
+
+  fetchUpdateMovieRate = (value, movieId) => {
+    return axios.patch(`${baseURL}/user/update-rate-movie`,
+      { value, movieId }, { withCredentials: true });
   }
 }

@@ -9,12 +9,11 @@ const MovieCommentItem = props => {
   const { commentaries } = props;
   return (
     (commentaries || []).map(({
-      createdAt, author, body, _id,
+      createdAt, author, body, _id
     }) => {
-      const { userName, userId, userAvatar } = author;
-      const currentDate = new Date(createdAt)
-        .toTimeString()
-        .slice(0, 8);
+      const { userName, userAvatar } = author;
+      let [date, time] = createdAt.split("T");
+      time = time.slice(0, 8);
       return (
         <React.Fragment key={_id}>
           <Col className="comment-header">
@@ -23,7 +22,7 @@ const MovieCommentItem = props => {
                 <Icon type="user" /> {userName}
               </span>
               <small className="comment-date">
-                {currentDate}
+                {date} {time}
               </small>
             </div>
           </Col>

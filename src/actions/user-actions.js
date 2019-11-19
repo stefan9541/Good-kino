@@ -28,3 +28,12 @@ export const removeMovieFromFavoriteAction = movieIndex => {
     payload: movieIndex
   };
 };
+export const addMovieToVoted = (movieId, rate) => {
+  return {
+    type: "ADD_MOVIE_TO_VOTED",
+    payload: {
+      movieId,
+      rate
+    }
+  };
+};

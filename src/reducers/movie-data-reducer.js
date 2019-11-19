@@ -25,6 +25,18 @@ const movieDataReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload
       };
+    case "UPDATE_MOVIE_RATE":
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          film: {
+            ...state.movies.film,
+            totalUsersRate: state.movies.film.totalUsersRate + action.payload,
+            totalUsersVotes: state.movies.film.totalUsersVotes + 1
+          }
+        }
+      };
     default:
       return state;
   }

@@ -9,27 +9,6 @@
   height: 10px;
 }
 
-/* rate-block */
-
-.rate-block-wrap {
-  background: #2d2d2d;
-  display: flex;
-  align-items: center;
-  padding: 5px 10px;
-}
-.rate-block-wrap span {
-  color: #fff;
-}
-.ant-rate {
-  color: #00aeef !important;
-  display: flex;
-  align-items: center
-}
-.ant-rate-star {
-  margin-right: 5px !important;
-  font-size: 16px !important;
-}
-
 /* plot-block */
 
 .plot-block-wrap {
