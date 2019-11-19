@@ -48,6 +48,17 @@ const userReducer = (state = initialState, action) => {
           ]
         }
       };
+    case "ADD_MOVIE_TO_VOTED":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ratedMovies: [
+            ...state.user.ratedMovies,
+            action.payload
+          ]
+        }
+      };
     default:
       return state;
   }
