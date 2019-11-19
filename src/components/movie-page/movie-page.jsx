@@ -1,11 +1,10 @@
 import React from "react";
-import { Col } from "antd";
+import { Col, Rate } from "antd";
 
 import "./movie-page.css";
 import VideoPlayer from "../video-player";
 import MovieDescription from "../movie-description";
 import MovieNameAndAddToFavorite from "../movie-name-add-to-favorite";
-import MovieRate from "../movie-rate";
 
 const MoviePage = props => {
   const {
@@ -22,8 +21,6 @@ const MoviePage = props => {
     imdbVotes,
     Released,
     Genre,
-    totalUsersRate,
-    totalUsersVotes,
     _id
   } = props.movieDescription;
   const replacedYear = (Year) ? Year.replace(new RegExp("–", "ig"), "") : null;
@@ -56,11 +53,11 @@ const MoviePage = props => {
       </Col>
 
       {/* rating block */}
-      <MovieRate
-        movieId={_id}
-        usersRate={totalUsersRate}
-        usersVotes={totalUsersVotes}
-      />
+      <Col className="rate-block-wrap">
+        <span style={{ color: "#0faeef" }}>Оцени Фильм: &#160; &#160;</span>
+        <Rate count={10} allowClear={false} />
+        <span>(55)</span>
+      </Col>
 
       {/* plot block */}
       <Col className="plot-block-wrap">

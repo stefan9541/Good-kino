@@ -4,6 +4,7 @@ export const fetchMovieDataRequest = name => {
     type: "FETCH_MOVIE_DATA_REQUEST"
   };
 };
+
 export const fetchMovieDataSuccess = (movies, name) => {
   return {
     type: "FETCH_MOVIE_DATA_SUCCESS",
@@ -16,12 +17,5 @@ export const fetchMovieDataFailure = (err, name) => {
     name,
     type: "FETCH_MOVIE_DATA_FAILURE",
     payload: err
-  };
-};
-export const updateMovieRate = (userRate, name) => {
-  return {
-    type: "UPDATE_MOVIE_RATE",
-    name,
-    payload: userRate
   };
 };

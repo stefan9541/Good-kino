@@ -70,10 +70,7 @@ class PaginationRoutingMoviesContainer extends Component {
     if (loading) {
       return (
         <div style={{
-          display: "flex",
-          justifyContent: "center",
-          height: "100%",
-          alignItems: "center"
+          display: "flex", justifyContent: "center", height: "100%", alignItems: "center"
         }}
         >
           <Spin tip="loadig..." />
@@ -104,6 +101,7 @@ class PaginationRoutingMoviesContainer extends Component {
           current={currentPage}
           total={itemCount}
         />
+        }
       </ErrorBoundry>
     );
   }

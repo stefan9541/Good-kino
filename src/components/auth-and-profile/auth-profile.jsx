@@ -26,12 +26,7 @@ class AuthAndProfile extends Component {
   };
 
   render() {
-    const { user, loading } = this.props;
-
-    if (loading) {
-      return false;
-    }
-
+    const { user } = this.props;
     return (
       <React.Fragment>
         <div>
@@ -57,8 +52,7 @@ class AuthAndProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user,
-    loading: state.userReducer.loading
+    user: state.userReducer.user
   };
 };
 

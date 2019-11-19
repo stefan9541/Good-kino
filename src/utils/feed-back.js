@@ -13,12 +13,7 @@ const errorMessage = msg => {
   return message.error(msg);
 };
 
-const warningMessage = msg => {
-  return message.warning(msg);
-};
-
 export {
   successMessage,
-  errorMessage,
-  warningMessage
+  errorMessage
 };
