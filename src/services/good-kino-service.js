@@ -108,5 +108,10 @@ export default class GoodKinoService {
   fetchUpdateMovieRate = (value, movieId) => {
     return axios.patch(`${baseURL}/user/update-rate-movie`,
       { value, movieId }, { withCredentials: true });
+  };
+
+  updateContinueMovieUserCollection = params => {
+    return axios.patch(`${baseURL}/user/continue-watch-movie`,
+      { ...params }, { withCredentials: true });
   }
 }

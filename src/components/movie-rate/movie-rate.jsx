@@ -24,7 +24,6 @@ const MovieRate = props => {
   const { ratedMovies = [] } = user || [];
   const dublicateMovie = ratedMovies.find(item => item.movieId === movieId);
   const { fetchUpdateMovieRate } = props.goodKinoService;
-  console.log(dublicateMovie)
   const average = (usersRate / usersVotes).toFixed(1);
   // if average > 1 && < 1.5 round to 1.5 else if avarage > 1.5 round to 2
   const rate = Math.ceil(average * 2) / 2;

@@ -13,7 +13,8 @@ class Video extends React.Component {
       onLoadVisibleBlock,
       handleOnEnded,
       innerRef,
-      videoPath
+      videoPath,
+      continueWatchMovie
     } = this.props;
 
     return (
@@ -24,6 +25,11 @@ class Video extends React.Component {
           </button>
         </div>
         <video
+          onPlaying={() => {
+            setTimeout(() => {
+              continueWatchMovie();
+            }, 1000);
+          }}
           onTimeUpdate={getCurrentTime}
           onClick={tooglePlayVideo}
           onEnded={handleOnEnded}

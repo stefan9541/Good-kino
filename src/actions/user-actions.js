@@ -37,3 +37,9 @@ export const addMovieToVoted = (movieId, rate) => {
     }
   };
 };
+export const addMovieToContinueWatch = movie => {
+  return {
+    type: "ADD_MOVIE_TO_CONTINUE_WATCHING",
+    payload: movie
+  };
+};

@@ -2,14 +2,15 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { withGoodKinoService } from "../hoc";
+import Layout from "../layout";
 import HomePageContainer from "../../containers/home-page-container";
 import SlickSLiderContainer from "../../containers/slick-slider-container";
 import PaginationRoutingMoviesContainer from "../../containers/pagination-routing-movies-container";
 import MoviePageContainer from "../../containers/movie-page-container";
-import UserFavoriteMovies from "../user-favorite-movies";
-
+import FavoriteMoviesContainer from "../../containers/favorite-movies-container";
+import ContinueWatch from "../continue-watch";
+import ProtectRoute from "../protect-route";
 import PageNotFound from "../page-not-found";
-import Layout from "../layout";
 
 
 const MainContentRoutes = props => {
@@ -17,7 +18,8 @@ const MainContentRoutes = props => {
     getMovieFromRoutingAndPagination,
     fetchMovieFromFilterPanel,
     fetchOneMovie,
-    getMovieFromHomePage
+    getMovieFromHomePage,
+    getFavoriteMovies
   } = props.goodKinoService;
   return (
     <React.Fragment>
@@ -231,12 +233,27 @@ const MainContentRoutes = props => {
         />
 
         <Route
-          render={() => {
+          path="/favorite"
+          render={props => {
             return (
-              <Layout rightSidebar>
-                <UserFavoriteMovies />
-              </Layout>
-            )
+              <ProtectRoute>
+                <Layout rightSidebar>
+                  <FavoriteMoviesContainer fetchingData={getFavoriteMovies} {...props} />
+                </Layout>
+              </ProtectRoute>
+            );
+          }}
+        />
+        <Route
+          path="/continue"
+          render={props => {
+            return (
+              <ProtectRoute>
+                <Layout>
+                  <ContinueWatch {...props} />
+                </Layout>
+              </ProtectRoute>
+            );
           }}
         />
 

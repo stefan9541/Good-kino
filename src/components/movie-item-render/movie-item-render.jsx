@@ -2,13 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Col } from "antd";
 import SortedPanelMovies from "../sorted-movies-panel";
+import { fixedEncodeURIComponent } from "../../utils/fixed-encode-uri";
 
 import "./movie-item-render.css";
-
-function fixedEncodeURIComponent(str) {
-  return encodeURI(str)
-    .replace(/%20/g, "+");
-}
 
 const imgError = event => {
   event.target.src = "https://ispwp.com/img/image-not-available-big.jpg";

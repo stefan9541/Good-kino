@@ -3,6 +3,7 @@ module.exports = {
   'extends': ['airbnb'],
   'rules': {
     "quotes": [2, "double", { "avoidEscape": true }],
+    "no-template-curly-in-string": ["error"],
     "react/jsx-fragments": "off",
     "react/prop-types": "off",
     "react/prefer-stateless-function": "off",
@@ -44,6 +45,8 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'arrow-body-style': 'off',
+    "template-curly-spacing": "off",
+    "indent": "off"
   },
   'globals': {
     'expectObservable': true,

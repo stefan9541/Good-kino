@@ -2,15 +2,11 @@ import React from "react";
 import Slider from "react-slick";
 import { Row, Col, Tooltip } from "antd";
 import { Link } from "react-router-dom";
+import { fixedEncodeURIComponent } from "../../utils/fixed-encode-uri";
 
 import "./slick-slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-function fixedEncodeURIComponent(str) {
-  return encodeURI(str)
-    .replace(/%20/g, "+");
-}
 
 const SlickSliderItem = ({ items = [], setting }) => {
   return (

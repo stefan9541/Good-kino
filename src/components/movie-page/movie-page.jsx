@@ -73,9 +73,16 @@ const MoviePage = props => {
       <div className="video-player-header">
         {props.movieDescription.Title}
       </div>
+
       <Col>
-        <VideoPlayer movieId={_id} />
+        <VideoPlayer
+          genre={Genre}
+          type={Type}
+          title={Title}
+          movieId={_id}
+        />
       </Col>
+
     </React.Fragment>
     // </Col>
   );

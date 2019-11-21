@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { Menu, Dropdown, Spin } from "antd";
 import { Link } from "react-router-dom";
+import { fixedEncodeURIComponent } from "../../utils/fixed-encode-uri";
 
 import "./search-input-result-item.css";
-
-function fixedEncodeURIComponent(str) {
-  return encodeURI(str)
-    .replace(/%20/g, "+");
-}
 
 class SearchInputResultItem extends Component {
   render() {

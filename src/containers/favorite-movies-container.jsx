@@ -3,7 +3,6 @@ import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import queryStr from "query-string";
 import { Spin } from "antd";
-import { withGoodKinoService } from "../components/hoc";
 import MovieItemRender from "../components/movie-item-render";
 import ErrorIndicator from "../components/error-indicator";
 import * as movieDataActions from "../actions/movie-data-action";
@@ -12,27 +11,27 @@ class FavoriteMoviesContainer extends Component {
   reducerName = "favorite-page"
 
   componentDidMount() {
-    this.fetchingData();
+    this.getData();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params !== this.props.match.params) {
-      this.fetchingData();
+      this.getData();
     }
   }
 
-  fetchingData = () => {
-    const { getFavoriteMovies } = this.props.goodKinoService;
+  getData = () => {
     const {
       fetchMovieDataSuccess,
       fetchMovieDataRequest,
       fetchMovieDataFailure,
+      fetchingData,
       location
     } = this.props;
     const parseParams = queryStr.parse(location.search);
 
     fetchMovieDataRequest(this.reducerName);
-    getFavoriteMovies(parseParams)
+    fetchingData(parseParams)
       .then(({ data }) => {
         fetchMovieDataSuccess(data, this.reducerName);
       })
@@ -73,6 +72,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  withGoodKinoService(),
   connect(mapStateToProps, mapDispatchToProps)
 )(FavoriteMoviesContainer);

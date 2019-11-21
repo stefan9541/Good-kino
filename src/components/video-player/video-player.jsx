@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { Icon } from "antd";
+import { connect } from "react-redux";
 import { withGoodKinoService } from "../hoc";
+import { addMovieToContinueWatch } from "../../actions/user-actions";
 import Video from "../video";
 import VideoControlPanel from "../video-control-panel";
 import QualityChange from "../quality-change";
@@ -166,7 +168,6 @@ class VideoPlayer extends Component {
   handleFetchVideoforPlayer = quality => {
     const { fetchVideoForPlayer } = this.props.goodKinoService;
     const { movieId } = this.props;
-    // const { currentQuality } = this.state;
     fetchVideoForPlayer(movieId, quality || "720")
       .then(({ data }) => {
         if (this._isMounted) {
@@ -180,6 +181,38 @@ class VideoPlayer extends Component {
         }
       })
       .catch(err => this.setState({ err }));
+  };
+
+  handleAddMovieToContinueWatch = () => {
+    const { updateContinueMovieUserCollection } = this.props.goodKinoService;
+    const {
+      movieId,
+      user,
+      addMovieToContinueWatch,
+      title,
+      genre,
+      type
+    } = this.props;
+    const { continueWatch = [] } = user;
+    const movieAlreadyHave = continueWatch.find(item => item.movieId === movieId);
+    const isWatch = false;
+    const date = new Date().toISOString();
+    if (movieAlreadyHave) {
+      return;
+    }
+    updateContinueMovieUserCollection({
+      movieId, title, genre, type
+    })
+      .then(() => {
+        addMovieToContinueWatch({
+          movieId,
+          isWatch,
+          date,
+          title,
+          type,
+          genre: genre.split(",")[0]
+        });
+      });
   }
 
   render() {
@@ -192,7 +225,6 @@ class VideoPlayer extends Component {
       volume
     } = this.state;
 
-
     const volumeIcon = (volume === 0)
       ? <i><img src="/svg-icon/123.svg" alt="" /></i>
       : <Icon type="sound" theme="filled" />;
@@ -203,11 +235,13 @@ class VideoPlayer extends Component {
     const visibleQualityMenu = (toogleQualityMenu) ? "block" : "none";
     const durationFormat = this.formatTime(duration);
     const currentTimeFormat = this.formatTime(currentTime);
+
     return (
       <div ref={customRef} className="custom-video-player-wrapp">
         <Video
           handleOnEnded={this.handleOnEnded}
           videoPath={this.state.videoPath}
+          continueWatchMovie={this.handleAddMovieToContinueWatch}
           ref={videoRef}
           getCurrentTime={this.getCurrentTime}
           tooglePlayVideo={this.tooglePlayVideo}
@@ -252,7 +286,17 @@ class VideoPlayer extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user
+  };
+};
+
+const mapDispatchToProps = {
+  addMovieToContinueWatch
+}
 
 export default compose(
   withGoodKinoService(),
+  connect(mapStateToProps, mapDispatchToProps)
 )(VideoPlayer);

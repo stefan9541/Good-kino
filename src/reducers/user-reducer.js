@@ -1,6 +1,7 @@
 const initialState = {
   user: null,
   loading: true,
+  isAuth: false,
   error: null
 };
 
@@ -11,6 +12,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         user: null,
         loading: true,
+        isAuth: false,
         error: null
       };
     case "FETCH_USER_DATA_SUCCESS":
@@ -18,6 +20,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
         loading: false,
+        isAuth: true,
         error: null
       };
 
@@ -25,6 +28,7 @@ const userReducer = (state = initialState, action) => {
       return {
         user: null,
         loading: false,
+        isAuth: false,
         error: action.payload
       };
     case "ADD_MOVIE_TO_FAVORITE":
@@ -55,6 +59,17 @@ const userReducer = (state = initialState, action) => {
           ...state.user,
           ratedMovies: [
             ...state.user.ratedMovies,
+            action.payload
+          ]
+        }
+      };
+    case "ADD_MOVIE_TO_CONTINUE_WATCHING":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          continueWatch: [
+            ...state.user.continueWatch,
             action.payload
           ]
         }
