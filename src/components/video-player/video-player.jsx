@@ -187,16 +187,19 @@ class VideoPlayer extends Component {
     const { updateContinueMovieUserCollection } = this.props.goodKinoService;
     const {
       movieId,
-      user,
+      continueWatch,
       addMovieToContinueWatch,
       title,
       genre,
       type
     } = this.props;
-    const { continueWatch = [] } = user;
+    if (!continueWatch) {
+      return;
+    }
     const movieAlreadyHave = continueWatch.find(item => item.movieId === movieId);
     const isWatch = false;
-    const date = new Date().toISOString();
+    const date = new Date()
+      .toISOString();
     if (movieAlreadyHave) {
       return;
     }
@@ -288,13 +291,13 @@ class VideoPlayer extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user
+    continueWatch: state.userReducer.continueWatch
   };
 };
 
 const mapDispatchToProps = {
   addMovieToContinueWatch
-}
+};
 
 export default compose(
   withGoodKinoService(),

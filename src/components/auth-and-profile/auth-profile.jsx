@@ -26,7 +26,13 @@ class AuthAndProfile extends Component {
   };
 
   render() {
-    const { user, loading } = this.props;
+    const {
+      loading,
+      continueWatch,
+      favoriteMovies,
+      picture,
+      isAuth
+    } = this.props;
 
     if (loading) {
       return false;
@@ -36,8 +42,12 @@ class AuthAndProfile extends Component {
       <React.Fragment>
         <div>
           {
-            (user) ? (
-              <UserProfileMenuDropdown user={user} />
+            (isAuth) ? (
+              <UserProfileMenuDropdown
+                favoriteMovies={favoriteMovies}
+                continueWatch={continueWatch}
+                picture={picture}
+              />
             )
               : (
                 <Button onClick={this.showModal} ghost>
@@ -57,7 +67,10 @@ class AuthAndProfile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user,
+    continueWatch: state.userReducer.continueWatch,
+    favoriteMovies: state.userReducer.favoriteMovies,
+    picture: state.userReducer.picture,
+    isAuth: state.userReducer.isAuth,
     loading: state.userReducer.loading
   };
 };

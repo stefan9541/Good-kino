@@ -19,9 +19,8 @@ const MovieRate = props => {
     usersVotes,
     addMovieToVoted,
     updateMovieRate,
-    user
+    ratedMovies
   } = props;
-  const { ratedMovies = [] } = user || [];
   const dublicateMovie = ratedMovies.find(item => item.movieId === movieId);
   const { fetchUpdateMovieRate } = props.goodKinoService;
   const average = (usersRate / usersVotes).toFixed(1);
@@ -48,7 +47,7 @@ const MovieRate = props => {
         onChange={handleChange}
         count={10}
         value={rate}
-        disabled={!user}
+        disabled={!ratedMovies}
         allowClear={false}
         allowHalf
       />
@@ -83,7 +82,7 @@ const MovieRate = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user
+    ratedMovies: state.userReducer.ratedMovies
   };
 };
 
@@ -93,5 +92,5 @@ const mapDistatchToProps = {
 };
 
 export default withGoodKinoService()(
-  connect(mapStateToProps, mapDistatchToProps)(MovieRate)
+  connect(mapStateToProps, mapDistatchToProps)(React.memo(MovieRate))
 );

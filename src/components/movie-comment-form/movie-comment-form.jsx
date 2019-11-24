@@ -28,7 +28,7 @@ class MovieCommentForm extends Component {
             });
           }}
         >
-          <Form.Item>
+          <Form.Item className="comment-form-item">
             {
               getFieldDecorator("commentText", {
                 rules: [{ required: true }],

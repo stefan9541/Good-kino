@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./movie-description.css";
 
-const MovieDescription = props => {
+const MovieDescription = React.memo(props => {
   const {
     genre,
     released,
@@ -53,6 +53,6 @@ const MovieDescription = props => {
       </Col>
     </Col>
   );
-};
+});
 
 export default MovieDescription;

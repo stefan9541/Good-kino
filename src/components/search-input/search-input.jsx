@@ -23,7 +23,7 @@ class SearchInput extends React.Component {
           });
         }}
       >
-        <Form.Item className="search-form-input" style={{ marginBottom: 0 }}>
+        <Form.Item className="search-form-input">
           {
             getFieldDecorator("searchInput", {
               rules: [{ min: 2, required: true, message: "Введите 2 или больше символа" }],

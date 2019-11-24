@@ -19,6 +19,7 @@ const VideoControlPanel = props => {
     tooglePlayVideo,
     volumeToolTip
   } = props;
+
   return (
     <React.Fragment>
       <div className="play-pause-button">

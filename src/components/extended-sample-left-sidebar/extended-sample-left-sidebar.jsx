@@ -29,19 +29,21 @@ class ExtendedSampleLeftSidebar extends Component {
     const { getFieldDecorator, getFieldValue } = this.props.form;
     const { items } = this.props;
     const selectValueByType = getFieldValue("byType");
-    const currentYear = new Date().getFullYear();
+    const currentYear = new Date()
+      .getFullYear();
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Menu id="extended-sample-panel" mode="inline" theme="dark">
-          <Menu.SubMenu title={
+          <Menu.SubMenu title={(
             <span>
-              <i className={"sub-menu-icon-wrap"}>
-                <img className={"sub-menu-icon"} src={"/svg-icon/filter.svg"} alt={`filter icon svg`} />
+              <i className="sub-menu-icon-wrap">
+                <img className="sub-menu-icon" src="/svg-icon/filter.svg" alt="filter icon svg" />
               </i>
-              {`Фильтры`}
+              {"Фильтры"}
             </span>
-          }>
+          )}
+          >
             <Form.Item className="extended-form-item extended-form-label">
               Выборка по типу
             </Form.Item>
@@ -97,7 +99,9 @@ class ExtendedSampleLeftSidebar extends Component {
             <Form.Item className="extended-form-item">
               {
                 getFieldDecorator("year", {
-                  rules: [{ min: "1950", max: currentYear, type: "number", message: " " }],
+                  rules: [{
+                    min: "1950", max: currentYear, type: "number", message: " "
+                  }],
                   initialValue: "2015"
                 })(
                   <InputNumber className="extended-input-number" />

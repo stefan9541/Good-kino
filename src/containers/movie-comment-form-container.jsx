@@ -21,7 +21,9 @@ class MovieCommentFormContainer extends Component {
       addNewCommentar,
       movieId,
       disableSubmitButton,
-      user
+      userId,
+      userName,
+      picture
     } = this.props;
 
     if (err) {
@@ -29,9 +31,9 @@ class MovieCommentFormContainer extends Component {
     }
 
     values.author = {
-      userName: user.userName,
-      userId: user._id,
-      userAvatar: user.picture
+      userName,
+      userId,
+      userAvatar: picture
     };
     postCommentaries({ ...values, movieId })
       .then(res => {
@@ -62,10 +64,10 @@ class MovieCommentFormContainer extends Component {
   }
 
   render() {
-    const { visibleSubmit, disableSubmit, user } = this.props;
+    const { visibleSubmit, disableSubmit, isAuth } = this.props;
 
     return (
-      (user)
+      (isAuth)
         ? (
           <MovieCommentForm
             visibleSubmit={visibleSubmit}
@@ -86,8 +88,9 @@ const mapStateToProps = state => {
     newCommentar: state.commentariesReducer.newCommentar,
     disableSubmit: state.commentariesReducer.disableSubmitButton,
     visibleSubmit: state.commentariesReducer.visibleSubmitButton,
-    saveNickname: state.commentariesReducer.saveNicknameToLocalStorage,
-    user: state.userReducer.user
+    isAuth: state.userReducer.isAuth,
+    userId: state.userReducer._id,
+    picture: state.userReducer.picture
   };
 };
 

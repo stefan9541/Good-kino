@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 import "./user-profile-menu-dropdown.css";
 
-const UserProfileMenuDropdown = ({ user }) => {
+const UserProfileMenuDropdown = ({ favoriteMovies, continueWatch, picture }) => {
+  console.log('asd')
   return (
     <Dropdown
       overlay={() => {
@@ -12,12 +13,12 @@ const UserProfileMenuDropdown = ({ user }) => {
           <Menu className="user-profile-menu">
             <Menu.Item key="0">
               <Link to="/continue">
-                Досмотреть ({user.continueWatch.length || 0})
+                Досмотреть ({continueWatch.length || 0})
               </Link>
             </Menu.Item>
             <Menu.Item key="1">
               <Link to="/favorite">
-                Избранные ({user.favoriteMovies.length || 1})
+                Избранные ({favoriteMovies.length || 1})
               </Link>
             </Menu.Item>
           </Menu>
@@ -26,7 +27,7 @@ const UserProfileMenuDropdown = ({ user }) => {
       placement="bottomCenter"
       trigger={["click"]}
     >
-      <Avatar className="user-avatar" size="large" src={user.picture} />
+      <Avatar className="user-avatar" size="large" src={picture} />
     </Dropdown>
   );
 };

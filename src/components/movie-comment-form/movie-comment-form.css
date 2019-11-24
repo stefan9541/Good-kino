@@ -35,3 +35,7 @@
 .save-nickname-switch:hover {
   box-shadow: none;
 }
+
+.comment-form-item {
+  margin-bottom: 24px;
+}

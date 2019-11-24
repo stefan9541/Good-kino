@@ -43,3 +43,9 @@ export const addMovieToContinueWatch = movie => {
     payload: movie
   };
 };
+export const updateMovieStatusToWatched = movieId => {
+  return {
+    type: "UPDATE_STATUS_MOVIE_TO_WATCHED",
+    payload: movieId
+  };
+};

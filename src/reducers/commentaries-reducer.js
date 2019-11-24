@@ -4,7 +4,7 @@ const initialState = {
   loading: true,
   error: null,
   disableSubmitButton: true,
-  visibleSubmitButton: false,
+  visibleSubmitButton: false
 };
 
 const commentariesReducer = (state = initialState, action) => {

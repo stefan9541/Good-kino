@@ -6,7 +6,7 @@ import {
 import "./auth-modal.css";
 
 
-const AuthModal = props => {
+const AuthModal = React.memo(props => {
   const { handleCancel, visible } = props;
   return (
     <Row>
@@ -32,6 +32,6 @@ const AuthModal = props => {
       </Modal>
     </Row>
   );
-};
+});
 
 export default AuthModal;

@@ -10,6 +10,7 @@
 
 .search-form-input {
   flex-grow: 1;
+  margin-bottom: 24px;
 }
 
 .search-form-input input {
@@ -18,7 +19,7 @@
 }
 
 .search-form-button {
-  margin-bottom: 0;
+  margin-bottom: 24px;
 }
 .search-form-button button {
   border-top-left-radius: 0;

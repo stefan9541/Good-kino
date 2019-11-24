@@ -19,19 +19,19 @@ const MovieNameAndAddToFavorite = props => {
   const { patchMovieToFavorite, removeMovieFromFavorite } = props.goodKinoService;
   const {
     title,
-    user,
+    favoriteMovies,
     movieId,
     addMovieToFavorite,
     removeMovieFromFavoriteAction
   } = props;
-  const movieIndex = user && user.favoriteMovies.indexOf(movieId);
-  const isUserAndIsMovieAdded = user && movieIndex !== -1;
+  const movieIndex = favoriteMovies.indexOf(movieId);
+  const isMovieAdded = movieIndex !== -1;
 
   const handleAddToFavorite = () => {
-    if (!user) {
+    if (!favoriteMovies) {
       return;
     }
-    if (isUserAndIsMovieAdded) {
+    if (isMovieAdded) {
       removeMovieFromFavorite(movieId)
         .then(() => {
           removeMovieFromFavoriteAction(movieIndex);
@@ -49,7 +49,6 @@ const MovieNameAndAddToFavorite = props => {
       .catch(() => errorMessage("Доступно только для авторизованных пользователей"));
   };
 
-
   return (
     <Col className="movie-name-and-add-to-favorite-wrap">
       <Col className="movie-name">
@@ -58,7 +57,7 @@ const MovieNameAndAddToFavorite = props => {
       <Col className="add-to-favorite">
         <Button onClick={handleAddToFavorite} className="add-to-favorite-btn">
           {
-            (isUserAndIsMovieAdded)
+            (isMovieAdded)
               ? <Icon twoToneColor="#1890ff" type="heart" theme="twoTone" />
               : <Icon type="heart" theme="outlined" />
           }
@@ -70,7 +69,7 @@ const MovieNameAndAddToFavorite = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user
+    favoriteMovies: state.userReducer.favoriteMovies
   };
 };
 
