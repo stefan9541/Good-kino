@@ -1,27 +1,32 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Button } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AuthModal from "../auth-modal";
+import RegisterModal from "../register-modal";
 import UserProfileMenuDropdown from "../user-profile-menu-dropdown";
 
-class AuthAndProfile extends Component {
+import "./auth-profile.css";
+
+class AuthAndProfile extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      authModal: false,
+      registerModal: false,
     };
   }
 
-  showModal = () => {
+  showModal = ({ target: { name } }) => {
     this.setState({
-      visible: true
+      [name]: true
     });
   };
 
   handleCancel = () => {
     this.setState({
-      visible: false
+      authModal: false,
+      registerModal: false
     });
   };
 
@@ -34,30 +39,41 @@ class AuthAndProfile extends Component {
       isAuth
     } = this.props;
 
-    if (loading) {
-      return false;
-    }
+    // if (loading) {
+    //   return false;
+    // }
 
     return (
       <React.Fragment>
-        <div>
+        <div className="auth-profile-wrap">
           {
             (isAuth) ? (
-              <UserProfileMenuDropdown
-                favoriteMovies={favoriteMovies}
-                continueWatch={continueWatch}
-                picture={picture}
-              />
+              <div>
+                <UserProfileMenuDropdown
+                  favoriteMovies={favoriteMovies}
+                  continueWatch={continueWatch}
+                  picture={picture}
+                />
+              </div>
             )
               : (
-                <Button onClick={this.showModal} ghost>
-                  Войти
-                </Button>
+                <div className="reg-auth-button-wrapp">
+                  <Button name="authModal" onClick={this.showModal} ghost>
+                    Войти
+                  </Button>
+                  <Button type="primary" name="registerModal" onClick={this.showModal} ghost>
+                    Регистрация
+                  </Button>
+                </div>
               )
           }
         </div>
         <AuthModal
-          visible={this.state.visible}
+          visible={this.state.authModal}
+          handleCancel={this.handleCancel}
+        />
+        <RegisterModal
+          visible={this.state.registerModal}
           handleCancel={this.handleCancel}
         />
       </React.Fragment>

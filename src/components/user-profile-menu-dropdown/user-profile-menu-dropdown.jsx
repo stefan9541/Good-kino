@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "./user-profile-menu-dropdown.css";
 
 const UserProfileMenuDropdown = ({ favoriteMovies, continueWatch, picture }) => {
-  console.log('asd')
   return (
     <Dropdown
       overlay={() => {

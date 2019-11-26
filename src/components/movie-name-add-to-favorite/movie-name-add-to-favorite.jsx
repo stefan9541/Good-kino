@@ -19,7 +19,7 @@ const MovieNameAndAddToFavorite = props => {
   const { patchMovieToFavorite, removeMovieFromFavorite } = props.goodKinoService;
   const {
     title,
-    favoriteMovies,
+    favoriteMovies = [],
     movieId,
     addMovieToFavorite,
     removeMovieFromFavoriteAction

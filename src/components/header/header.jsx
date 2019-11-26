@@ -21,7 +21,7 @@ const Header = () => {
         <Col className="input-search-wrap" span={9}>
           <WrappedSearchFormContainer />
         </Col>
-        <Col className="auth-profile-wrap" span={7}>
+        <Col offset={1} span={7}>
           <AuthAndProfile />
         </Col>
       </Row>

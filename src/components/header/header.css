@@ -19,20 +19,6 @@ header {
   width: 90%;
 }
 
-.auth-profile-wrap {
-  display: flex;
-  margin-left: 13px;
-  justify-content: center
-}
-
-.auth-profile-wrap div:first-child {
-  margin-left: 75px;
-} 
-
-.input-search-wrap {
-  margin-left: 25px;
-}
-
 .ant-form-explain {
   position: absolute !important;
 }

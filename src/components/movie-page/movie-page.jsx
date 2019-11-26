@@ -26,7 +26,7 @@ const MoviePage = props => {
     totalUsersVotes,
     _id
   } = props.movieDescription;
-  const replacedYear = (Year) ? Year.replace(new RegExp("–", "ig"), "") : null;
+  const replacedYear = Year.split("–")[0];
 
   return (
     // <Col span={18}>

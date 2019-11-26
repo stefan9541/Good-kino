@@ -19,7 +19,8 @@ const MovieRate = props => {
     usersVotes,
     addMovieToVoted,
     updateMovieRate,
-    ratedMovies
+    ratedMovies = [],
+    isAuth
   } = props;
   const dublicateMovie = ratedMovies.find(item => item.movieId === movieId);
   const { fetchUpdateMovieRate } = props.goodKinoService;
@@ -47,7 +48,7 @@ const MovieRate = props => {
         onChange={handleChange}
         count={10}
         value={rate}
-        disabled={!ratedMovies}
+        disabled={!isAuth}
         allowClear={false}
         allowHalf
       />
@@ -82,7 +83,8 @@ const MovieRate = props => {
 
 const mapStateToProps = state => {
   return {
-    ratedMovies: state.userReducer.ratedMovies
+    ratedMovies: state.userReducer.ratedMovies,
+    isAuth: state.userReducer.isAuth
   };
 };
 

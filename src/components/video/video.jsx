@@ -28,7 +28,7 @@ class Video extends React.Component {
           onPlaying={() => {
             setTimeout(() => {
               continueWatchMovie();
-            }, 1000);
+            }, 5000);
           }}
           onTimeUpdate={getCurrentTime}
           onClick={tooglePlayVideo}
