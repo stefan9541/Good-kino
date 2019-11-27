@@ -95,7 +95,7 @@ const mapStateToProps = state => {
     commentaries: state.commentariesReducer.commentaries,
     movie: state.moviePage.movies,
     loading: state.commentariesReducer.loading,
-    error: state.commentariesReducer.error,
+    error: state.commentariesReducer.error
   };
 };
 

@@ -39,9 +39,9 @@ class AuthAndProfile extends PureComponent {
       isAuth
     } = this.props;
 
-    // if (loading) {
-    //   return false;
-    // }
+    if (loading) {
+      return false;
+    }
 
     return (
       <React.Fragment>

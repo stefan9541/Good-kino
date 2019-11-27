@@ -21,7 +21,7 @@ class MovieCommentFormContainer extends Component {
       addNewCommentar,
       movieId,
       disableSubmitButton,
-      userId,
+      _id,
       userName,
       picture
     } = this.props;
@@ -30,14 +30,15 @@ class MovieCommentFormContainer extends Component {
       return;
     }
 
-    values.author = {
+    const author = {
+      _id,
       userName,
-      userId,
-      userAvatar: picture
+      picture
     };
     postCommentaries({ ...values, movieId })
-      .then(res => {
-        addNewCommentar({ ...res.data });
+      .then(({ data }) => {
+        data.author = author;
+        addNewCommentar({ ...data });
         resetFields("commentText");
         disableSubmitButton(true);
       })
@@ -89,7 +90,7 @@ const mapStateToProps = state => {
     disableSubmit: state.commentariesReducer.disableSubmitButton,
     visibleSubmit: state.commentariesReducer.visibleSubmitButton,
     isAuth: state.userReducer.isAuth,
-    userId: state.userReducer._id,
+    _id: state.userReducer._id,
     picture: state.userReducer.picture
   };
 };

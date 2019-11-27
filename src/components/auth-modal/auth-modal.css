@@ -1,11 +1,15 @@
 .auth-body {
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   justify-content: center;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .auth-body button {
   color: #16b7f5;
+}
+.sign-in-with h2 {
+  color: tomato;
 }

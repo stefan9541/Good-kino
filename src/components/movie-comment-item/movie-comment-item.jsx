@@ -11,7 +11,7 @@ const MovieCommentItem = props => {
     (commentaries || []).map(({
       createdAt, author, body, _id
     }) => {
-      const { userName, userAvatar } = author;
+      const { userName, picture } = author;
       let [date, time] = createdAt.split("T");
       time = time.slice(0, 8);
       return (
@@ -29,8 +29,8 @@ const MovieCommentItem = props => {
           <Col className="comment-body">
             <div className="user-comment-avatar">
               {
-                (userAvatar)
-                  ? <Avatar src={userAvatar} size={64} />
+                (picture)
+                  ? <Avatar src={picture} size={64} />
                   : <Avatar icon="user" size={64} />
               }
             </div>

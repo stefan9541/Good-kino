@@ -17,16 +17,25 @@ const UserProfileMenuDropdown = ({ favoriteMovies, continueWatch, picture }) => 
             </Menu.Item>
             <Menu.Item key="1">
               <Link to="/favorite">
-                Избранные ({favoriteMovies.length || 1})
+                Избранные ({favoriteMovies.length || 0})
               </Link>
             </Menu.Item>
+            <Menu.Item key="2">
+              <a href="http://localhost:8080/api/logout">
+                Выйти
+              </a>
+            </Menu.Item>
           </Menu>
-        )
+        );
       }}
       placement="bottomCenter"
       trigger={["click"]}
     >
-      <Avatar className="user-avatar" size="large" src={picture} />
+      <Avatar
+        className="user-avatar"
+        size="large"
+        src={picture}
+      />
     </Dropdown>
   );
 };

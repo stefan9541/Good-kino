@@ -72,13 +72,9 @@ export default class GoodKinoService {
 
   postCommentaries = async commentar => {
     try {
-      return await axios.post(`${baseURL}/post-commentaries`, {
-        ...commentar,
-        body: commentar.commentText,
-        author: commentar.author,
-        userAvatar: commentar.userAvatar,
-        userId: commentar.userId
-      });
+      return await axios.post(`${baseURL}/post-commentaries`,
+        { ...commentar },
+        { withCredentials: true });
     } catch (error) {
       throw new Error("smth wrong bad");
     }
@@ -112,6 +108,16 @@ export default class GoodKinoService {
 
   updateContinueMovieUserCollection = params => {
     return axios.patch(`${baseURL}/user/continue-watch-movie`,
+      { ...params }, { withCredentials: true });
+  };
+
+  registerNewUser = params => {
+    return axios.post(`${baseURL}/register`,
+      { ...params }, { withCredentials: true });
+  };
+
+  logInUser = params => {
+    return axios.post(`${baseURL}/login`,
       { ...params }, { withCredentials: true });
   }
 }
