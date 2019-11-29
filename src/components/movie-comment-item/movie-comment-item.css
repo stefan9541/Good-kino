@@ -15,20 +15,6 @@
   margin-left: 10px;
 }
 
-.like-dislike-button span {
-  margin: 0 10px;
-  color: #fff
-}
-
-.like-dislike-button i {
-  font-size: 16px;
-}
-
-.like-dislike-button i:hover {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
 .comment-body {
   display: flex;
   padding: 15px;

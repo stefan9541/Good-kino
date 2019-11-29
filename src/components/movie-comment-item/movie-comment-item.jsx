@@ -2,14 +2,21 @@ import React from "react";
 import {
   Col, Icon, Avatar
 } from "antd";
+import LikeDislike from "../like-dislike";
 
 import "./movie-comment-item.css";
 
 const MovieCommentItem = props => {
-  const { commentaries } = props;
+  const {
+    commentaries,
+    userId,
+    toogleLikeOrDislike,
+    updateCommentariesLike,
+    updateCommentariesDislike
+  } = props;
   return (
     (commentaries || []).map(({
-      createdAt, author, body, _id
+      createdAt, author, body, _id, likes, dislikes
     }) => {
       const { userName, picture } = author;
       let [date, time] = createdAt.split("T");
@@ -25,6 +32,15 @@ const MovieCommentItem = props => {
                 {date} {time}
               </small>
             </div>
+            <LikeDislike
+              commentdId={_id}
+              updateCommentariesDislike={updateCommentariesDislike}
+              updateCommentariesLike={updateCommentariesLike}
+              toogleLikeOrDislike={toogleLikeOrDislike}
+              likes={likes}
+              dislikes={dislikes}
+              userId={userId}
+            />
           </Col>
           <Col className="comment-body">
             <div className="user-comment-avatar">

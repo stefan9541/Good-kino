@@ -1,0 +1,19 @@
+.like-dislike-wrapp span {
+  color: #fff
+}
+
+.like-dislike-wrapp i {
+  margin-right: 5px;
+}
+.dislike {
+  margin-left: 10px;
+}
+
+.like-dislike-wrapp i {
+  font-size: 16px;
+}
+
+.like-dislike-wrapp i:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}

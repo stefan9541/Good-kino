@@ -90,6 +90,7 @@ const mapStateToProps = state => {
     disableSubmit: state.commentariesReducer.disableSubmitButton,
     visibleSubmit: state.commentariesReducer.visibleSubmitButton,
     isAuth: state.userReducer.isAuth,
+    userName: state.userReducer.userName,
     _id: state.userReducer._id,
     picture: state.userReducer.picture
   };

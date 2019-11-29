@@ -119,5 +119,15 @@ export default class GoodKinoService {
   logInUser = params => {
     return axios.post(`${baseURL}/login`,
       { ...params }, { withCredentials: true });
+  };
+
+  updateCommentariesLike = (commentariesId, isLiked) => {
+    return axios.patch(`${baseURL}/commentaries/update/likes`,
+      { commentariesId, isLiked }, { withCredentials: true });
+  };
+
+  updateCommentariesDislike = (commentariesId, isDislike) => {
+    return axios.patch(`${baseURL}/commentaries/update/dislikes`,
+      { commentariesId, isDislike }, { withCredentials: true });
   }
 }

@@ -46,3 +46,10 @@ export const visibleSubmitButton = visibleButton => {
     payload: visibleButton
   };
 };
+
+export const toogleLikeOrDislike = (toogle, userId, commentId) => {
+  return {
+    type: "TOOGLE_LIKE_OR_DISLIKE",
+    payload: { toogle, userId, commentId }
+  };
+};

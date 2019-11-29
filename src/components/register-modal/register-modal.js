@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Modal,
   Button,
-  Col,
   Row,
   Form,
   Input,

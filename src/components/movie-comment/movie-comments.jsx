@@ -7,7 +7,8 @@ import {
   fetchCommentariesRequest,
   fetchCommentariesSuccess,
   fetchCommentariesFailure,
-  fetchNewCommentaries
+  fetchNewCommentaries,
+  toogleLikeOrDislike
 } from "../../actions/commentaries-action";
 
 import MovieCommentFormContainer from "../../containers/movie-comment-form-container";
@@ -66,7 +67,13 @@ class MovieComment extends Component {
   }
 
   render() {
-    const { commentaries, movie } = this.props;
+    const {
+      commentaries,
+      movie,
+      userId,
+      toogleLikeOrDislike
+    } = this.props;
+    const { updateCommentariesLike, updateCommentariesDislike } = this.props.goodKinoService;
     return (
       <Col id="comment-wrapp">
         <span className="comment-value">
@@ -75,7 +82,13 @@ class MovieComment extends Component {
 
         <MovieCommentFormContainer movieId={movie.film._id} />
 
-        <MovieCommentItem commentaries={commentaries} />
+        <MovieCommentItem
+          updateCommentariesDislike={updateCommentariesDislike}
+          updateCommentariesLike={updateCommentariesLike}
+          toogleLikeOrDislike={toogleLikeOrDislike}
+          userId={userId}
+          commentaries={commentaries}
+        />
 
         <Button
           className="load-more-commentaries-btn"
@@ -95,7 +108,8 @@ const mapStateToProps = state => {
     commentaries: state.commentariesReducer.commentaries,
     movie: state.moviePage.movies,
     loading: state.commentariesReducer.loading,
-    error: state.commentariesReducer.error
+    error: state.commentariesReducer.error,
+    userId: state.userReducer._id
   };
 };
 
@@ -103,7 +117,8 @@ const mapDispatchToProps = {
   fetchCommentariesRequest,
   fetchCommentariesSuccess,
   fetchCommentariesFailure,
-  fetchNewCommentaries
+  fetchNewCommentaries,
+  toogleLikeOrDislike
 };
 export default compose(
   withGoodKinoService(),
