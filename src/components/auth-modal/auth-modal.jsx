@@ -1,20 +1,15 @@
 import React from "react";
-import {
-  Modal,
-  Button,
-  Col,
-  Row,
-  Form,
-  Input,
-  Icon
-} from "antd";
+import { Modal, Button, Col, Row, Form, Input, Icon } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { fetchUserDataRequest, fetchUserDataSuccess } from "../../actions/user-actions";
+import {
+  fetchUserDataRequest,
+  fetchUserDataSuccess,
+  fetchUserovieDataFailure
+} from "../../actions/user-actions";
 import { withGoodKinoService } from "../hoc";
 
 import "./auth-modal.css";
-
 
 const AuthModal = React.memo(props => {
   const { getFieldDecorator, validateFields, setFields } = props.form;
@@ -22,7 +17,8 @@ const AuthModal = React.memo(props => {
     handleCancel,
     visible,
     fetchUserDataRequest,
-    fetchUserDataSuccess
+    fetchUserDataSuccess,
+    fetchUserovieDataFailure
   } = props;
   const { logInUser } = props.goodKinoService;
 
@@ -34,8 +30,12 @@ const AuthModal = React.memo(props => {
       }
       fetchUserDataRequest();
       logInUser(values)
-        .then(({ data }) => fetchUserDataSuccess(data))
+        .then(({ data }) => {
+          fetchUserDataSuccess(data);
+          handleCancel();
+        })
         .catch(({ response }) => {
+          fetchUserovieDataFailure(response);
           setFields({
             email: {
               value: values.email,
@@ -61,10 +61,7 @@ const AuthModal = React.memo(props => {
           height: "500px"
         }}
       >
-        <Form
-          autoComplete="off"
-          onSubmit={handleSubmit}
-        >
+        <Form autoComplete="off" onSubmit={handleSubmit}>
           <Form.Item label="E-mail">
             {getFieldDecorator("email", {
               rules: [
@@ -79,31 +76,36 @@ const AuthModal = React.memo(props => {
               ]
             })(<Input />)}
           </Form.Item>
-          <Form.Item style={{marginBottom: "20px"}} label="Password">
+          <Form.Item style={{ marginBottom: "20px" }} label="Password">
             {getFieldDecorator("password", {
-              rules: [{ required: true, message: "Please input your Password!" }]
+              rules: [
+                { required: true, message: "Please input your Password!" }
+              ]
             })(
               <Input.Password
-                prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
                 type="password"
                 placeholder="Password"
-              />,
+              />
             )}
           </Form.Item>
-          <Button onClick={handleCancel} type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Log in
           </Button>
           <Col className="auth-body">
             <div className="sign-in-with">
               <h2>Or u can sign in with</h2>
             </div>
-            <Button size="large" icon="google">
-              <a
-                href="http://localhost:8080/api/google-auth"
-                style={{ marginLeft: "10px" }}
-              >
-                Google
-              </a>
+            <Button
+              onClick={() => {
+                window.open("http://localhost:8080/api/google-auth", "_self");
+              }}
+              size="large"
+              icon="google"
+            >
+              Google
             </Button>
           </Col>
         </Form>
@@ -114,7 +116,8 @@ const AuthModal = React.memo(props => {
 
 const mapDispatchToProps = {
   fetchUserDataRequest,
-  fetchUserDataSuccess
+  fetchUserDataSuccess,
+  fetchUserovieDataFailure
 };
 
 export default compose(

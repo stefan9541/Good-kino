@@ -22,14 +22,13 @@ class GetAuthenticatedUser extends Component {
   }
 
   render() {
-    return (null);
+    return null;
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ ...getAuthenticatedUserActions }, dispatch);
 };
-
 
 export default compose(
   withGoodKinoService(),

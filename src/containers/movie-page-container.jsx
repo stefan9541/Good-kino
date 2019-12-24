@@ -12,8 +12,7 @@ import MovieComment from "../components/movie-comment";
 import MovieItemRender from "../components/movie-item-render";
 
 function decodeUriComponent(str) {
-  return decodeURI(str)
-    .replace(/\+/g, " ");
+  return decodeURI(str).replace(/\+/g, " ");
 }
 
 class MoviePageContainer extends Component {
@@ -68,7 +67,10 @@ class MoviePageContainer extends Component {
         <MoviePage movieDescription={this.props.movie.film || []} />
         <Row style={{ marginTop: "10px" }}>
           <Col>
-            <MovieItemRender signature="Watch more free movies" movies={this.props.movie.similarFilm} />
+            <MovieItemRender
+              signature="Watch more free movies"
+              movies={this.props.movie.similarFilm}
+            />
           </Col>
         </Row>
         <MovieComment />

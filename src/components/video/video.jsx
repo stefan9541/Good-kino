@@ -19,7 +19,10 @@ class Video extends React.Component {
 
     return (
       <div className="video-wrapp">
-        <div style={{ display: onLoadVisibleBlock }} className="play-button-wrapp">
+        <div
+          style={{ display: onLoadVisibleBlock }}
+          className="play-button-wrapp"
+        >
           <button type="button" onClick={hidePreviousPlayButton}>
             <Icon type="play-circle" />
           </button>
@@ -28,7 +31,7 @@ class Video extends React.Component {
           onPlaying={() => {
             setTimeout(() => {
               continueWatchMovie();
-            }, 5000);
+            }, 1000);
           }}
           onTimeUpdate={getCurrentTime}
           onClick={tooglePlayVideo}

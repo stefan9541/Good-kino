@@ -12,10 +12,7 @@ import {
 class LeftSideBarContainer extends Component {
   componentDidMount() {
     const { getLinkForLeftSideBar } = this.props.goodKinoService;
-    const {
-      leftSidebarRequest,
-      leftSidebarFilure
-    } = this.props;
+    const { leftSidebarRequest, leftSidebarFilure } = this.props;
     getLinkForLeftSideBar()
       .then(res => {
         leftSidebarRequest(res.data);
@@ -35,7 +32,6 @@ class LeftSideBarContainer extends Component {
   }
 }
 
-
 const mapStateToProps = state => {
   return {
     leftSidebarItems: state.leftSidebarReducer.leftSidebarItems,
@@ -45,7 +41,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    leftSidebarRequest: sidebarItems => dispatch(leftSidebarRequest(sidebarItems)),
+    leftSidebarRequest: sidebarItems =>
+      dispatch(leftSidebarRequest(sidebarItems)),
     leftSidebarFilure: err => dispatch(leftSidebarFilure(err))
   };
 };

@@ -4,12 +4,23 @@ import { Link } from "react-router-dom";
 
 import "./user-profile-menu-dropdown.css";
 
-const UserProfileMenuDropdown = ({ favoriteMovies, continueWatch, picture }) => {
+const UserProfileMenuDropdown = props => {
+  const {
+    favoriteMovies,
+    continueWatch,
+    picture,
+    userName
+  } = props;
+  const sliceName = (userName.length > 15) ? `${userName.slice(0, 15)}...` : userName;
   return (
     <Dropdown
       overlay={() => {
         return (
           <Menu className="user-profile-menu">
+            <Menu.Item className="menu-item-user-name" key="5">
+              {sliceName}
+            </Menu.Item>
+            <Menu.Divider style={{ margin: "5px 0" }} />
             <Menu.Item key="0">
               <Link to="/continue">
                 Досмотреть ({continueWatch.length || 0})

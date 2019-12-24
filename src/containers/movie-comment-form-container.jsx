@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  withGoodKinoService
-} from "../components/hoc";
+import { withGoodKinoService } from "../components/hoc";
 import * as commentariesAction from "../actions/commentaries-action";
 import MovieCommentForm from "../components/movie-comment-form";
 import NoAccessToComments from "../components/no-access-to-comments";
@@ -48,12 +46,12 @@ class MovieCommentFormContainer extends Component {
   handleFocus = () => {
     const { visibleSubmitButton } = this.props;
     visibleSubmitButton(true);
-  }
+  };
 
   handleButtonClick = () => {
     const { visibleSubmitButton } = this.props;
     visibleSubmitButton(false);
-  }
+  };
 
   handleTextAreaChange = ({ target: { value } }) => {
     const { disableSubmitButton } = this.props;
@@ -62,24 +60,22 @@ class MovieCommentFormContainer extends Component {
     } else {
       disableSubmitButton(false);
     }
-  }
+  };
 
   render() {
     const { visibleSubmit, disableSubmit, isAuth } = this.props;
 
-    return (
-      (isAuth)
-        ? (
-          <MovieCommentForm
-            visibleSubmit={visibleSubmit}
-            disableSubmit={disableSubmit}
-            handleFocus={this.handleFocus}
-            handleTextAreaChange={this.handleTextAreaChange}
-            handleButtonClick={this.handleButtonClick}
-            handleSubmit={this.handleSubmit}
-          />
-        )
-        : <NoAccessToComments />
+    return isAuth ? (
+      <MovieCommentForm
+        visibleSubmit={visibleSubmit}
+        disableSubmit={disableSubmit}
+        handleFocus={this.handleFocus}
+        handleTextAreaChange={this.handleTextAreaChange}
+        handleButtonClick={this.handleButtonClick}
+        handleSubmit={this.handleSubmit}
+      />
+    ) : (
+      <NoAccessToComments />
     );
   }
 }
@@ -102,5 +98,5 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   withGoodKinoService(),
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps)
 )(MovieCommentFormContainer);

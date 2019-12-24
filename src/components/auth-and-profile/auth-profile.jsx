@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Button } from "antd";
+import { Button, Icon, Avatar } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AuthModal from "../auth-modal";
@@ -13,7 +13,7 @@ class AuthAndProfile extends PureComponent {
     super(props);
     this.state = {
       authModal: false,
-      registerModal: false,
+      registerModal: false
     };
   }
 
@@ -36,37 +36,47 @@ class AuthAndProfile extends PureComponent {
       continueWatch,
       favoriteMovies,
       picture,
+      userName,
+      error,
       isAuth
     } = this.props;
 
-    if (loading) {
-      return false;
-    }
+    // if (loading) {
+    //   return (
+    //     <div>
+    //       <Avatar icon="user" />
+    //       <Avatar icon="user" />
+    //     </div>
+    //   );
+    // }
 
     return (
       <React.Fragment>
         <div className="auth-profile-wrap">
-          {
-            (isAuth) ? (
-              <div>
-                <UserProfileMenuDropdown
-                  favoriteMovies={favoriteMovies}
-                  continueWatch={continueWatch}
-                  picture={picture}
-                />
-              </div>
-            )
-              : (
-                <div className="reg-auth-button-wrapp">
-                  <Button name="authModal" onClick={this.showModal} ghost>
-                    Войти
-                  </Button>
-                  <Button type="primary" name="registerModal" onClick={this.showModal} ghost>
-                    Регистрация
-                  </Button>
-                </div>
-              )
-          }
+          {isAuth && !loading ? (
+            <div>
+              <UserProfileMenuDropdown
+                favoriteMovies={favoriteMovies}
+                continueWatch={continueWatch}
+                userName={userName}
+                picture={picture}
+              />
+            </div>
+          ) : (
+            <div className="reg-auth-button-wrapp">
+              <Button name="authModal" onClick={this.showModal} ghost>
+                Войти
+              </Button>
+              <Button
+                type="primary"
+                name="registerModal"
+                onClick={this.showModal}
+                ghost
+              >
+                Регистрация
+              </Button>
+            </div>
+          )}
         </div>
         <AuthModal
           visible={this.state.authModal}
@@ -85,12 +95,12 @@ const mapStateToProps = state => {
   return {
     continueWatch: state.userReducer.continueWatch,
     favoriteMovies: state.userReducer.favoriteMovies,
+    error: state.userReducer.error,
     picture: state.userReducer.picture,
+    userName: state.userReducer.userName,
     isAuth: state.userReducer.isAuth,
     loading: state.userReducer.loading
   };
 };
 
-export default compose(
-  connect(mapStateToProps)
-)(AuthAndProfile);
+export default compose(connect(mapStateToProps))(AuthAndProfile);

@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Col, Icon, Avatar
-} from "antd";
+import { Col, Icon, Avatar } from "antd";
 import LikeDislike from "../like-dislike";
 
 import "./movie-comment-item.css";
@@ -14,10 +12,8 @@ const MovieCommentItem = props => {
     updateCommentariesLike,
     updateCommentariesDislike
   } = props;
-  return (
-    (commentaries || []).map(({
-      createdAt, author, body, _id, likes, dislikes
-    }) => {
+  return (commentaries || []).map(
+    ({ createdAt, author, body, _id, likes, dislikes }) => {
       const { userName, picture } = author;
       let [date, time] = createdAt.split("T");
       time = time.slice(0, 8);
@@ -44,21 +40,19 @@ const MovieCommentItem = props => {
           </Col>
           <Col className="comment-body">
             <div className="user-comment-avatar">
-              {
-                (picture)
-                  ? <Avatar src={picture} size={64} />
-                  : <Avatar icon="user" size={64} />
-              }
+              {picture ? (
+                <Avatar src={picture} size={64} />
+              ) : (
+                <Avatar icon="user" size={64} />
+              )}
             </div>
             <div className="comment-text">
-              <span>
-                {body}
-              </span>
+              <span>{body}</span>
             </div>
           </Col>
         </React.Fragment>
       );
-    })
+    }
   );
 };
 

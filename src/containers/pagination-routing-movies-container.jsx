@@ -3,14 +3,15 @@ import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import qstr from "query-string";
 import { Spin } from "antd";
-import * as movieDataActions from "../actions/movie-data-action";
+import { fetchData, fetchMovieDataRequest } from "../actions/movie-data-action";
 import MovieItemRender from "../components/movie-item-render";
 import ErrorBoundry from "../components/error-boundry";
 import ErrorIndicator from "../components/error-indicator";
 import PaginationComponent from "../components/pagination";
 
-
 class PaginationRoutingMoviesContainer extends Component {
+  reducerName = "pagination-route";
+
   componentDidMount() {
     this.gettingData();
   }
@@ -22,22 +23,16 @@ class PaginationRoutingMoviesContainer extends Component {
   }
 
   componentWillUnmount() {
-    const {
-      fetchMovieDataRequest
-    } = this.props;
-    fetchMovieDataRequest("pagination-route");
+    const { fetchMovieDataRequest } = this.props;
+    fetchMovieDataRequest(this.reducerName);
   }
 
   gettingData = () => {
-    const reducerName = "pagination-route";
-    const { fetchingData } = this.props;
-    const {
-      fetchMovieDataFailure,
-      fetchMovieDataRequest,
-      fetchMovieDataSuccess
-    } = this.props;
+    const { fetchData } = this.props;
     const { location } = this.props;
-    const { match: { params } } = this.props;
+    const {
+      match: { params }
+    } = this.props;
     const movieByType = location.pathname.split("/")[1];
     const parseParams = qstr.parse(location.search);
     const sortedBy = parseParams.sortedBy || "imdbRating";
@@ -46,35 +41,27 @@ class PaginationRoutingMoviesContainer extends Component {
       movieByType,
       sortedBy,
       ...parseParams,
-      ...params || ""
+      ...(params || "")
     };
 
-    fetchMovieDataRequest(reducerName);
-
-    fetchingData(dataParams)
-      .then(res => fetchMovieDataSuccess(res.data, reducerName))
-      .catch(err => fetchMovieDataFailure(err, reducerName));
-  }
-
+    fetchData(dataParams, this.reducerName);
+  };
 
   render() {
-    const {
-      data,
-      loading,
-      error
-    } = this.props;
+    const { data, loading, error } = this.props;
     const { result = [] } = data;
     const [items, itemCount = null] = result;
-    const currentPage = (data.currentPage + 1) || null;
+    const currentPage = data.currentPage + 1 || null;
 
     if (loading) {
       return (
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          height: "100%",
-          alignItems: "center"
-        }}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            height: "100%",
+            alignItems: "center"
+          }}
         >
           <Spin tip="loadig..." />
         </div>
@@ -83,7 +70,8 @@ class PaginationRoutingMoviesContainer extends Component {
     if (data.length < 1) {
       return (
         <div style={{ color: "white", fontSize: "18px" }}>
-          По вашим критерия ничего не найдено Попробуйте выбрать что нибудь другое
+          По вашим критерия ничего не найдено Попробуйте выбрать что нибудь
+          другое
         </div>
       );
     }
@@ -92,7 +80,6 @@ class PaginationRoutingMoviesContainer extends Component {
       return <ErrorIndicator />;
     }
 
-
     return (
       <ErrorBoundry>
         <MovieItemRender
@@ -100,10 +87,7 @@ class PaginationRoutingMoviesContainer extends Component {
           movies={items || []}
           signature={data.signature || ""}
         />
-        <PaginationComponent
-          current={currentPage}
-          total={itemCount}
-        />
+        <PaginationComponent current={currentPage} total={itemCount} />
       </ErrorBoundry>
     );
   }
@@ -117,11 +101,10 @@ const mapStateToProps = state => {
   };
 };
 
-
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...movieDataActions }, dispatch);
+  return bindActionCreators({ fetchData, fetchMovieDataRequest }, dispatch);
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(PaginationRoutingMoviesContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  PaginationRoutingMoviesContainer
+);

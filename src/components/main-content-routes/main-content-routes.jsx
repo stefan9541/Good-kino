@@ -12,7 +12,6 @@ import ContinueWatch from "../continue-watch";
 import ProtectRoute from "../protect-route";
 import PageNotFound from "../page-not-found";
 
-
 const MainContentRoutes = props => {
   const {
     getMovieFromRoutingAndPagination,
@@ -34,7 +33,7 @@ const MainContentRoutes = props => {
               <Layout sidebar>
                 <HomePageContainer fetchingData={getMovieFromHomePage} />
               </Layout>
-            )
+            );
           }}
         />
 
@@ -45,7 +44,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -56,7 +55,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -67,7 +66,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -78,7 +77,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -91,7 +90,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -102,7 +101,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -113,11 +112,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer
-                  {...props}
-                  fetchingData={getMovieFromRoutingAndPagination}
-                  sortedPanel
-                />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -128,7 +123,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -141,7 +136,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -152,7 +147,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -163,7 +158,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -174,7 +169,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -187,7 +182,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -200,7 +195,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={getMovieFromRoutingAndPagination} sortedPanel />
+                <PaginationRoutingMoviesContainer {...props} sortedPanel />
               </Layout>
             );
           }}
@@ -213,7 +208,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} fetchingData={fetchMovieFromFilterPanel} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  {...props}
+                  fetchingData={fetchMovieFromFilterPanel}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -238,7 +237,10 @@ const MainContentRoutes = props => {
             return (
               <ProtectRoute>
                 <Layout rightSidebar>
-                  <FavoriteMoviesContainer fetchingData={getFavoriteMovies} {...props} />
+                  <FavoriteMoviesContainer
+                    fetchingData={getFavoriteMovies}
+                    {...props}
+                  />
                 </Layout>
               </ProtectRoute>
             );
@@ -257,15 +259,15 @@ const MainContentRoutes = props => {
           }}
         />
 
-        <Route render={() => {
-          return (
-            <Layout>
-              <PageNotFound />
-            </Layout>
-          );
-        }}
+        <Route
+          render={() => {
+            return (
+              <Layout>
+                <PageNotFound />
+              </Layout>
+            );
+          }}
         />
-
       </Switch>
     </React.Fragment>
   );

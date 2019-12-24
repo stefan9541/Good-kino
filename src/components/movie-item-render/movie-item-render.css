@@ -1,9 +1,9 @@
-.movie-type-wrap>div {
-  background: #141E30;
+.movie-type-wrap > div {
+  background: #141e30;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #243B55, #141E30);
+  background: -webkit-linear-gradient(to right, #243b55, #141e30);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #243B55, #141E30);
+  background: linear-gradient(to right, #243b55, #141e30);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 5px;
   display: flex;
@@ -19,11 +19,11 @@
 }
 
 .movie-type-wrap span:first-child {
-  background: #141E30;
+  background: #141e30;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #141E30, #20334a);
+  background: -webkit-linear-gradient(to right, #141e30, #20334a);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #141E30, #20334a);
+  background: linear-gradient(to right, #141e30, #20334a);
   border-radius: 5px;
   width: 165px;
 }
@@ -35,7 +35,6 @@
 
 .movie-wrap {
   padding: 5px;
-  ;
 }
 
 .poster-wrap {
@@ -47,11 +46,11 @@
 .poster-wrap img {
   width: 100%;
   height: 100%;
-  transition: transform .1s linear;
+  transition: transform 0.1s linear;
 }
 
 .poster-wrap:hover img {
-  transform: scale(1.1)
+  transform: scale(1.1);
 }
 
 .title-wrap {
@@ -59,6 +58,10 @@
   height: 45px;
   padding-left: 3px;
   padding-right: 3px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre-line;
+  word-break: break-all;
 }
 
 .title-wrap a {
@@ -80,5 +83,4 @@
 
 .movie-released-wrap span {
   color: #b5b0b0;
-  ;
 }

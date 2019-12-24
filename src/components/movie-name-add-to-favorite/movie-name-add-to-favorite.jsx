@@ -8,15 +8,15 @@ import {
   removeMovieFromFavoriteAction
 } from "../../actions/user-actions";
 
-import {
-  successMessage,
-  errorMessage
-} from "../../utils/feed-back";
+import { successMessage, errorMessage } from "../../utils/feed-back";
 
 import "./movie-name-add-to-favorite.css";
 
 const MovieNameAndAddToFavorite = props => {
-  const { patchMovieToFavorite, removeMovieFromFavorite } = props.goodKinoService;
+  const {
+    patchMovieToFavorite,
+    removeMovieFromFavorite
+  } = props.goodKinoService;
   const {
     title,
     favoriteMovies = [],
@@ -37,7 +37,9 @@ const MovieNameAndAddToFavorite = props => {
           removeMovieFromFavoriteAction(movieIndex);
           successMessage("Успешно удалено из закладок");
         })
-        .catch(() => errorMessage("Доступно только для авторизованных пользователей"));
+        .catch(() =>
+          errorMessage("Доступно только для авторизованных пользователей")
+        );
       return;
     }
 
@@ -46,7 +48,9 @@ const MovieNameAndAddToFavorite = props => {
         addMovieToFavorite(movieId);
         successMessage("Успешно добавлено в закладки");
       })
-      .catch(() => errorMessage("Доступно только для авторизованных пользователей"));
+      .catch(() =>
+        errorMessage("Доступно только для авторизованных пользователей")
+      );
   };
 
   return (
@@ -56,11 +60,11 @@ const MovieNameAndAddToFavorite = props => {
       </Col>
       <Col className="add-to-favorite">
         <Button onClick={handleAddToFavorite} className="add-to-favorite-btn">
-          {
-            (isMovieAdded)
-              ? <Icon twoToneColor="#1890ff" type="heart" theme="twoTone" />
-              : <Icon type="heart" theme="outlined" />
-          }
+          {isMovieAdded ? (
+            <Icon twoToneColor="#1890ff" type="heart" theme="twoTone" />
+          ) : (
+            <Icon type="heart" theme="outlined" />
+          )}
         </Button>
       </Col>
     </Col>
@@ -80,8 +84,5 @@ const mapDispatchToProps = {
 
 export default compose(
   withGoodKinoService(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(MovieNameAndAddToFavorite);

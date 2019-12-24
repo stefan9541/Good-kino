@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Col, Button } from "antd";
+import InfiniteScroll from "react-infinite-scroller";
+import { Col, Button, Spin } from "antd";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withGoodKinoService } from "../hoc";
@@ -17,26 +18,25 @@ import MovieCommentItem from "../movie-comment-item";
 import "./movie-comments.css";
 
 class MovieComment extends Component {
-  state = {
-    loading: false,
-    iconLoading: false,
-    commentariesPage: 0
-  }
+  constructor(props) {
+    super(props);
 
-  timer = null
+    this.state = {
+      hasMoreItems: true,
+      page: 0
+    };
+  }
 
   componentDidMount() {
     this.fetchingData();
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
-
   fetchingData = () => {
     const { fetchCommentaries } = this.props.goodKinoService;
     const {
-      movie: { film: { _id } },
+      movie: {
+        film: { _id }
+      },
       fetchCommentariesSuccess,
       fetchCommentariesFailure,
       fetchCommentariesRequest
@@ -44,36 +44,57 @@ class MovieComment extends Component {
 
     fetchCommentariesRequest();
     fetchCommentaries(_id)
-      .then(res => fetchCommentariesSuccess(res.data))
+      .then(({ data }) => {
+        if (data.commentsResponse.length < 40) {
+          this.setState({ hasMoreItems: false });
+        } else {
+          this.setState(state => ({ page: state.page + 1 }));
+        }
+        fetchCommentariesSuccess(data.commentsResponse);
+      })
       .catch(err => fetchCommentariesFailure(err));
-  }
+  };
 
   handleFetchNewCommentaries = () => {
-    clearTimeout(this.timer);
+    const { page, hasMoreItems } = this.state;
     const { fetchCommentaries } = this.props.goodKinoService;
     const {
       fetchNewCommentaries,
-      movie: { film: { _id } }
+      commentaries,
+      movie: {
+        film: { _id }
+      }
     } = this.props;
 
-    this.setState({ loading: true });
-    fetchCommentaries(_id)
-      .then(res => {
-        fetchNewCommentaries(res.data);
-        this.timer = setTimeout(() => {
-          this.setState({ loading: false });
-        }, 1000);
-      });
-  }
+    if (!hasMoreItems) {
+      return;
+    }
+
+    fetchCommentaries(_id, page)
+      .then(({ data }) => {
+        const { commentsResponse, countResponse } = data;
+
+        if (commentaries.length === countResponse) {
+          this.setState({ hasMoreItems: false });
+          return undefined;
+        }
+        fetchNewCommentaries(commentsResponse);
+        this.setState(state => {
+          return {
+            page: state.page + 1
+          };
+        });
+      })
+      .catch(err => fetchCommentariesFailure(err));
+  };
 
   render() {
+    const { hasMoreItems } = this.state;
+    const { commentaries, movie, userId, toogleLikeOrDislike } = this.props;
     const {
-      commentaries,
-      movie,
-      userId,
-      toogleLikeOrDislike
-    } = this.props;
-    const { updateCommentariesLike, updateCommentariesDislike } = this.props.goodKinoService;
+      updateCommentariesLike,
+      updateCommentariesDislike
+    } = this.props.goodKinoService;
     return (
       <Col id="comment-wrapp">
         <span className="comment-value">
@@ -82,22 +103,20 @@ class MovieComment extends Component {
 
         <MovieCommentFormContainer movieId={movie.film._id} />
 
-        <MovieCommentItem
-          updateCommentariesDislike={updateCommentariesDislike}
-          updateCommentariesLike={updateCommentariesLike}
-          toogleLikeOrDislike={toogleLikeOrDislike}
-          userId={userId}
-          commentaries={commentaries}
-        />
-
-        <Button
-          className="load-more-commentaries-btn"
-          type="primary"
-          disabled={this.state.loading}
-          onClick={this.handleFetchNewCommentaries}
+        <InfiniteScroll
+          pageStart={0}
+          loader={<Spin key={1} />}
+          loadMore={this.handleFetchNewCommentaries}
+          hasMore={hasMoreItems}
         >
-          Load more comments
-        </Button>
+          <MovieCommentItem
+            updateCommentariesDislike={updateCommentariesDislike}
+            updateCommentariesLike={updateCommentariesLike}
+            toogleLikeOrDislike={toogleLikeOrDislike}
+            userId={userId}
+            commentaries={commentaries}
+          />
+        </InfiniteScroll>
       </Col>
     );
   }

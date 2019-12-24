@@ -20,12 +20,12 @@ const LikeDislike = React.memo(props => {
       <Tooltip title="Like">
         <Icon
           onClick={() => {
-            updateCommentariesLike(commentdId, isLike)
+            updateCommentariesLike(commentdId, isLike);
             toogleLikeOrDislike("likes", userId, commentdId);
           }}
           type="like"
           twoToneColor="#3cce7b"
-          theme={(isLike) ? "twoTone" : "filled"}
+          theme={isLike ? "twoTone" : "filled"}
         />
       </Tooltip>
       <span>{likes.length}</span>
@@ -38,7 +38,7 @@ const LikeDislike = React.memo(props => {
           className="dislike"
           type="dislike"
           twoToneColor="#f66"
-          theme={(isDislike) ? "twoTone" : "filled"}
+          theme={isDislike ? "twoTone" : "filled"}
         />
       </Tooltip>
       <span>{dislikes.length}</span>

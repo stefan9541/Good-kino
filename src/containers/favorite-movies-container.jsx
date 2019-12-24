@@ -8,7 +8,7 @@ import ErrorIndicator from "../components/error-indicator";
 import * as movieDataActions from "../actions/movie-data-action";
 
 class FavoriteMoviesContainer extends Component {
-  reducerName = "favorite-page"
+  reducerName = "favorite-page";
 
   componentDidMount() {
     this.getData();
@@ -36,7 +36,7 @@ class FavoriteMoviesContainer extends Component {
         fetchMovieDataSuccess(data, this.reducerName);
       })
       .catch(err => fetchMovieDataFailure(err, this.reducerName));
-  }
+  };
 
   render() {
     const { movies, loading, error } = this.props;
@@ -54,7 +54,6 @@ class FavoriteMoviesContainer extends Component {
         signature="Избранные фильмы"
         sortedPanel
       />
-
     );
   }
 }
@@ -71,6 +70,6 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ ...movieDataActions }, dispatch);
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(FavoriteMoviesContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  FavoriteMoviesContainer
+);

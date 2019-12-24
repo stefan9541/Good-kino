@@ -49,7 +49,7 @@ class VideoPlayer extends Component {
         return { toogleQualityMenu: false };
       });
     }
-  }
+  };
 
   formatTime = time => {
     const hours = Math.floor(time / 3600);
@@ -70,35 +70,37 @@ class VideoPlayer extends Component {
       secondValue = seconds;
     }
 
-    return (hours > 0)
+    return hours > 0
       ? `${hours}:${minuteValue}:${secondValue}`
       : `${minuteValue}:${secondValue}`;
-  }
+  };
 
   toolTipFormat = value => {
     const { duration } = this.state;
-    const toolTipFormat = `${this.formatTime(value)} : ${this.formatTime(duration)}`;
+    const toolTipFormat = `${this.formatTime(value)} : ${this.formatTime(
+      duration
+    )}`;
     return toolTipFormat;
-  }
+  };
 
   volumeToolTip = value => {
     return `${value}%`;
-  }
+  };
 
   rewindVideo = value => {
     videoRef.current.pause();
     this.setState({ currentTime: Math.floor(value), toogleQualityMenu: false });
     videoRef.current.currentTime = Math.floor(value);
-  }
+  };
 
   handleAfterChange = () => {
     videoRef.current.play();
-  }
+  };
 
   handleVolumeChange = value => {
     this.setState({ volume: value, toogleQualityMenu: false });
     videoRef.current.volume = value / 100;
-  }
+  };
 
   tooglePlayVideo = () => {
     if (videoRef.current.paused) {
@@ -108,7 +110,7 @@ class VideoPlayer extends Component {
       this.setState({ tooglePlay: false, toogleQualityMenu: false });
       videoRef.current.pause();
     }
-  }
+  };
 
   hidePreviousPlayButton = () => {
     const duration = Math.floor(videoRef.current.duration);
@@ -119,24 +121,33 @@ class VideoPlayer extends Component {
       duration
     });
     videoRef.current.play();
-  }
+  };
 
   handleOnEnded = () => {
-    this.setState({
-      tooglePlay: false,
-      currentTime: 0,
-      visiblePlayButton: true
-    }, () => {
-      videoRef.current.pause();
-    });
-  }
+    this.setState(
+      {
+        tooglePlay: false,
+        currentTime: 0,
+        visiblePlayButton: true
+      },
+      () => {
+        videoRef.current.pause();
+      }
+    );
+  };
 
   fullScreenMode = () => {
     const videoCurrent = customRef.current;
     this.setState({ toogleQualityMenu: false });
 
-    if (!document.fullscreenElement // alternative standard method
-      && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) { // current working methods
+    if (
+      // alternative standard method
+      !document.fullscreenElement &&
+      !document.mozFullScreenElement &&
+      !document.webkitFullscreenElement &&
+      !document.msFullscreenElement
+    ) {
+      // current working methods
       if (videoCurrent.requestFullscreen) {
         videoCurrent.requestFullscreen();
       } else if (videoCurrent.msRequestFullscreen) {
@@ -155,15 +166,15 @@ class VideoPlayer extends Component {
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-  }
+  };
 
   getCurrentTime = () => {
     this.setState({ currentTime: Math.floor(videoRef.current.currentTime) });
-  }
+  };
 
   toogleQualityMenu = () => {
     this.setState({ toogleQualityMenu: !this.state.toogleQualityMenu });
-  }
+  };
 
   handleFetchVideoforPlayer = quality => {
     const { fetchVideoForPlayer } = this.props.goodKinoService;
@@ -196,27 +207,31 @@ class VideoPlayer extends Component {
     if (!continueWatch) {
       return;
     }
-    const movieAlreadyHave = continueWatch.find(item => item.movieId === movieId);
+    const movieAlreadyHave = continueWatch.find(
+      item => item.movieId === movieId
+    );
     const isWatch = false;
-    const date = new Date()
-      .toISOString();
+    const date = Date.now();
+
     if (movieAlreadyHave) {
       return;
     }
     updateContinueMovieUserCollection({
-      movieId, title, genre, type
-    })
-      .then(() => {
-        addMovieToContinueWatch({
-          movieId,
-          isWatch,
-          date,
-          title,
-          type,
-          genre: genre.split(",")[0]
-        });
+      movieId,
+      title,
+      genre,
+      type
+    }).then(() => {
+      addMovieToContinueWatch({
+        movieId,
+        isWatch,
+        date,
+        title,
+        type,
+        genre: genre.split(",")[0]
       });
-  }
+    });
+  };
 
   render() {
     const {
@@ -228,14 +243,21 @@ class VideoPlayer extends Component {
       volume
     } = this.state;
 
-    const volumeIcon = (volume === 0)
-      ? <i><img src="/svg-icon/123.svg" alt="" /></i>
-      : <Icon type="sound" theme="filled" />;
-    const playPauseIcon = (tooglePlay)
-      ? <Icon type="pause-circle" />
-      : <Icon type="play-circle" theme="filled" />;
-    const onLoadVisibleBlock = (visiblePlayButton) ? "flex" : "none";
-    const visibleQualityMenu = (toogleQualityMenu) ? "block" : "none";
+    const volumeIcon =
+      volume === 0 ? (
+        <i>
+          <img src="/svg-icon/123.svg" alt="" />
+        </i>
+      ) : (
+        <Icon type="sound" theme="filled" />
+      );
+    const playPauseIcon = tooglePlay ? (
+      <Icon type="pause-circle" />
+    ) : (
+      <Icon type="play-circle" theme="filled" />
+    );
+    const onLoadVisibleBlock = visiblePlayButton ? "flex" : "none";
+    const visibleQualityMenu = toogleQualityMenu ? "block" : "none";
     const durationFormat = this.formatTime(duration);
     const currentTimeFormat = this.formatTime(currentTime);
 

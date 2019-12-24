@@ -1,3 +1,7 @@
+import GoodKinoService from "../services";
+
+const { getMovieFromRoutingAndPagination } = new GoodKinoService();
+
 export const fetchMovieDataRequest = name => {
   return {
     name,
@@ -18,6 +22,14 @@ export const fetchMovieDataFailure = (err, name) => {
     payload: err
   };
 };
+
+export const fetchData = (params, name) => dispatch => {
+  dispatch(fetchMovieDataRequest());
+  getMovieFromRoutingAndPagination(params)
+    .then(({ data }) => dispatch(fetchMovieDataSuccess(data, name)))
+    .catch(err => dispatch(fetchMovieDataFailure(err, name)));
+};
+
 export const updateMovieRate = (userRate, name) => {
   return {
     type: "UPDATE_MOVIE_RATE",

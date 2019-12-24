@@ -28,8 +28,10 @@ function likes(value, state, commentId, userId) {
   const dislike = "dislikes";
   const commentindex = state.commentaries.findIndex(el => el._id === commentId);
   const isHaveLike = state.commentaries[commentindex][like].indexOf(userId);
-  const isHaveDislike = state.commentaries[commentindex][dislike].indexOf(userId);
-  const isLiked = (value === "likes") ? isHaveLike : isHaveDislike;
+  const isHaveDislike = state.commentaries[commentindex][dislike].indexOf(
+    userId
+  );
+  const isLiked = value === "likes" ? isHaveLike : isHaveDislike;
 
   if (isHaveDislike !== -1 && value === "likes") {
     // if we have userId in dislikes array and value === likes,
@@ -119,10 +121,7 @@ const commentariesReducer = (state = initialState, action) => {
     case "ADD_NEW_COMMENTAR":
       return {
         ...state,
-        commentaries: [
-          payload,
-          ...state.commentaries
-        ]
+        commentaries: [payload, ...state.commentaries]
       };
     case "DISABLE_SUBMIT_BUTTON":
       return {

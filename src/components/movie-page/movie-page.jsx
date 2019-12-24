@@ -31,11 +31,7 @@ const MoviePage = props => {
   return (
     // <Col span={18}>
     <React.Fragment>
-
-      <MovieNameAndAddToFavorite
-        movieId={_id}
-        title={Title}
-      />
+      <MovieNameAndAddToFavorite movieId={_id} title={Title} />
 
       <MovieDescription
         genre={Genre}
@@ -51,9 +47,7 @@ const MoviePage = props => {
         director={Director}
       />
 
-      <Col className="bottom-line">
-        {/* blue-line */}
-      </Col>
+      <Col className="bottom-line">{/* blue-line */}</Col>
 
       {/* rating block */}
       <MovieRate
@@ -64,25 +58,15 @@ const MoviePage = props => {
 
       {/* plot block */}
       <Col className="plot-block-wrap">
-        <span>
-          {Plot}
-        </span>
+        <span>{Plot}</span>
       </Col>
 
       {/* video-block */}
-      <div className="video-player-header">
-        {props.movieDescription.Title}
-      </div>
+      <div className="video-player-header">{props.movieDescription.Title}</div>
 
       <Col>
-        <VideoPlayer
-          genre={Genre}
-          type={Type}
-          title={Title}
-          movieId={_id}
-        />
+        <VideoPlayer genre={Genre} type={Type} title={Title} movieId={_id} />
       </Col>
-
     </React.Fragment>
     // </Col>
   );

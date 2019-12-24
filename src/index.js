@@ -12,7 +12,6 @@ import store from "./store";
 
 const goodKinoService = new GoodKinoService();
 
-
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
@@ -22,5 +21,6 @@ ReactDOM.render(
         </Router>
       </GoodKinoServiceProvider>
     </ErrorBoundry>
-  </Provider>, document.getElementById("root")
+  </Provider>,
+  document.getElementById("root")
 );

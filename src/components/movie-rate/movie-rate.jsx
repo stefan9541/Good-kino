@@ -5,10 +5,7 @@ import { withGoodKinoService } from "../hoc";
 import { addMovieToVoted } from "../../actions/user-actions";
 import { updateMovieRate } from "../../actions/movie-data-action";
 
-import {
-  successMessage,
-  warningMessage
-} from "../../utils/feed-back";
+import { successMessage, warningMessage } from "../../utils/feed-back";
 
 import "./movie-rate.css";
 
@@ -33,12 +30,11 @@ const MovieRate = props => {
     if (dublicateMovie) {
       return warningMessage("Вы уже голосовали");
     }
-    fetchUpdateMovieRate(value, movieId)
-      .then(() => {
-        addMovieToVoted(movieId, value);
-        updateMovieRate(value, "movie-page");
-        successMessage("Голос добавлен! Спасибо");
-      });
+    fetchUpdateMovieRate(value, movieId).then(() => {
+      addMovieToVoted(movieId, value);
+      updateMovieRate(value, "movie-page");
+      successMessage("Голос добавлен! Спасибо");
+    });
   };
 
   return (
@@ -52,31 +48,22 @@ const MovieRate = props => {
         allowClear={false}
         allowHalf
       />
-      {
-        (rate)
-          ? (
-            <React.Fragment>
-              <span>({average}) &#160;</span>
-              <span>
-                &#160;&#160;
-                {usersVotes}
-              </span>
-              <div className="user-vote">
-                <span>
-                  {
-                    (dublicateMovie)
-                      ? `ваша оценка ${dublicateMovie.rate}`
-                      : null
-                  }
-                </span>
-              </div>
-            </React.Fragment>
-          ) : (
+      {rate ? (
+        <React.Fragment>
+          <span>({average}) &#160;</span>
+          <span>
+            &#160;&#160;
+            {usersVotes}
+          </span>
+          <div className="user-vote">
             <span>
-              No vote, be the first
+              {dublicateMovie ? `ваша оценка ${dublicateMovie.rate}` : null}
             </span>
-          )
-      }
+          </div>
+        </React.Fragment>
+      ) : (
+        <span>No vote, be the first</span>
+      )}
     </Col>
   );
 };

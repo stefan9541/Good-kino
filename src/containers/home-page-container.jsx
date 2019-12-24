@@ -27,11 +27,9 @@ class HomePageContainer extends Component {
 
   render() {
     const { homePageData = [], loading } = this.props;
-    const [
-      anime = [],
-      cartoon = [],
-      films = [],
-      series = []] = (homePageData || []).map(({ doc }) => doc.slice(0, 8));
+    const [anime = [], cartoon = [], films = [], series = []] = (
+      homePageData || []
+    ).map(({ doc }) => doc.slice(0, 8));
 
     if (loading) {
       return <Spin />;
@@ -39,7 +37,11 @@ class HomePageContainer extends Component {
 
     return (
       <React.Fragment>
-        <MovieItemRender movies={cartoon} signature="Новые Мультфильмы" watchAll />
+        <MovieItemRender
+          movies={cartoon}
+          signature="Новые Мультфильмы"
+          watchAll
+        />
         <MovieItemRender movies={films} signature="Новые Фильмы" watchAll />
         <MovieItemRender movies={anime} signature="Новые Аниме" watchAll />
         <MovieItemRender movies={series} signature="Новые Сериалы" watchAll />
@@ -59,6 +61,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(HomePageContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  HomePageContainer
+);

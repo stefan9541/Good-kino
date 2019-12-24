@@ -7,8 +7,14 @@
 }
 .user-profile-menu li a {
   color: #fff;
+  font-size: 0.9;
 }
 
 .user-profile-menu li:hover {
   background-color: rgba(139,199,255, 0.3) !important;
+}
+
+.menu-item-user-name {
+  color: aqua;
+  font-size: 16px;
 }
