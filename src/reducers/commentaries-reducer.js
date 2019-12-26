@@ -1,6 +1,8 @@
 const initialState = {
   commentaries: [],
-  newCommentar: {},
+  commentariesCount: 0,
+  page: 0,
+  hasMoreItems: true,
   loading: true,
   error: null,
   disableSubmitButton: true,
@@ -113,7 +115,27 @@ const commentariesReducer = (state = initialState, action) => {
         loading: false,
         error: payload
       };
-    case "FETCH_NEW_COMMENTARIES":
+    case "FETCH_NEW_ITEM_IF_NEEDED":
+      return {
+        ...state,
+        hasMoreItems: action.payload
+      };
+    case "PAGE_OF_COMMENTARIES":
+      return {
+        ...state,
+        page: state.page + 1
+      };
+    case "COMMENTARIES_COUNT":
+      return {
+        ...state,
+        commentariesCount: action.payload
+      };
+    case "INC_COMMENTARIES_COUNT":
+      return {
+        ...state,
+        commentariesCount: state.commentariesCount + 1
+      };
+    case "CONCAT_NEW_COMMENTARIES":
       return {
         ...state,
         commentaries: state.commentaries.concat(payload)

@@ -19,7 +19,7 @@ export default class GoodKinoService {
 
   getMovieFromHomePage = async () => {
     try {
-      return await axios.get(`${baseURL}/home-page`, { withCredentials: true });
+      return await axios.get(`${baseURL}/home-page`);
     } catch (error) {
       throw new Error(`sry bar response plz try again ${error}`);
     }
@@ -53,7 +53,7 @@ export default class GoodKinoService {
     }
   };
 
-  fetchOneMovie = movieName => {
+  fetchSingleMovie = movieName => {
     return axios.get(`${baseURL}/get-only-one-movie`, {
       params: { movieName }
     });
@@ -79,7 +79,7 @@ export default class GoodKinoService {
     }
   };
 
-  postCommentaries = async commentar => {
+  postNewCommentaries = async commentar => {
     try {
       return await axios.post(
         `${baseURL}/post-commentaries`,
@@ -174,5 +174,12 @@ export default class GoodKinoService {
       { movieId, toggler },
       { withCredentials: true }
     );
+  };
+
+  deleteMovieFromContinueWatch = movieId => {
+    return axios.delete(`${baseURL}/user/continue-watch-movie/delete`, {
+      withCredentials: true,
+      params: { movieId }
+    });
   };
 }

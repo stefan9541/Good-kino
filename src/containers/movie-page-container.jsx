@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Spin, Col, Row } from "antd";
-import * as movieDataActions from "../actions/movie-data-action";
+import { fetchData, fetchMovieDataRequest } from "../actions/movie-data-action";
 
 import PageNotFound from "../components/page-not-found";
 import MoviePage from "../components/movie-page";
@@ -16,39 +16,29 @@ function decodeUriComponent(str) {
 }
 
 class MoviePageContainer extends Component {
+  reducerName = "movie-page";
+
   componentDidMount() {
     this.getData();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params !== this.props.match.params) {
+      console.log("asd");
       this.getData();
     }
   }
 
   componentWillUnmount() {
     const { fetchMovieDataRequest } = this.props;
-    fetchMovieDataRequest("movie-page");
+    fetchMovieDataRequest(this.reducerName);
   }
 
   getData() {
-    const reducerName = "movie-page";
-    const {
-      match,
-      fetchingData,
-      fetchMovieDataFailure,
-      fetchMovieDataRequest,
-      fetchMovieDataSuccess
-    } = this.props;
+    const { fetchData, match } = this.props;
 
     const movie = decodeUriComponent(match.params.movie);
-
-    fetchMovieDataRequest(reducerName);
-    fetchingData(movie)
-      .then(({ data }) => {
-        fetchMovieDataSuccess(data, reducerName);
-      })
-      .catch(err => fetchMovieDataFailure(err, reducerName));
+    fetchData(this.reducerName, movie);
   }
 
   render() {
@@ -87,10 +77,16 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...movieDataActions }, dispatch);
+const mapDispatchToProps = (dispatch, { apiCall }) => {
+  return bindActionCreators(
+    {
+      fetchData: fetchData(apiCall),
+      fetchMovieDataRequest
+    },
+    dispatch
+  );
 };
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps)
-)(MoviePageContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  MoviePageContainer
+);

@@ -207,7 +207,7 @@ class VideoPlayer extends Component {
     if (!continueWatch) {
       return;
     }
-    const movieAlreadyHave = continueWatch.find(
+    const movieAlreadyHave = continueWatch.some(
       item => item.movieId === movieId
     );
     const isWatch = false;

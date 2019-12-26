@@ -1,16 +1,23 @@
 import React from "react";
 import { Col, Table, Divider, Tooltip, Icon } from "antd";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import { fixedEncodeURIComponent } from "../../utils/fixed-encode-uri";
-import { updateMovieStatusToWatched } from "../../actions/user-actions";
+import {
+  handleToggleWatchStatus,
+  handleDeleteMovieFromContinueWatch
+} from "../../actions/user-actions";
 
 import "./continue-watch.css";
 import { withGoodKinoService } from "../hoc";
 
 const ContinueWatch = props => {
-  const { updateMovieStatusToWatched, continueWatch } = props;
-  const { fetchToggleWatchStatus } = props.goodKinoService;
+  const {
+    handleToggleWatchStatus,
+    handleDeleteMovieFromContinueWatch,
+    continueWatch
+  } = props;
   const columns = [
     {
       title: "Дата",
@@ -36,16 +43,14 @@ const ContinueWatch = props => {
       defaultSortOrder: "ascend",
       sorter: (a, b) => a.isWatch - b.isWatch,
       render: (text, record) => {
-        const { isWatch } = record;
+        const { isWatch, movieId } = record;
         const icon = isWatch ? "twoTone" : "outlined";
         return (
           <span>
             <Tooltip title="mark as viewed">
               <Icon
                 onClick={() => {
-                  fetchToggleWatchStatus(record.movieId, !isWatch).then(() => {
-                    updateMovieStatusToWatched(record.movieId, !isWatch);
-                  });
+                  handleToggleWatchStatus(movieId, !isWatch);
                 }}
                 style={{ fontSize: "20px" }}
                 type="eye"
@@ -59,6 +64,7 @@ const ContinueWatch = props => {
                 type="vertical"
               />
               <Icon
+                onClick={() => handleDeleteMovieFromContinueWatch(movieId)}
                 style={{ fontSize: "18px" }}
                 type="close-circle"
                 theme="twoTone"
@@ -91,8 +97,20 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {
-  updateMovieStatusToWatched
+const mapDispatchToProps = (dispatch, props) => {
+  const {
+    fetchToggleWatchStatus,
+    deleteMovieFromContinueWatch
+  } = props.goodKinoService;
+  return bindActionCreators(
+    {
+      handleToggleWatchStatus: handleToggleWatchStatus(fetchToggleWatchStatus),
+      handleDeleteMovieFromContinueWatch: handleDeleteMovieFromContinueWatch(
+        deleteMovieFromContinueWatch
+      )
+    },
+    dispatch
+  );
 };
 
 export default withGoodKinoService()(

@@ -18,25 +18,20 @@
 #nav-menu li:nth-child(12) {
   border-right: 1px solid #2d2d2d;
 }
-/* #nav-menu:last-child {
-  border-right: 1px solid #000 !important;
-} */
 
-#nav-menu li a {
+#nav-menu li a,
+#nav-menu li span {
   text-align: center;
   color: #ffffff;
   display: block;
 }
-#nav-menu li a i {
+#nav-menu li span i {
   position: relative;
   color: deepskyblue;
   left: 5px;
 }
-#nav-menu li div {
-  /* padding: 0 !important; */
-}
 
-.active-link  {
+.active-link {
   color: #1890ff !important;
 }
 .active-item-link {

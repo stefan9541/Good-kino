@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withGoodKinoService } from "../components/hoc";
-import * as commentariesAction from "../actions/commentaries-action";
+import {
+  handleAddNewCommentar,
+  disableSubmitButton,
+  visibleSubmitButton
+} from "../actions/commentaries-action";
 import MovieCommentForm from "../components/movie-comment-form";
 import NoAccessToComments from "../components/no-access-to-comments";
 
@@ -14,33 +18,11 @@ class MovieCommentFormContainer extends Component {
 
   handleSubmit = (e, err, values, resetFields) => {
     e.preventDefault();
-    const { postCommentaries } = this.props.goodKinoService;
-    const {
-      addNewCommentar,
-      movieId,
-      disableSubmitButton,
-      _id,
-      userName,
-      picture
-    } = this.props;
-
+    const { handleAddNewCommentar, movieId } = this.props;
     if (err) {
       return;
     }
-
-    const author = {
-      _id,
-      userName,
-      picture
-    };
-    postCommentaries({ ...values, movieId })
-      .then(({ data }) => {
-        data.author = author;
-        addNewCommentar({ ...data });
-        resetFields("commentText");
-        disableSubmitButton(true);
-      })
-      .catch(err => console.log(err));
+    handleAddNewCommentar(movieId, values, resetFields);
   };
 
   handleFocus = () => {
@@ -82,18 +64,22 @@ class MovieCommentFormContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    newCommentar: state.commentariesReducer.newCommentar,
     disableSubmit: state.commentariesReducer.disableSubmitButton,
     visibleSubmit: state.commentariesReducer.visibleSubmitButton,
-    isAuth: state.userReducer.isAuth,
-    userName: state.userReducer.userName,
-    _id: state.userReducer._id,
-    picture: state.userReducer.picture
+    isAuth: state.userReducer.isAuth
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...commentariesAction }, dispatch);
+const mapDispatchToProps = (dispatch, props) => {
+  const { postNewCommentaries } = props.goodKinoService;
+  return bindActionCreators(
+    {
+      disableSubmitButton,
+      visibleSubmitButton,
+      handleAddNewCommentar: handleAddNewCommentar(postNewCommentaries)
+    },
+    dispatch
+  );
 };
 
 export default compose(
