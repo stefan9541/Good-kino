@@ -66,6 +66,13 @@ const userReducer = (state = initialState, action) => {
           return item;
         })
       };
+    case "DELETE_MOVIE_CONTINUE_WATCH":
+      return {
+        ...state,
+        continueWatch: state.continueWatch.filter(
+          item => item.movieId !== action.payload
+        )
+      };
     default:
       return state;
   }

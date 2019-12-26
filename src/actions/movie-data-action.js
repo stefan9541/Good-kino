@@ -1,21 +1,17 @@
-import GoodKinoService from "../services";
-
-const { getMovieFromRoutingAndPagination } = new GoodKinoService();
-
 export const fetchMovieDataRequest = name => {
   return {
     name,
     type: "FETCH_MOVIE_DATA_REQUEST"
   };
 };
-export const fetchMovieDataSuccess = (movies, name) => {
+export const fetchMovieDataSuccess = (name, movies) => {
   return {
     type: "FETCH_MOVIE_DATA_SUCCESS",
     payload: movies,
     name
   };
 };
-export const fetchMovieDataFailure = (err, name) => {
+export const fetchMovieDataFailure = (name, err) => {
   return {
     name,
     type: "FETCH_MOVIE_DATA_FAILURE",
@@ -23,17 +19,17 @@ export const fetchMovieDataFailure = (err, name) => {
   };
 };
 
-export const fetchData = (params, name) => dispatch => {
-  dispatch(fetchMovieDataRequest());
-  getMovieFromRoutingAndPagination(params)
-    .then(({ data }) => dispatch(fetchMovieDataSuccess(data, name)))
-    .catch(err => dispatch(fetchMovieDataFailure(err, name)));
+export const fetchData = apiCall => (name, params) => dispatch => {
+  dispatch(fetchMovieDataRequest(name));
+  apiCall(params)
+    .then(({ data }) => dispatch(fetchMovieDataSuccess(name, data)))
+    .catch(err => dispatch(fetchMovieDataFailure(name, err)));
 };
 
-export const updateMovieRate = (userRate, name) => {
+export const updateMovieRate = userRate => {
   return {
     type: "UPDATE_MOVIE_RATE",
-    name,
+    name: "movie-page",
     payload: userRate
   };
 };

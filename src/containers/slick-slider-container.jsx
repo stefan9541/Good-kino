@@ -3,7 +3,6 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import SlickSliderItem from "../components/slick-slider-item";
 
-
 class SlickSLiderContainer extends Component {
   setting = {
     infinite: false,
@@ -11,23 +10,19 @@ class SlickSLiderContainer extends Component {
     touchMove: false,
     slidesToShow: 5,
     slidesToScroll: 5
-  }
+  };
 
   render() {
     const { sliderItem } = this.props;
-    const [movies = [],
-      anime = [],
-      cartoon = [],
-      series = []] = (sliderItem || []).map(({ doc }) => (doc || []).slice(0, 5));
+    const [movies = [], anime = [], cartoon = [], series = []] = (
+      sliderItem || []
+    ).map(({ doc }) => (doc || []).slice(0, 5));
 
     const sliderItems = cartoon.concat(anime, movies, series);
 
-    return (
-      <SlickSliderItem items={sliderItems} setting={this.setting} />
-    );
+    return <SlickSliderItem items={sliderItems} setting={this.setting} />;
   }
 }
-
 
 const mapStateToProps = state => {
   return {
@@ -35,7 +30,4 @@ const mapStateToProps = state => {
   };
 };
 
-
-export default compose(
-  connect(mapStateToProps)
-)(SlickSLiderContainer);
+export default compose(connect(mapStateToProps))(SlickSLiderContainer);

@@ -2,27 +2,15 @@ import React, { Component } from "react";
 import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Spin } from "antd";
-import * as movieDataActions from "../actions/movie-data-action";
+import { fetchData } from "../actions/movie-data-action";
 
 import MovieItemRender from "../components/movie-item-render";
 
 class HomePageContainer extends Component {
   componentDidMount() {
     const reducerName = "home-page";
-    const { fetchingData } = this.props;
-    const {
-      fetchMovieDataRequest,
-      fetchMovieDataSuccess,
-      fetchMovieDataFailure
-    } = this.props;
-
-    fetchMovieDataRequest(reducerName);
-
-    fetchingData()
-      .then(res => {
-        fetchMovieDataSuccess(res.data, reducerName);
-      })
-      .catch(err => fetchMovieDataFailure(err, reducerName));
+    const { fetchData } = this.props;
+    fetchData(reducerName);
   }
 
   render() {
@@ -50,8 +38,13 @@ class HomePageContainer extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...movieDataActions }, dispatch);
+const mapDispatchToProps = (dispatch, { apiCall }) => {
+  return bindActionCreators(
+    {
+      fetchData: fetchData(apiCall)
+    },
+    dispatch
+  );
 };
 
 const mapStateToProps = state => {

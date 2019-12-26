@@ -44,7 +44,7 @@ class PaginationRoutingMoviesContainer extends Component {
       ...(params || "")
     };
 
-    fetchData(dataParams, this.reducerName);
+    fetchData(this.reducerName, dataParams);
   };
 
   render() {
@@ -101,8 +101,14 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchData, fetchMovieDataRequest }, dispatch);
+const mapDispatchToProps = (dispatch, { apiCall }) => {
+  return bindActionCreators(
+    {
+      fetchData: fetchData(apiCall),
+      fetchMovieDataRequest
+    },
+    dispatch
+  );
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(

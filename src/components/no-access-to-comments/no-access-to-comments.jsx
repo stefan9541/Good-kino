@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Row, Col, Icon } from "antd";
 
 import "./no-access-to-comments.css";
@@ -11,8 +11,9 @@ const NoAccessToComments = () => {
           <Icon twoToneColor="#ffaf00" type="warning" theme="twoTone" />
         </Col>
         <Col>
-          Уважаемый посетитель, Оставлять коментарии могут только зарегистрированные пользователи
-          Мы рекомендуем Вам зарегистрироваться либо войти на сайт под своим именем
+          Уважаемый посетитель, Оставлять коментарии могут только
+          зарегистрированные пользователи!!! Мы рекомендуем Вам
+          зарегистрироваться либо войти на сайт под своим именем
         </Col>
       </div>
     </Row>

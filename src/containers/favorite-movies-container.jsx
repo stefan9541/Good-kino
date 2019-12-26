@@ -5,7 +5,7 @@ import queryStr from "query-string";
 import { Spin } from "antd";
 import MovieItemRender from "../components/movie-item-render";
 import ErrorIndicator from "../components/error-indicator";
-import * as movieDataActions from "../actions/movie-data-action";
+import { fetchData } from "../actions/movie-data-action";
 
 class FavoriteMoviesContainer extends Component {
   reducerName = "favorite-page";
@@ -21,21 +21,10 @@ class FavoriteMoviesContainer extends Component {
   }
 
   getData = () => {
-    const {
-      fetchMovieDataSuccess,
-      fetchMovieDataRequest,
-      fetchMovieDataFailure,
-      fetchingData,
-      location
-    } = this.props;
+    const { location, fetchData } = this.props;
     const parseParams = queryStr.parse(location.search);
 
-    fetchMovieDataRequest(this.reducerName);
-    fetchingData(parseParams)
-      .then(({ data }) => {
-        fetchMovieDataSuccess(data, this.reducerName);
-      })
-      .catch(err => fetchMovieDataFailure(err, this.reducerName));
+    fetchData(this.reducerName, parseParams);
   };
 
   render() {
@@ -66,8 +55,13 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...movieDataActions }, dispatch);
+const mapDispatchToProps = (dispatch, { apiCall }) => {
+  return bindActionCreators(
+    {
+      fetchData: fetchData(apiCall)
+    },
+    dispatch
+  );
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(

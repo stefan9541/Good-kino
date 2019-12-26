@@ -7,13 +7,18 @@ const leftSidebarReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LEFT_SIDEBAR_REQUEST":
       return {
-        ...state,
-        leftSidebarItems: action.payload
+        err: null,
+        leftSidebarItems: []
       };
     case "LEFT_SIDEBAR_FAILURE":
       return {
-        ...state,
+        leftSidebarItems: [],
         err: action.payload
+      };
+    case "LEFT_SIDEBAR_SUCCESS":
+      return {
+        leftSidebarItems: action.payload,
+        err: null
       };
 
     default:

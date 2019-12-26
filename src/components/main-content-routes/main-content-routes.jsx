@@ -14,10 +14,10 @@ import PageNotFound from "../page-not-found";
 
 const MainContentRoutes = props => {
   const {
-    getMovieFromRoutingAndPagination,
     fetchMovieFromFilterPanel,
-    fetchOneMovie,
+    fetchSingleMovie,
     getMovieFromHomePage,
+    getMovieFromRoutingAndPagination,
     getFavoriteMovies
   } = props.goodKinoService;
   return (
@@ -31,7 +31,7 @@ const MainContentRoutes = props => {
           render={() => {
             return (
               <Layout sidebar>
-                <HomePageContainer fetchingData={getMovieFromHomePage} />
+                <HomePageContainer apiCall={getMovieFromHomePage} />
               </Layout>
             );
           }}
@@ -44,7 +44,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -55,7 +59,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -66,7 +74,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -77,7 +89,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -90,7 +106,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -101,7 +121,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -112,7 +136,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -123,7 +151,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -136,7 +168,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -147,7 +183,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -158,7 +198,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -169,7 +213,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -182,7 +230,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -195,7 +247,11 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout sidebar>
-                <PaginationRoutingMoviesContainer {...props} sortedPanel />
+                <PaginationRoutingMoviesContainer
+                  apiCall={getMovieFromRoutingAndPagination}
+                  {...props}
+                  sortedPanel
+                />
               </Layout>
             );
           }}
@@ -210,7 +266,7 @@ const MainContentRoutes = props => {
               <Layout sidebar>
                 <PaginationRoutingMoviesContainer
                   {...props}
-                  fetchingData={fetchMovieFromFilterPanel}
+                  apiCall={fetchMovieFromFilterPanel}
                   sortedPanel
                 />
               </Layout>
@@ -225,7 +281,7 @@ const MainContentRoutes = props => {
           render={props => {
             return (
               <Layout>
-                <MoviePageContainer {...props} fetchingData={fetchOneMovie} />
+                <MoviePageContainer {...props} apiCall={fetchSingleMovie} />
               </Layout>
             );
           }}
@@ -238,7 +294,7 @@ const MainContentRoutes = props => {
               <ProtectRoute>
                 <Layout rightSidebar>
                   <FavoriteMoviesContainer
-                    fetchingData={getFavoriteMovies}
+                    apiCall={getFavoriteMovies}
                     {...props}
                   />
                 </Layout>

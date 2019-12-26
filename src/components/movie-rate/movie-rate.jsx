@@ -1,40 +1,29 @@
 import React from "react";
 import { Col, Rate } from "antd";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withGoodKinoService } from "../hoc";
-import { addMovieToVoted } from "../../actions/user-actions";
-import { updateMovieRate } from "../../actions/movie-data-action";
-
-import { successMessage, warningMessage } from "../../utils/feed-back";
+import { handleVoted } from "../../actions/user-actions";
 
 import "./movie-rate.css";
 
 const MovieRate = props => {
   const {
     movieId,
+    handleVoted,
     usersRate,
     usersVotes,
-    addMovieToVoted,
-    updateMovieRate,
     ratedMovies = [],
     isAuth
   } = props;
   const dublicateMovie = ratedMovies.find(item => item.movieId === movieId);
-  const { fetchUpdateMovieRate } = props.goodKinoService;
   const average = (usersRate / usersVotes).toFixed(1);
   // if average > 1 && < 1.5 round to 1.5 else if avarage > 1.5 round to 2
   const rate = Math.ceil(average * 2) / 2;
   // chek if rate = NaN it is bacause userRate = 0 && usersVote = 0
 
   const handleChange = value => {
-    if (dublicateMovie) {
-      return warningMessage("Вы уже голосовали");
-    }
-    fetchUpdateMovieRate(value, movieId).then(() => {
-      addMovieToVoted(movieId, value);
-      updateMovieRate(value, "movie-page");
-      successMessage("Голос добавлен! Спасибо");
-    });
+    handleVoted(movieId, value, dublicateMovie);
   };
 
   return (
@@ -75,9 +64,12 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDistatchToProps = {
-  addMovieToVoted,
-  updateMovieRate
+const mapDistatchToProps = (dispatch, props) => {
+  const { fetchUpdateMovieRate } = props.goodKinoService;
+  return bindActionCreators(
+    { handleVoted: handleVoted(fetchUpdateMovieRate) },
+    dispatch
+  );
 };
 
 export default withGoodKinoService()(

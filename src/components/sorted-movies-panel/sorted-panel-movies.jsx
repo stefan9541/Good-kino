@@ -10,13 +10,14 @@ class SortedPanelMovies extends Component {
     { label: "По рейтингу imDb", value: "imdbRating" },
     { label: "По популяртности", value: "imdbVotes" },
     { label: "По алфавиту", value: "Title" }
-  ]
-
+  ];
 
   handleChange = e => {
     const { value } = e.target;
     const { history } = this.props;
-    const { location: { search, pathname } } = this.props;
+    const {
+      location: { search, pathname }
+    } = this.props;
     const parseParams = qstr.parse(search);
     let params = `&${qstr.stringify(parseParams)}`;
 
@@ -30,10 +31,12 @@ class SortedPanelMovies extends Component {
     }
 
     history.push(`${pathname}?sortedBy=${value}${params}`);
-  }
+  };
 
   render() {
-    const { location: { search } } = this.props;
+    const {
+      location: { search }
+    } = this.props;
     const parseParams = qstr.parse(search);
     const defaultCheckedRadio = parseParams.sortedBy || "imdbRating";
     return (
@@ -42,16 +45,22 @@ class SortedPanelMovies extends Component {
           <span>Сортировать по</span>
         </Col>
         <Col offset={1}>
-          <Radio.Group defaultValue={defaultCheckedRadio} size="small" buttonStyle="solid">
-            {
-              this.radioButtons.map(({ label, value }) => {
-                return (
-                  <Radio.Button onChange={this.handleChange} key={value} value={value}>
-                    {label}
-                  </Radio.Button>
-                );
-              })
-            }
+          <Radio.Group
+            defaultValue={defaultCheckedRadio}
+            size="small"
+            buttonStyle="solid"
+          >
+            {this.radioButtons.map(({ label, value }) => {
+              return (
+                <Radio.Button
+                  onChange={this.handleChange}
+                  key={value}
+                  value={value}
+                >
+                  {label}
+                </Radio.Button>
+              );
+            })}
           </Radio.Group>
         </Col>
       </Row>

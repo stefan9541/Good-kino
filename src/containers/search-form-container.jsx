@@ -7,14 +7,17 @@ import { withGoodKinoService } from "../components/hoc";
 import SearchInputResultItem from "../components/search-input-result-item";
 import SearchInput from "../components/search-input";
 
-import * as searchAction from "../actions/search-input.action";
-
-
-// import "./search-input.css"
+import {
+  fetchSearchData,
+  searchItemResultVisible
+} from "../actions/search-input.action";
 
 class SearchFormContainer extends Component {
-  state = {
-    inputValue: ""
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ""
+    };
   }
 
   handleSubmit = (e, err, value) => {
@@ -39,27 +42,12 @@ class SearchFormContainer extends Component {
   };
 
   onInputChange = e => {
-    const { postMoviesForInputSearch } = this.props.goodKinoService;
-    const {
-      searchInputRequst,
-      searchInputSuccess,
-      searchInputFailure,
-      searchItemResultVisible
-    } = this.props;
+    const { fetchSearchData } = this.props;
 
     const inputValue = e.target.value;
     this.setState({ inputValue });
 
-    searchInputRequst();
-    if (inputValue.length >= 2) {
-      postMoviesForInputSearch(inputValue)
-        .then(({ data }) => searchInputSuccess(data))
-        .catch(err => searchInputFailure(err));
-
-      searchItemResultVisible(true);
-    } else {
-      searchItemResultVisible(false);
-    }
+    fetchSearchData(inputValue);
   };
 
   onInputFocus = e => {
@@ -98,7 +86,6 @@ class SearchFormContainer extends Component {
   }
 }
 
-
 const mapStateToProps = state => {
   return {
     searchData: state.searchInputReducer.onSearchData,
@@ -107,11 +94,16 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ ...searchAction }, dispatch);
+const mapDispatchToProps = (dispatch, props) => {
+  const { postMoviesForInputSearch } = props.goodKinoService;
+  return bindActionCreators(
+    {
+      fetchSearchData: fetchSearchData(postMoviesForInputSearch),
+      searchItemResultVisible
+    },
+    dispatch
+  );
 };
-
-// const WrappedSearchFormContainer = Form.create({ name: "search-form" })(SearchForm);
 
 export default compose(
   withRouter,

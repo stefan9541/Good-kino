@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { Col, Button, Spin } from "antd";
-import { compose } from "redux";
+import { Col, Spin } from "antd";
+import { compose, bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withGoodKinoService } from "../hoc";
 import {
-  fetchCommentariesRequest,
-  fetchCommentariesSuccess,
-  fetchCommentariesFailure,
+  handleFetchCommentaries,
   fetchNewCommentaries,
   toogleLikeOrDislike
 } from "../../actions/commentaries-action";
@@ -18,79 +16,39 @@ import MovieCommentItem from "../movie-comment-item";
 import "./movie-comments.css";
 
 class MovieComment extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hasMoreItems: true,
-      page: 0
-    };
-  }
-
   componentDidMount() {
     this.fetchingData();
   }
 
-  fetchingData = () => {
-    const { fetchCommentaries } = this.props.goodKinoService;
-    const {
-      movie: {
-        film: { _id }
-      },
-      fetchCommentariesSuccess,
-      fetchCommentariesFailure,
-      fetchCommentariesRequest
-    } = this.props;
+  componentDidUpdate(prevProps) {
+    const movieId = this.props.movie.film._id;
+    if (movieId !== prevProps.movie.film._id) {
+      this.fetchingData();
+    }
+  }
 
-    fetchCommentariesRequest();
-    fetchCommentaries(_id)
-      .then(({ data }) => {
-        if (data.commentsResponse.length < 40) {
-          this.setState({ hasMoreItems: false });
-        } else {
-          this.setState(state => ({ page: state.page + 1 }));
-        }
-        fetchCommentariesSuccess(data.commentsResponse);
-      })
-      .catch(err => fetchCommentariesFailure(err));
+  fetchingData = () => {
+    const movieId = this.props.movie.film._id;
+    const { handleFetchCommentaries } = this.props;
+    handleFetchCommentaries(movieId);
   };
 
   handleFetchNewCommentaries = () => {
-    const { page, hasMoreItems } = this.state;
-    const { fetchCommentaries } = this.props.goodKinoService;
-    const {
-      fetchNewCommentaries,
-      commentaries,
-      movie: {
-        film: { _id }
-      }
-    } = this.props;
-
-    if (!hasMoreItems) {
-      return;
-    }
-
-    fetchCommentaries(_id, page)
-      .then(({ data }) => {
-        const { commentsResponse, countResponse } = data;
-
-        if (commentaries.length === countResponse) {
-          this.setState({ hasMoreItems: false });
-          return undefined;
-        }
-        fetchNewCommentaries(commentsResponse);
-        this.setState(state => {
-          return {
-            page: state.page + 1
-          };
-        });
-      })
-      .catch(err => fetchCommentariesFailure(err));
+    const movieId = this.props.movie.film._id;
+    const { fetchNewCommentaries } = this.props;
+    fetchNewCommentaries(movieId);
   };
 
   render() {
-    const { hasMoreItems } = this.state;
-    const { commentaries, movie, userId, toogleLikeOrDislike } = this.props;
+    console.log("commentaries");
+    const {
+      commentaries,
+      hasMoreItems,
+      movie,
+      commentariesCount,
+      userId,
+      toogleLikeOrDislike
+    } = this.props;
     const {
       updateCommentariesLike,
       updateCommentariesDislike
@@ -98,7 +56,7 @@ class MovieComment extends Component {
     return (
       <Col id="comment-wrapp">
         <span className="comment-value">
-          {`Total comments ${commentaries.length}`}
+          {`Total comments ${commentariesCount}`}
         </span>
 
         <MovieCommentFormContainer movieId={movie.film._id} />
@@ -128,16 +86,23 @@ const mapStateToProps = state => {
     movie: state.moviePage.movies,
     loading: state.commentariesReducer.loading,
     error: state.commentariesReducer.error,
+    hasMoreItems: state.commentariesReducer.hasMoreItems,
+    pageOfCommentaries: state.commentariesReducer.pageOfCommentaries,
+    commentariesCount: state.commentariesReducer.commentariesCount,
     userId: state.userReducer._id
   };
 };
 
-const mapDispatchToProps = {
-  fetchCommentariesRequest,
-  fetchCommentariesSuccess,
-  fetchCommentariesFailure,
-  fetchNewCommentaries,
-  toogleLikeOrDislike
+const mapDispatchToProps = (dispatch, props) => {
+  const { fetchCommentaries } = props.goodKinoService;
+  return bindActionCreators(
+    {
+      handleFetchCommentaries: handleFetchCommentaries(fetchCommentaries),
+      fetchNewCommentaries: fetchNewCommentaries(fetchCommentaries),
+      toogleLikeOrDislike
+    },
+    dispatch
+  );
 };
 export default compose(
   withGoodKinoService(),

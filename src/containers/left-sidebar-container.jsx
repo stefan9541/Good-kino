@@ -1,25 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { compose } from "redux";
+import { compose, bindActionCreators } from "redux";
 import { withGoodKinoService } from "../components/hoc";
 import LeftSideBarItemRender from "../components/left-sidebar-item";
 import ExtendedSampleLeftSidebar from "../components/extended-sample-left-sidebar";
-import {
-  leftSidebarRequest,
-  leftSidebarFilure
-} from "../actions/left-side-bar-actions";
+import { fetchSideBaritems } from "../actions/left-side-bar-actions";
 
 class LeftSideBarContainer extends Component {
   componentDidMount() {
-    const { getLinkForLeftSideBar } = this.props.goodKinoService;
-    const { leftSidebarRequest, leftSidebarFilure } = this.props;
-    getLinkForLeftSideBar()
-      .then(res => {
-        leftSidebarRequest(res.data);
-      })
-      .catch(err => {
-        leftSidebarFilure(err);
-      });
+    const { fetchSideBaritems } = this.props;
+    fetchSideBaritems();
   }
 
   render() {
@@ -39,12 +29,14 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    leftSidebarRequest: sidebarItems =>
-      dispatch(leftSidebarRequest(sidebarItems)),
-    leftSidebarFilure: err => dispatch(leftSidebarFilure(err))
-  };
+const mapDispatchToProps = (dispatch, props) => {
+  const { getLinkForLeftSideBar } = props.goodKinoService;
+  return bindActionCreators(
+    {
+      fetchSideBaritems: fetchSideBaritems(getLinkForLeftSideBar)
+    },
+    dispatch
+  );
 };
 
 export default compose(

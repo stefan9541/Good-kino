@@ -1,7 +1,6 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { Component } from "react";
-import {
-  Menu, InputNumber, Form, Button, Select
-} from "antd";
+import { Menu, InputNumber, Form, Button, Select } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
@@ -18,48 +17,53 @@ class ExtendedSampleLeftSidebar extends Component {
     const { byType, byGenre, year } = getFieldsValue();
     const url = `/filter?byType=${byType}&byGenre=${byGenre}&year=${year}`;
     history.push(url);
-  }
+  };
 
   handleSelectChange = () => {
     const { resetFields } = this.props.form;
     resetFields(["byGenre"]);
-  }
+  };
 
   render() {
     const { getFieldDecorator, getFieldValue } = this.props.form;
     const { items } = this.props;
     const selectValueByType = getFieldValue("byType");
-    const currentYear = new Date()
-      .getFullYear();
+    const currentYear = new Date().getFullYear();
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Menu id="extended-sample-panel" mode="inline" theme="dark">
-          <Menu.SubMenu title={(
-            <span>
-              <i className="sub-menu-icon-wrap">
-                <img className="sub-menu-icon" src="/svg-icon/filter.svg" alt="filter icon svg" />
-              </i>
-              {"Фильтры"}
-            </span>
-          )}
+          <Menu.SubMenu
+            title={
+              <span>
+                <i className="sub-menu-icon-wrap">
+                  <img
+                    className="sub-menu-icon"
+                    src="/svg-icon/filter.svg"
+                    alt="filter icon svg"
+                  />
+                </i>
+                {"Фильтры"}
+              </span>
+            }
           >
             <Form.Item className="extended-form-item extended-form-label">
               Выборка по типу
             </Form.Item>
             <Form.Item className="extended-form-item">
-              {
-                getFieldDecorator("byType", {
-                  initialValue: "films"
-                })(
-                  <Select onChange={this.handleSelectChange} className="extended-panel-select">
-                    <Option value="films">Фильмы</Option>
-                    <Option value="series">Сериалы</Option>
-                    <Option value="anime">Аниме</Option>
-                    <Option value="cartoon">Мультфильмы</Option>
-                  </Select>
-                )
-              }
+              {getFieldDecorator("byType", {
+                initialValue: "films"
+              })(
+                <Select
+                  onChange={this.handleSelectChange}
+                  className="extended-panel-select"
+                >
+                  <Option value="films">Фильмы</Option>
+                  <Option value="series">Сериалы</Option>
+                  <Option value="anime">Аниме</Option>
+                  <Option value="cartoon">Мультфильмы</Option>
+                </Select>
+              )}
             </Form.Item>
 
             <Form.Item className="extended-form-item extended-form-label">
@@ -69,27 +73,19 @@ class ExtendedSampleLeftSidebar extends Component {
             {/* if value of select(by-type) === films, render only films genre */}
 
             <Form.Item className="extended-form-item">
-              {
-                getFieldDecorator("byGenre", {
-                  initialValue: "Adventure"
-                })(
-                  <Select className="extended-panel-select">
-                    {
-                      (items || []).map(item => {
-                        if (selectValueByType === item.type) {
-                          return (
-                            item.links.map(({ label }) => {
-                              return (
-                                <Option value={label}>{label}</Option>
-                              );
-                            })
-                          );
-                        }
-                      })
+              {getFieldDecorator("byGenre", {
+                initialValue: "Adventure"
+              })(
+                <Select className="extended-panel-select">
+                  {(items || []).map(item => {
+                    if (selectValueByType === item.type) {
+                      return item.links.map(({ label }) => {
+                        return <Option value={label}>{label}</Option>;
+                      });
                     }
-                  </Select>
-                )
-              }
+                  })}
+                </Select>
+              )}
             </Form.Item>
 
             <Form.Item className="extended-form-item extended-form-label">
@@ -97,16 +93,17 @@ class ExtendedSampleLeftSidebar extends Component {
             </Form.Item>
 
             <Form.Item className="extended-form-item">
-              {
-                getFieldDecorator("year", {
-                  rules: [{
-                    min: "1950", max: currentYear, type: "number", message: " "
-                  }],
-                  initialValue: "2015"
-                })(
-                  <InputNumber className="extended-input-number" />
-                )
-              }
+              {getFieldDecorator("year", {
+                rules: [
+                  {
+                    min: "1950",
+                    max: currentYear,
+                    type: "number",
+                    message: " "
+                  }
+                ],
+                initialValue: "2015"
+              })(<InputNumber className="extended-input-number" />)}
             </Form.Item>
 
             <Form.Item className="extended-form-item">
