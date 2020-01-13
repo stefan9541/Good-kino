@@ -11,6 +11,8 @@ import FavoriteMoviesContainer from "../../containers/favorite-movies-container"
 import ContinueWatch from "../continue-watch";
 import ProtectRoute from "../protect-route";
 import PageNotFound from "../page-not-found";
+import UpdateUserAvatar from "../update-user-avatar/update-user-avatar";
+import ProfileSetting from "../profile-setting/profile-setting";
 
 const MainContentRoutes = props => {
   const {
@@ -309,6 +311,19 @@ const MainContentRoutes = props => {
               <ProtectRoute>
                 <Layout>
                   <ContinueWatch {...props} />
+                </Layout>
+              </ProtectRoute>
+            );
+          }}
+        />
+
+        <Route
+          path="/setting"
+          render={props => {
+            return (
+              <ProtectRoute>
+                <Layout>
+                  <ProfileSetting />
                 </Layout>
               </ProtectRoute>
             );

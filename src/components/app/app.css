@@ -4,5 +4,9 @@ body {
 }
 
 #container {
- background-color: #020202;
+  background-color: #020202;
+}
+
+.ant-message {
+  z-index: 55512355 !important;
 }

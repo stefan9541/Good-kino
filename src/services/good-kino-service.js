@@ -182,4 +182,13 @@ export default class GoodKinoService {
       params: { movieId }
     });
   };
+
+  updateUserAvatar = file => {
+    return axios.post(`${baseURL}/user/update/avatar`, file, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+  };
 }

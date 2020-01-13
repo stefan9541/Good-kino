@@ -47,7 +47,7 @@ export const handleFetchCommentaries = apiCall => movieId => dispatch => {
   apiCall(movieId)
     .then(({ data }) => {
       const { commentsResponse, countResponse } = data;
-      if (commentsResponse.length < 40) {
+      if (commentsResponse.length < 10) {
         dispatch(fetchNewItemIfNeeded(false));
       } else {
         dispatch(pageOfCommentaries());

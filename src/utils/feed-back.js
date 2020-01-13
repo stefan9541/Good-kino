@@ -1,7 +1,7 @@
 import { message } from "antd";
 
 message.config({
-  duration: 2,
+  duration: 1,
   maxCount: 3
 });
 
@@ -17,8 +17,4 @@ const warningMessage = msg => {
   return message.warning(msg);
 };
 
-export {
-  successMessage,
-  errorMessage,
-  warningMessage
-};
+export { successMessage, errorMessage, warningMessage };

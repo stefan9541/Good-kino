@@ -8,6 +8,7 @@ const MovieCommentItem = props => {
   const {
     commentaries,
     userId,
+    isAuth,
     toogleLikeOrDislike,
     updateCommentariesLike,
     updateCommentariesDislike
@@ -30,6 +31,7 @@ const MovieCommentItem = props => {
             </div>
             <LikeDislike
               commentdId={_id}
+              isAuth={isAuth}
               updateCommentariesDislike={updateCommentariesDislike}
               updateCommentariesLike={updateCommentariesLike}
               toogleLikeOrDislike={toogleLikeOrDislike}

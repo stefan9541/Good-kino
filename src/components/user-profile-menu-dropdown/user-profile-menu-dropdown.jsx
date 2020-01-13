@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React from "react";
 import { Avatar, Menu, Dropdown } from "antd";
 import { Link } from "react-router-dom";
@@ -5,13 +6,9 @@ import { Link } from "react-router-dom";
 import "./user-profile-menu-dropdown.css";
 
 const UserProfileMenuDropdown = props => {
-  const {
-    favoriteMovies,
-    continueWatch,
-    picture,
-    userName
-  } = props;
-  const sliceName = (userName.length > 15) ? `${userName.slice(0, 15)}...` : userName;
+  const { favoriteMovies, continueWatch, picture, userName } = props;
+  const sliceName =
+    userName.length > 15 ? `${userName.slice(0, 15)}...` : userName;
   return (
     <Dropdown
       overlay={() => {
@@ -32,9 +29,7 @@ const UserProfileMenuDropdown = props => {
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <a href="http://localhost:8080/api/logout">
-                Выйти
-              </a>
+              <a href="http://localhost:8080/api/logout">Выйти</a>
             </Menu.Item>
           </Menu>
         );
@@ -42,11 +37,7 @@ const UserProfileMenuDropdown = props => {
       placement="bottomCenter"
       trigger={["click"]}
     >
-      <Avatar
-        className="user-avatar"
-        size="large"
-        src={picture}
-      />
+      <Avatar className="user-avatar" size="large" src={picture} />
     </Dropdown>
   );
 };
