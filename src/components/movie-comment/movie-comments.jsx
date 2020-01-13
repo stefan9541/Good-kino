@@ -40,13 +40,13 @@ class MovieComment extends Component {
   };
 
   render() {
-    console.log("commentaries");
     const {
       commentaries,
       hasMoreItems,
       movie,
       commentariesCount,
       userId,
+      isAuth,
       toogleLikeOrDislike
     } = this.props;
     const {
@@ -62,12 +62,14 @@ class MovieComment extends Component {
         <MovieCommentFormContainer movieId={movie.film._id} />
 
         <InfiniteScroll
+          threshold={20}
           pageStart={0}
           loader={<Spin key={1} />}
           loadMore={this.handleFetchNewCommentaries}
           hasMore={hasMoreItems}
         >
           <MovieCommentItem
+            isAuth={isAuth}
             updateCommentariesDislike={updateCommentariesDislike}
             updateCommentariesLike={updateCommentariesLike}
             toogleLikeOrDislike={toogleLikeOrDislike}
@@ -89,7 +91,8 @@ const mapStateToProps = state => {
     hasMoreItems: state.commentariesReducer.hasMoreItems,
     pageOfCommentaries: state.commentariesReducer.pageOfCommentaries,
     commentariesCount: state.commentariesReducer.commentariesCount,
-    userId: state.userReducer._id
+    userId: state.userReducer._id,
+    isAuth: state.userReducer.isAuth
   };
 };
 

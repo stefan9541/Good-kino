@@ -132,3 +132,7 @@ export const handleDeleteMovieFromContinueWatch = apiCall => {
     };
   };
 };
+
+export const handleUpdateAvatar = e => {
+  e.preventDefault();
+};

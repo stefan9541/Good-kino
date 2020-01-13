@@ -12,22 +12,18 @@ const Layout = props => {
   if (rightSidebar) {
     return (
       <Row id="main-content">
-        <Col span={18}>
-          {props.children}
-        </Col>
+        <Col span={18}>{props.children}</Col>
         <Col span={5} offset={1} style={{ color: "red" }}>
           <SortFavoriteByType />
         </Col>
       </Row>
-    )
+    );
   }
 
   if (!sidebar) {
     return (
       <Row id="main-content">
-        <Col span={24}>
-          {props.children}
-        </Col>
+        <Col span={24}>{props.children}</Col>
       </Row>
     );
   }

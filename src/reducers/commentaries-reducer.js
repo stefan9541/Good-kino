@@ -28,6 +28,7 @@ function likes(value, state, commentId, userId) {
   // if toogle === 1 its a like else dislike;
   const like = "likes";
   const dislike = "dislikes";
+
   const commentindex = state.commentaries.findIndex(el => el._id === commentId);
   const isHaveLike = state.commentaries[commentindex][like].indexOf(userId);
   const isHaveDislike = state.commentaries[commentindex][dislike].indexOf(

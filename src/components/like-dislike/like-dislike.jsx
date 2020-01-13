@@ -2,12 +2,14 @@ import React from "react";
 import { Icon, Tooltip } from "antd";
 
 import "./like-dislike.css";
+import { warningMessage } from "../../utils/feed-back";
 
 const LikeDislike = React.memo(props => {
   const {
     likes,
     dislikes,
     userId,
+    isAuth,
     updateCommentariesLike,
     updateCommentariesDislike,
     toogleLikeOrDislike,
@@ -20,6 +22,9 @@ const LikeDislike = React.memo(props => {
       <Tooltip title="Like">
         <Icon
           onClick={() => {
+            if (!isAuth) {
+              return warningMessage("Авторизуйтесь");
+            }
             updateCommentariesLike(commentdId, isLike);
             toogleLikeOrDislike("likes", userId, commentdId);
           }}
@@ -32,6 +37,9 @@ const LikeDislike = React.memo(props => {
       <Tooltip title="Dislike">
         <Icon
           onClick={() => {
+            if (!isAuth) {
+              return warningMessage("Авторизуйтесь");
+            }
             updateCommentariesDislike(commentdId, isDislike);
             toogleLikeOrDislike("dislikes", userId, commentdId);
           }}

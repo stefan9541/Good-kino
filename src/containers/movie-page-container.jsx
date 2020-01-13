@@ -24,7 +24,6 @@ class MoviePageContainer extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params !== this.props.match.params) {
-      console.log("asd");
       this.getData();
     }
   }
