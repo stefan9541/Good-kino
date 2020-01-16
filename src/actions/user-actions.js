@@ -71,7 +71,7 @@ export const excludeMovieFromFavorite = apiCall => {
   };
 };
 
-export const addMovieToVoted = (movieId, rate) => {
+const addMovieToVoted = (movieId, rate) => {
   return {
     type: "ADD_MOVIE_TO_VOTED",
     payload: {
@@ -133,6 +133,72 @@ export const handleDeleteMovieFromContinueWatch = apiCall => {
   };
 };
 
-export const handleUpdateAvatar = e => {
-  e.preventDefault();
+const changeAvatarRequest = () => {
+  return {
+    type: "CHANGE_AVATAR_REQUEST"
+  };
+};
+const changeAvatarSuccess = avatar => {
+  return {
+    type: "CHANGE_AVATAR_SUCCESS",
+    payload: avatar
+  };
+};
+const changeAvatarFailure = () => {
+  return {
+    type: "CHANGE_AVATAR_FAILURE"
+  };
+};
+
+export const handleUpdateAvatar = apiCall => formData => dispatch => {
+  dispatch(changeAvatarRequest());
+  apiCall(formData)
+    .then(({ data }) => {
+      dispatch(changeAvatarSuccess(data.url));
+    })
+    .catch(err => {
+      dispatch(changeAvatarFailure());
+      const {
+        response: { data }
+      } = err;
+      warningMessage(data.message);
+    });
+};
+
+const changeUsernameAction = username => {
+  return {
+    type: "CHANGE_USERNAME",
+    payload: username
+  };
+};
+
+export const changeUsername = apiCall => (
+  prevUsername,
+  validateFields,
+  setFields
+) => dispatch => {
+  validateFields((errors, { username }) => {
+    if (prevUsername === username) {
+      return successMessage("username successfully changed");
+    }
+    if (errors) {
+      return warningMessage("Plz write a valid username");
+    }
+    if (!username.trim()) {
+      warningMessage("username can not be empty");
+      setFields({
+        username: {
+          value: "",
+          errors: [new Error()]
+        }
+      });
+      return;
+    }
+    apiCall(username)
+      .then(() => {
+        dispatch(changeUsernameAction(username));
+        successMessage("username successfully changed");
+      })
+      .catch(({ response: { data } }) => warningMessage(data.message));
+  });
 };

@@ -15,9 +15,11 @@ class HomePageContainer extends Component {
 
   render() {
     const { homePageData = [], loading } = this.props;
-    const [anime = [], cartoon = [], films = [], series = []] = (
-      homePageData || []
-    ).map(({ doc }) => doc.slice(0, 8));
+    const data = homePageData.reduce((acc, { _id, doc }) => {
+      acc[_id] = { _id, doc: doc.slice(0, 8) };
+      return acc;
+    }, {});
+    const { anime, cartoon, series, films } = data;
 
     if (loading) {
       return <Spin />;
@@ -26,13 +28,17 @@ class HomePageContainer extends Component {
     return (
       <React.Fragment>
         <MovieItemRender
-          movies={cartoon}
+          movies={cartoon.doc}
           signature="Новые Мультфильмы"
           watchAll
         />
-        <MovieItemRender movies={films} signature="Новые Фильмы" watchAll />
-        <MovieItemRender movies={anime} signature="Новые Аниме" watchAll />
-        <MovieItemRender movies={series} signature="Новые Сериалы" watchAll />
+        <MovieItemRender movies={films.doc} signature="Новые Фильмы" watchAll />
+        <MovieItemRender movies={anime.doc} signature="Новые Аниме" watchAll />
+        <MovieItemRender
+          movies={series.doc}
+          signature="Новые Сериалы"
+          watchAll
+        />
       </React.Fragment>
     );
   }

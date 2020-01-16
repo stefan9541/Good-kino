@@ -28,7 +28,10 @@ const UserProfileMenuDropdown = props => {
                 Избранные ({favoriteMovies.length || 0})
               </Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="3">
+              <Link to="/setting">Профиль</Link>
+            </Menu.Item>
+            <Menu.Item key="4">
               <a href="http://localhost:8080/api/logout">Выйти</a>
             </Menu.Item>
           </Menu>

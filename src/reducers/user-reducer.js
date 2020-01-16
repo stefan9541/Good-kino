@@ -7,6 +7,7 @@ const initialState = {
   userName: null,
   picture: null,
   loading: true,
+  avatarLoading: false,
   isAuth: false,
   error: null
 };
@@ -72,6 +73,27 @@ const userReducer = (state = initialState, action) => {
         continueWatch: state.continueWatch.filter(
           item => item.movieId !== action.payload
         )
+      };
+    case "CHANGE_AVATAR_REQUEST":
+      return {
+        ...state,
+        avatarLoading: true
+      };
+    case "CHANGE_AVATAR_SUCCESS":
+      return {
+        ...state,
+        avatarLoading: false,
+        picture: action.payload
+      };
+    case "CHANGE_AVATAR_FAILURE":
+      return {
+        ...state,
+        avatarLoading: false
+      };
+    case "CHANGE_USERNAME":
+      return {
+        ...state,
+        userName: action.payload
       };
     default:
       return state;
