@@ -13,30 +13,24 @@ const SlickSliderItem = ({ items = [], setting }) => {
     <Row id="slider-container">
       <Row id="slider">
         <Slider {...setting}>
-          {
-            (items || []).map(({
-              Genre, Type, Title, Poster
-            }) => {
-              const genre = Genre.split(",")[0];
-              const linkHref = `/${Type}/${genre}/${Title}`;
-              return (
-                <Tooltip mouseEnterDelay={0.3} key={Title} title={Title}>
-                  <Col className="slider-item-wrap">
-                    <div className="slider-poster-wrap">
-                      <Link to={fixedEncodeURIComponent(linkHref)}>
-                        <img alt={`${Title} poster img`} src={Poster} />
-                      </Link>
-                    </div>
-                    <div className="slider-title-name-wrap">
-                      <Link to={`/${Type}/${genre}/${Title}`}>
-                        {Title}
-                      </Link>
-                    </div>
-                  </Col>
-                </Tooltip>
-              );
-            })
-          }
+          {(items || []).map(({ Genre, Type, Title, Poster }) => {
+            const genre = Genre.split(",")[0];
+            const linkHref = `/${Type}/${genre}/${Title}`;
+            return (
+              <Tooltip mouseEnterDelay={0.3} key={Title} title={Title}>
+                <Col className="slider-item-wrap">
+                  <div className="slider-poster-wrap">
+                    <Link to={fixedEncodeURIComponent(linkHref)}>
+                      <img alt={`${Title} poster img`} src={Poster} />
+                    </Link>
+                  </div>
+                  <div className="slider-title-name-wrap">
+                    <Link to={`/${Type}/${genre}/${Title}`}>{Title}</Link>
+                  </div>
+                </Col>
+              </Tooltip>
+            );
+          })}
         </Slider>
       </Row>
     </Row>

@@ -26,7 +26,7 @@ const MovieDescription = React.memo(props => {
       <Col className="movie-description">
         <ul className="description-list">
           <li>
-            <b>Рейтинги:</b> imdb: {imdbRating}  <small>({imdbVotes})</small>
+            <b>Рейтинги:</b> imdb: {imdbRating} <small>({imdbVotes})</small>
           </li>
           <li>
             <b>Год Выпуска:</b> <Link to={`/${type}/year/${year}`}>{year}</Link>

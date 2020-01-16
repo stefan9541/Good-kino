@@ -3,11 +3,11 @@
   padding: 7px 15px;
   display: flex;
   align-items: baseline;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .user-name {
-  color: #ffffff
+  color: #00aeef;
 }
 
 .comment-date {
