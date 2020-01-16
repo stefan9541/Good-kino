@@ -1,6 +1,5 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import { Icon, Upload, message, Avatar, Button, Col } from "antd";
-import { withGoodKinoService } from "../hoc";
 
 import "./update-user-avatar.css";
 
@@ -10,11 +9,10 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
-class UserAvatar extends React.Component {
+class UserAvatar extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
       file: null,
       imageUrl: null
     };
@@ -41,23 +39,22 @@ class UserAvatar extends React.Component {
 
   uploadImage = e => {
     e.preventDefault();
-    const { updateUserAvatar } = this.props.goodKinoService;
+    const { handleUpdateAvatar } = this.props;
     const { file } = this.state;
     const formData = new FormData();
     formData.append("avatar", file);
-    updateUserAvatar(formData)
-      .then(res => console.log(res))
-      .catch(err => console.log({ ...err }));
+    handleUpdateAvatar(formData);
   };
 
   render() {
     const uploadButton = (
       <div>
-        <Icon type={this.state.loading ? "loading" : "plus"} />
+        <Icon type="plus" />
         <div className="ant-upload-text">Upload</div>
       </div>
     );
     const { imageUrl } = this.state;
+    const { avatarLoading } = this.props;
     return (
       <Col span={3}>
         <form onSubmit={this.uploadImage} encType="multipart/form-data">
@@ -76,7 +73,11 @@ class UserAvatar extends React.Component {
               uploadButton
             )}
           </Upload>
-          <Button className="update-avatar-btn" htmlType="submit">
+          <Button
+            loading={avatarLoading}
+            className="update-avatar-btn"
+            htmlType="submit"
+          >
             Изменить
           </Button>
         </form>
@@ -85,4 +86,4 @@ class UserAvatar extends React.Component {
   }
 }
 
-export default withGoodKinoService()(UserAvatar);
+export default UserAvatar;

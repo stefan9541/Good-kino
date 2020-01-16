@@ -191,4 +191,12 @@ export default class GoodKinoService {
       }
     });
   };
+
+  changeUsernameQuery = username => {
+    return axios.patch(
+      `${baseURL}/user/update/username`,
+      { username },
+      { withCredentials: true }
+    );
+  };
 }

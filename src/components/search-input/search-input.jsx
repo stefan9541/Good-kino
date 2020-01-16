@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  Input, Form, Button, Icon
-} from "antd";
+import { Input, Form, Button, Icon } from "antd";
 
 import "./search-input.css";
 
 class SearchInput extends React.Component {
   render() {
-    const {
-      getFieldDecorator,
-      validateFields
-    } = this.props.form;
+    const { getFieldDecorator, validateFields } = this.props.form;
     const { onInputFocus, handleSubmit, onInputChange } = this.props;
 
     return (
@@ -24,18 +19,22 @@ class SearchInput extends React.Component {
         }}
       >
         <Form.Item className="search-form-input">
-          {
-            getFieldDecorator("searchInput", {
-              rules: [{ min: 2, required: true, message: "Введите 2 или больше символа" }],
-              initialValue: this.props.defaultValue || ""
-            })(
-              <Input
-                onFocus={onInputFocus}
-                onChange={onInputChange}
-                name="search-input"
-              />
-            )
-          }
+          {getFieldDecorator("searchInput", {
+            rules: [
+              {
+                min: 2,
+                required: true,
+                message: "Введите 2 или больше символа"
+              }
+            ],
+            initialValue: this.props.defaultValue || ""
+          })(
+            <Input
+              onFocus={onInputFocus}
+              onChange={onInputChange}
+              name="search-input"
+            />
+          )}
         </Form.Item>
         <Form.Item className="search-form-button">
           <Button htmlType="submit" type="primary">

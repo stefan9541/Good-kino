@@ -1,25 +1,45 @@
 import React from "react";
-import { Col, Input, Button } from "antd";
+import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
+import { Col } from "antd";
 import UserAvatar from "../update-user-avatar";
 
 import "./profile-setting-main.css";
+import { withGoodKinoService } from "../hoc";
+import { handleUpdateAvatar, changeUsername } from "../../actions/user-actions";
+import ChangeUserNickname from "../change-user-nickname";
 
-const ProfileMainSettingTabs = () => {
+const ProfileMainSettingTabs = props => {
+  const { userName, handleUpdateAvatar, avatarLoading, changeUsername } = props;
   return (
     <Col className="setting-main-tab">
-      <UserAvatar />
+      <UserAvatar
+        avatarLoading={avatarLoading}
+        handleUpdateAvatar={handleUpdateAvatar}
+      />
 
-      <Col span={5} offset={1}>
-        <h3>Change your username</h3>
-        <form autoComplete="off">
-          <Input placeholder="change your nickname" />
-          <Button htmlType="submit" style={{ marginTop: "8px" }}>
-            Изменить
-          </Button>
-        </form>
-      </Col>
+      <ChangeUserNickname changeUsername={changeUsername} username={userName} />
     </Col>
   );
 };
 
-export default ProfileMainSettingTabs;
+const mapStateToProps = state => {
+  return {
+    userName: state.userReducer.userName,
+    avatarLoading: state.userReducer.avatarLoading
+  };
+};
+const mapDispatchToProps = (dispatch, props) => {
+  const { updateUserAvatar, changeUsernameQuery } = props.goodKinoService;
+  return bindActionCreators(
+    {
+      handleUpdateAvatar: handleUpdateAvatar(updateUserAvatar),
+      changeUsername: changeUsername(changeUsernameQuery)
+    },
+    dispatch
+  );
+};
+export default compose(
+  withGoodKinoService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(ProfileMainSettingTabs);
