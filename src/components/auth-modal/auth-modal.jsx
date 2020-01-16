@@ -61,8 +61,8 @@ const AuthModal = React.memo(props => {
           height: "500px"
         }}
       >
-        <Form autoComplete="off" onSubmit={handleSubmit}>
-          <Form.Item label="E-mail">
+        <Form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
+          <Form.Item className="auth-modal-item" label="E-mail">
             {getFieldDecorator("email", {
               rules: [
                 {
@@ -76,7 +76,7 @@ const AuthModal = React.memo(props => {
               ]
             })(<Input />)}
           </Form.Item>
-          <Form.Item style={{ marginBottom: "20px" }} label="Password">
+          <Form.Item className="auth-modal-item" label="Password">
             {getFieldDecorator("password", {
               rules: [
                 { required: true, message: "Please input your Password!" }
@@ -91,7 +91,7 @@ const AuthModal = React.memo(props => {
               />
             )}
           </Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button className="auth-btn" type="primary" htmlType="submit">
             Log in
           </Button>
           <Col className="auth-body">

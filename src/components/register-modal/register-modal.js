@@ -1,14 +1,6 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { useState } from "react";
-import {
-  Modal,
-  Button,
-  Row,
-  Form,
-  Input,
-  Icon,
-  Tooltip,
-  Result
-} from "antd";
+import { Modal, Button, Row, Form, Input, Icon, Tooltip, Result } from "antd";
 import { withGoodKinoService } from "../hoc";
 
 import "./register-modal.css";
@@ -72,6 +64,7 @@ const RegisterModal = React.memo(props => {
   return (
     <Row>
       <Modal
+        className="register-modal"
         visible={visible}
         footer={null}
         onCancel={e => {
@@ -81,94 +74,102 @@ const RegisterModal = React.memo(props => {
           }, 500);
         }}
       >
-        {
-          (showSuccessMessage)
-            ? successMessage
-            : (
-              <Form onSubmit={handleSubmit} autoComplete="off">
-                <Form.Item
-                  hasFeedback
-                  label="E-mail"
-                  className="register-form-item"
-                >
-                  {getFieldDecorator("email", {
-                    rules: [
-                      {
-                        type: "email",
-                        message: "The input is not valid E-mail!"
-                      },
-                      {
-                        required: true,
-                        message: "Please input your E-mail!"
-                      }
-                    ]
-                  })(<Input />)}
-                </Form.Item>
-                <Form.Item
-                  hasFeedback
-                  className="register-form-item"
-                  label="Password"
-                >
-                  {getFieldDecorator("password", {
-                    rules: [
-                      {
-                        whitespace: true
-                      },
-                      {
-                        required: true,
-                        message: "Please input your password!"
-                      },
-                      {
-                        min: 5,
-                        message: "min length of password is 5"
-                      },
-                      {
-                        validator: validateToNextPassword
-                      }
-                    ]
-                  })(<Input.Password />)}
-                </Form.Item>
-                <Form.Item
-                  className="register-form-item"
-                  label="Confirm Password"
-                  hasFeedback
-                >
-                  {getFieldDecorator("confirm", {
-                    rules: [
-                      {
-                        whitespace: true
-                      },
-                      {
-                        required: true,
-                        message: "Please confirm your password!"
-                      },
-                      {
-                        validator: compareToFirstPassword
-                      }
-                    ]
-                  })(<Input.Password />)}
-                </Form.Item>
-                <Form.Item
-                  className="register-form-item"
-                  label={(
-                    <span>
-                      Nickname&nbsp;
-                      <Tooltip title="What do you want others to call you?">
-                        <Icon type="question-circle-o" />
-                      </Tooltip>
-                    </span>
-                  )}
-                >
-                  {getFieldDecorator("userName", {
-                    rules: [{ required: true, message: "Please input your nickname!", whitespace: true }]
-                  })(<Input />)}
-                </Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Register
-                </Button>
-              </Form>
-            )
-        }
+        {showSuccessMessage ? (
+          successMessage
+        ) : (
+          <Form onSubmit={handleSubmit} autoComplete="off">
+            <Form.Item
+              hasFeedback
+              label="E-mail"
+              className="register-form-item"
+            >
+              {getFieldDecorator("email", {
+                rules: [
+                  {
+                    type: "email",
+                    message: "The input is not valid E-mail!"
+                  },
+                  {
+                    required: true,
+                    message: "Please input your E-mail!"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item
+              hasFeedback
+              className="register-form-item"
+              label="Password"
+            >
+              {getFieldDecorator("password", {
+                rules: [
+                  {
+                    whitespace: true
+                  },
+                  {
+                    required: true,
+                    message: "Please input your password!"
+                  },
+                  {
+                    min: 5,
+                    message: "min length of password is 5"
+                  },
+                  {
+                    validator: validateToNextPassword
+                  }
+                ]
+              })(<Input.Password />)}
+            </Form.Item>
+            <Form.Item
+              className="register-form-item"
+              label="Confirm Password"
+              hasFeedback
+            >
+              {getFieldDecorator("confirm", {
+                rules: [
+                  {
+                    whitespace: true
+                  },
+                  {
+                    required: true,
+                    message: "Please confirm your password!"
+                  },
+                  {
+                    validator: compareToFirstPassword
+                  }
+                ]
+              })(<Input.Password />)}
+            </Form.Item>
+            <Form.Item
+              className="register-form-item"
+              label={
+                <span className="register-form-label">
+                  Nickname&nbsp;
+                  <Tooltip title="What do you want others to call you?">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              }
+            >
+              {getFieldDecorator("userName", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input your nickname!",
+                    whitespace: true
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+            <Button
+              style={{ marginTop: "5px" }}
+              type="primary"
+              htmlType="submit"
+            >
+              Register
+            </Button>
+          </Form>
+        )}
       </Modal>
     </Row>
   );
