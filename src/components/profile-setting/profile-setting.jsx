@@ -28,7 +28,7 @@ const ProfileSetting = props => {
           tab={
             <span className="tab-header">
               <Icon type="unordered-list" />
-              your commentaries
+              Security
             </span>
           }
           key="2"

@@ -1,3 +1,9 @@
+.register-modal {
+  width: 450px !important;
+}
 .register-form-item {
   margin-bottom: 15px !important;
+}
+.register-form-item .ant-form-item-label {
+  line-height: 25px;
 }

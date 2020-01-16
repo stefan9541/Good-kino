@@ -6,10 +6,20 @@
   align-items: center;
   flex-direction: column;
 }
+.auth-modal {
+  width: 450px !important;
+}
 
 .auth-body button {
   color: #16b7f5;
 }
 .sign-in-with h2 {
   color: tomato;
+}
+
+.auth-modal-item {
+  margin-bottom: 5px !important;
+}
+.auth-btn {
+  margin-top: 15px;
 }
