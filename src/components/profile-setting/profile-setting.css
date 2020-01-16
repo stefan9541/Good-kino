@@ -1,5 +1,6 @@
 .setting-wrapp {
   padding: 5px 15px;
+  height: 80vh;
   background: #757f9a; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
