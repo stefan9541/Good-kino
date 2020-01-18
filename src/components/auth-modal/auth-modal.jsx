@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from "react";
 import { Modal, Button, Col, Row, Form, Input, Icon } from "antd";
 import { connect } from "react-redux";
@@ -21,6 +22,10 @@ const AuthModal = React.memo(props => {
     fetchUserovieDataFailure
   } = props;
   const { logInUser } = props.goodKinoService;
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:8080/api"
+      : "https://good-kino.herokuapp.com/api";
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -100,7 +105,7 @@ const AuthModal = React.memo(props => {
             </div>
             <Button
               onClick={() => {
-                window.open("http://localhost:8080/api/google-auth", "_self");
+                window.open(url, "_self");
               }}
               size="large"
               icon="google"
