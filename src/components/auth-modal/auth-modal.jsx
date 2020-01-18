@@ -24,8 +24,10 @@ const AuthModal = React.memo(props => {
   const { logInUser } = props.goodKinoService;
   const url =
     process.env.NODE_ENV === "development"
-      ? "https://good-kino.herokuapp.com/api/google-auth"
-      : "http://localhost:8080/api";
+      ? "http://localhost:8080/api"
+      : "https://good-kino.herokuapp.com/api/google-auth";
+  console.log(process.env.NODE_ENV);
+  console.log(url);
 
   const handleSubmit = e => {
     e.preventDefault();

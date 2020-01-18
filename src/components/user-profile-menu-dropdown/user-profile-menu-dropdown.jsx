@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import "./user-profile-menu-dropdown.css";
 
 const UserProfileMenuDropdown = props => {
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:8080/api"
+      : "https://good-kino.herokuapp.com/api/logout";
   const { favoriteMovies, continueWatch, picture, userName } = props;
   const sliceName =
     userName.length > 15 ? `${userName.slice(0, 15)}...` : userName;
@@ -32,7 +36,7 @@ const UserProfileMenuDropdown = props => {
               <Link to="/setting">Профиль</Link>
             </Menu.Item>
             <Menu.Item key="4">
-              <a href="http://localhost:8080/api/logout">Выйти</a>
+              <a href={url}>Выйти</a>
             </Menu.Item>
           </Menu>
         );
