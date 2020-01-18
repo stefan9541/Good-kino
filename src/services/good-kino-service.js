@@ -4,7 +4,7 @@ import axios from "axios";
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080/api"
-    : "http://localhost:8050";
+    : "https://good-kino.herokuapp.com/api";
 
 const { baseURL } = axios.defaults;
 
