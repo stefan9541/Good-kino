@@ -2,9 +2,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is my first REST SPA application.
 
-How to run?
-npm i.
-npm start.
-cd server.
-node server.js.
-
+live version https://good-kino-e6706.firebaseapp.com/
