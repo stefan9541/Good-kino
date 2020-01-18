@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from "react";
-import { Icon } from "antd";
+import { Icon, Spin } from "antd";
 
 import "./video.css";
 
@@ -14,11 +14,16 @@ class Video extends React.Component {
       handleOnEnded,
       innerRef,
       videoPath,
-      continueWatchMovie
+      continueWatchMovie,
+      loading,
+      onLoadedData
     } = this.props;
 
     return (
-      <div className="video-wrapp">
+      <div
+        style={{ display: loading ? "none" : "block" }}
+        className="video-wrapp"
+      >
         <div
           style={{ display: onLoadVisibleBlock }}
           className="play-button-wrapp"
@@ -28,6 +33,7 @@ class Video extends React.Component {
           </button>
         </div>
         <video
+          onLoadedData={() => onLoadedData(false)}
           onPlaying={() => {
             setTimeout(() => {
               continueWatchMovie();

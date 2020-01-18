@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import React, { Component } from "react";
 import { compose } from "redux";
-import { Icon } from "antd";
+import { Icon, Spin } from "antd";
 import { connect } from "react-redux";
 import { withGoodKinoService } from "../hoc";
 import { addMovieToContinueWatch } from "../../actions/user-actions";
@@ -20,6 +20,7 @@ class VideoPlayer extends Component {
     super(props);
     this.state = {
       tooglePlay: false,
+      loading: true,
       toogleQualityMenu: false,
       visiblePlayButton: true,
       duration: 0,
@@ -95,7 +96,12 @@ class VideoPlayer extends Component {
   };
 
   handleAfterChange = () => {
-    videoRef.current.play();
+    const { tooglePlay } = this.state;
+    if (tooglePlay) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
   };
 
   handleVolumeChange = value => {
@@ -180,19 +186,21 @@ class VideoPlayer extends Component {
   handleFetchVideoforPlayer = quality => {
     const { fetchVideoForPlayer } = this.props.goodKinoService;
     const { movieId } = this.props;
-    fetchVideoForPlayer(movieId, quality || "720")
-      .then(({ data }) => {
-        if (this._isMounted) {
-          this.setState({
-            visiblePlayButton: true,
-            tooglePlay: true
-          });
-          videoRef.current.src = data.path;
-          videoRef.current.pause();
-          videoRef.current.currentTime = 0;
-        }
-      })
-      .catch(err => this.setState({ err }));
+    this.setState({ loading: true }, () => {
+      fetchVideoForPlayer(movieId, quality || "720")
+        .then(({ data }) => {
+          if (this._isMounted) {
+            this.setState({
+              visiblePlayButton: true,
+              tooglePlay: true
+            });
+            videoRef.current.src = data.path;
+            videoRef.current.pause();
+            videoRef.current.currentTime = 0;
+          }
+        })
+        .catch(err => this.setState({ err }));
+    });
   };
 
   handleAddMovieToContinueWatch = () => {
@@ -234,6 +242,10 @@ class VideoPlayer extends Component {
     });
   };
 
+  onLoadedData = loading => {
+    this.setState({ loading });
+  };
+
   render() {
     const {
       tooglePlay,
@@ -241,7 +253,8 @@ class VideoPlayer extends Component {
       toogleQualityMenu,
       currentTime,
       duration,
-      volume
+      volume,
+      loading
     } = this.state;
 
     const volumeIcon =
@@ -266,7 +279,9 @@ class VideoPlayer extends Component {
       <div ref={customRef} className="custom-video-player-wrapp">
         <Video
           handleOnEnded={this.handleOnEnded}
+          onLoadedData={this.onLoadedData}
           videoPath={this.state.videoPath}
+          loading={loading}
           continueWatchMovie={this.handleAddMovieToContinueWatch}
           ref={videoRef}
           getCurrentTime={this.getCurrentTime}
@@ -275,39 +290,48 @@ class VideoPlayer extends Component {
           onLoadVisibleBlock={onLoadVisibleBlock}
         />
 
-        <div className="custom-control-panel-wrap">
-          <div className="custom-controls">
-            <VideoControlPanel
-              // volume slider
-              volumeValue={volume}
-              volumeToolTip={this.volumeToolTip}
-              handleVolumeChange={this.handleVolumeChange}
-              volumeIcon={volumeIcon}
-              // video slider
-              handleRewindVideo={this.rewindVideo}
-              rewindVideoValue={this.state.currentTime}
-              maxDurationVideo={this.state.duration}
-              toolTipFormat={this.toolTipFormat}
-              handleOnAfterChange={this.handleAfterChange}
-              // other text value
-              durationVideo={durationFormat}
-              currentTimeVideo={currentTimeFormat}
-              playPauseIcon={playPauseIcon}
-              // play pause button
-              tooglePlayVideo={this.tooglePlayVideo}
-            />
+        {loading ? (
+          <Spin size="large" className="video-spin" />
+        ) : (
+          <React.Fragment>
+            <div className="custom-control-panel-wrap">
+              <div className="custom-controls">
+                <VideoControlPanel
+                  // volume slider
+                  volumeValue={volume}
+                  volumeToolTip={this.volumeToolTip}
+                  handleVolumeChange={this.handleVolumeChange}
+                  volumeIcon={volumeIcon}
+                  // video slider
+                  handleRewindVideo={this.rewindVideo}
+                  rewindVideoValue={this.state.currentTime}
+                  maxDurationVideo={this.state.duration}
+                  toolTipFormat={this.toolTipFormat}
+                  handleOnAfterChange={this.handleAfterChange}
+                  // other text value
+                  durationVideo={durationFormat}
+                  currentTimeVideo={currentTimeFormat}
+                  playPauseIcon={playPauseIcon}
+                  // play pause button
+                  tooglePlayVideo={this.tooglePlayVideo}
+                />
 
-            <QualityChange
-              toogleQualityMenu={this.toogleQualityMenu}
-              onQualityChange={this.handleFetchVideoforPlayer}
-              visible={visibleQualityMenu}
-            />
+                <QualityChange
+                  toogleQualityMenu={this.toogleQualityMenu}
+                  onQualityChange={this.handleFetchVideoforPlayer}
+                  visible={visibleQualityMenu}
+                />
 
-            <div onClick={this.fullScreenMode} className="fullscreen-button">
-              <Icon type="fullscreen" />
+                <div
+                  onClick={this.fullScreenMode}
+                  className="fullscreen-button"
+                >
+                  <Icon type="fullscreen" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </React.Fragment>
+        )}
       </div>
     );
   }

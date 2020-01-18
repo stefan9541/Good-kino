@@ -6,6 +6,7 @@ video {
 .video-wrapp {
   padding: 10px;
   width: 100%;
+  height: 100%;
 }
 
 .play-button-wrapp {
