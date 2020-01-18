@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable operator-linebreak */
 import React from "react";
 import { Modal, Button, Col, Row, Form, Input, Icon } from "antd";
 import { connect } from "react-redux";
@@ -24,8 +24,8 @@ const AuthModal = React.memo(props => {
   const { logInUser } = props.goodKinoService;
   const url =
     process.env.NODE_ENV === "development"
-      ? "http://localhost:8080/api"
-      : "https://good-kino.herokuapp.com/api";
+      ? "https://good-kino.herokuapp.com/api/google-auth"
+      : "http://localhost:8080/api";
 
   const handleSubmit = e => {
     e.preventDefault();
