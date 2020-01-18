@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import React from "react";
-import { Modal, Button, Col, Row, Form, Input, Icon } from "antd";
+import { Modal, Button, Col, Row, Form, Input, Icon, Tooltip } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
@@ -24,10 +24,8 @@ const AuthModal = React.memo(props => {
   const { logInUser } = props.goodKinoService;
   const url =
     process.env.NODE_ENV === "development"
-      ? "http://localhost:8080/api"
+      ? "http://localhost:8080/api/google-auth"
       : "https://good-kino.herokuapp.com/api/google-auth";
-  console.log(process.env.NODE_ENV);
-  console.log(url);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -68,7 +66,7 @@ const AuthModal = React.memo(props => {
           height: "500px"
         }}
       >
-        <Form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
+        <Form className="login-form" onSubmit={handleSubmit}>
           <Form.Item className="auth-modal-item" label="E-mail">
             {getFieldDecorator("email", {
               rules: [
@@ -105,15 +103,18 @@ const AuthModal = React.memo(props => {
             <div className="sign-in-with">
               <h2>Or u can sign in with</h2>
             </div>
-            <Button
-              onClick={() => {
-                window.open(url, "_self");
-              }}
-              size="large"
-              icon="google"
-            >
-              Google
-            </Button>
+            <Tooltip title="Google auth not worked yet">
+              <Button
+                disabled
+                onClick={() => {
+                  window.open(url, "_self");
+                }}
+                size="large"
+                icon="google"
+              >
+                Google
+              </Button>
+            </Tooltip>
           </Col>
         </Form>
       </Modal>

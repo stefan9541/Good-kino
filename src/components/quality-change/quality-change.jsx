@@ -21,13 +21,9 @@ const QualityMenu = props => {
       onClick={item => props.onQualityChange(item.key)}
     >
       <Menu.Divider />
-      <Menu.Item key="480">
-        480p
-      </Menu.Item>
+      <Menu.Item key="480">480p</Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="720">
-        720p
-      </Menu.Item>
+      <Menu.Item key="720">720p</Menu.Item>
       <Menu.Divider />
       <Menu.Item key="1080">1080</Menu.Item>
     </Menu>

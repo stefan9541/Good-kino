@@ -8,7 +8,7 @@ import "./user-profile-menu-dropdown.css";
 const UserProfileMenuDropdown = props => {
   const url =
     process.env.NODE_ENV === "development"
-      ? "http://localhost:8080/api"
+      ? "http://localhost:8080/api/logout"
       : "https://good-kino.herokuapp.com/api/logout";
   const { favoriteMovies, continueWatch, picture, userName } = props;
   const sliceName =

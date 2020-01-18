@@ -11,7 +11,6 @@ import FavoriteMoviesContainer from "../../containers/favorite-movies-container"
 import ContinueWatch from "../continue-watch";
 import ProtectRoute from "../protect-route";
 import PageNotFound from "../page-not-found";
-import UpdateUserAvatar from "../update-user-avatar/update-user-avatar";
 import ProfileSetting from "../profile-setting/profile-setting";
 
 const MainContentRoutes = props => {

@@ -6,20 +6,19 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./components/app";
 import ErrorBoundry from "./components/error-boundry";
 import GoodKinoService from "./services";
-import { GoodKinoServiceProvider } from "./components/good-kino-service-context";
-
 import store from "./store";
+import GoodKinoServiceContext from "./components/good-kino-service-context/good-kino-service-context";
 
 const goodKinoService = new GoodKinoService();
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
-      <GoodKinoServiceProvider value={goodKinoService}>
+      <GoodKinoServiceContext.Provider value={goodKinoService}>
         <Router>
           <App />
         </Router>
-      </GoodKinoServiceProvider>
+      </GoodKinoServiceContext.Provider>
     </ErrorBoundry>
   </Provider>,
   document.getElementById("root")

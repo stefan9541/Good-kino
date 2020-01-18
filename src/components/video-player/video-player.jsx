@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React, { Component } from "react";
 import { compose } from "redux";
 import { Icon } from "antd";

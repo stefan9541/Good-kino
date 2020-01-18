@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Input, Col, Button } from "antd";
-import { warningMessage } from "../../utils/feed-back";
 
 const rules = [
   {

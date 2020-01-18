@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Button, Icon, Avatar } from "antd";
+import { Button } from "antd";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import AuthModal from "../auth-modal";
@@ -37,7 +37,6 @@ class AuthAndProfile extends PureComponent {
       favoriteMovies,
       picture,
       userName,
-      error,
       isAuth
     } = this.props;
 
@@ -95,7 +94,6 @@ const mapStateToProps = state => {
   return {
     continueWatch: state.userReducer.continueWatch,
     favoriteMovies: state.userReducer.favoriteMovies,
-    error: state.userReducer.error,
     picture: state.userReducer.picture,
     userName: state.userReducer.userName,
     isAuth: state.userReducer.isAuth,
