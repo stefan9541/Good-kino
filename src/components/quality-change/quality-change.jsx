@@ -3,16 +3,19 @@ import { Icon, Menu } from "antd";
 
 import "./quality-change.css";
 
-const QualityChange = ({ toogleQualityMenu, visible, onQualityChange }) => {
-  return (
-    <div onClick={toogleQualityMenu} className="quality-change">
-      <div style={{ display: visible }} className="overlay-qality">
-        <QualityMenu onQualityChange={onQualityChange} />
+const QualityChange = React.memo(
+  ({ toogleQualityMenu, visible, onQualityChange }) => {
+    console.log("hello quality");
+    return (
+      <div onClick={toogleQualityMenu} className="quality-change">
+        <div style={{ display: visible }} className="overlay-qality">
+          <QualityMenu onQualityChange={onQualityChange} />
+        </div>
+        <Icon type="setting" />
       </div>
-      <Icon type="setting" />
-    </div>
-  );
-};
+    );
+  }
+);
 
 const QualityMenu = props => {
   return (

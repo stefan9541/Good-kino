@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from "react";
-import { Icon, Spin } from "antd";
+import { Icon } from "antd";
 
 import "./video.css";
 
