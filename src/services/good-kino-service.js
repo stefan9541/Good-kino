@@ -53,9 +53,9 @@ export default class GoodKinoService {
     }
   };
 
-  fetchSingleMovie = movieName => {
-    return axios.get(`${baseURL}/get-only-one-movie`, {
-      params: { movieName }
+  fetchSingleMovie = movieId => {
+    return axios.get(`${baseURL}/movie`, {
+      params: { movieId }
     });
   };
 

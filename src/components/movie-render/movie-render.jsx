@@ -10,14 +10,14 @@ const imgError = event => {
 };
 
 const MovieRender = ({ movies }) => {
-  return movies.map(({ Poster, Title, Genre, Released, Type }, idx) => {
+  return movies.map(({ Poster, Title, Genre, Released, Type, _id }) => {
     const splitGenre = Genre.split(",")[0];
     const titlePath = `/${Type}/${splitGenre}/${Title}`;
     const currentPath = fixedEncodeURIComponent(titlePath);
     return (
-      <Col key={`${Title}+ ${idx}`} className="movie-wrap" span={6}>
+      <Col key={_id} className="movie-wrap" span={6}>
         <div className="poster-wrap">
-          <Link to={currentPath}>
+          <Link to={{ pathname: currentPath, state: { _id } }}>
             <img
               onError={imgError}
               src={Poster}

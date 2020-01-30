@@ -13,14 +13,15 @@ const SlickSliderItem = ({ items = [], setting }) => {
     <Row id="slider-container">
       <Row id="slider">
         <Slider {...setting}>
-          {(items || []).map(({ Genre, Type, Title, Poster }) => {
+          {(items || []).map(({ Genre, Type, Title, Poster, _id }) => {
             const genre = Genre.split(",")[0];
             const linkHref = `/${Type}/${genre}/${Title}`;
+            const fixedHref = fixedEncodeURIComponent(linkHref);
             return (
-              <Tooltip mouseEnterDelay={0.3} key={Title} title={Title}>
+              <Tooltip mouseEnterDelay={0.3} key={_id} title={Title}>
                 <Col className="slider-item-wrap">
                   <div className="slider-poster-wrap">
-                    <Link to={fixedEncodeURIComponent(linkHref)}>
+                    <Link to={{ pathname: fixedHref, state: { _id } }}>
                       <img alt={`${Title} poster img`} src={Poster} />
                     </Link>
                   </div>

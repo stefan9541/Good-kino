@@ -17,12 +17,14 @@ export const fetchUserDataSuccess = user => {
     payload: user
   };
 };
+
 export const fetchUserovieDataFailure = err => {
   return {
     type: "FETCH_USER_DATA_FAILURE",
     payload: err
   };
 };
+
 export const fetchUser = apiCall => () => dispatch => {
   dispatch(fetchUserDataRequest());
   apiCall()

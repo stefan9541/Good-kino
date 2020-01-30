@@ -34,10 +34,13 @@ class MoviePageContainer extends Component {
   }
 
   getData() {
-    const { fetchData, match } = this.props;
+    const {
+      fetchData,
+      location: { state }
+    } = this.props;
 
-    const movie = decodeUriComponent(match.params.movie);
-    fetchData(this.reducerName, movie);
+    const movieId = state._id;
+    fetchData(this.reducerName, movieId);
   }
 
   render() {
