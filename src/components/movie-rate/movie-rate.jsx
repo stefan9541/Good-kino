@@ -1,11 +1,12 @@
 import React from "react";
-import { Col, Rate } from "antd";
+import { Col, Rate, Button } from "antd";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withGoodKinoService } from "../hoc";
 import { handleVoted } from "../../actions/user-actions";
 
 import "./movie-rate.css";
+import Axios from "axios";
 
 const MovieRate = props => {
   const {
@@ -29,6 +30,14 @@ const MovieRate = props => {
   return (
     <Col className="rate-block-wrap">
       <span style={{ color: "#0faeef" }}>Оцени Фильм: &#160; &#160;</span>
+      <Button
+        onClick={() => {
+          Axios.get(`http://localhost:8080/api/notification/${movieId}`);
+        }}
+        type="primary"
+      >
+        push noticifation
+      </Button>
       <Rate
         onChange={handleChange}
         count={10}

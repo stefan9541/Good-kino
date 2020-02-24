@@ -27,7 +27,7 @@ const MovieRender = ({ movies }) => {
         </div>
 
         <div className="title-wrap">
-          <Link to={currentPath}>{Title}</Link>
+          <Link to={{ pathname: currentPath, state: { _id } }}>{Title}</Link>
         </div>
 
         <div className="movie-released-wrap">

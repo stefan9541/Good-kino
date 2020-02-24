@@ -23,13 +23,9 @@ const VideoControlPanel = props => {
   return (
     <React.Fragment>
       <div className="play-pause-button">
-        <Button onClick={tooglePlayVideo}>
-          {playPauseIcon}
-        </Button>
+        <Button onClick={tooglePlayVideo}>{playPauseIcon}</Button>
       </div>
-      <div className="current-time">
-        {currentTimeVideo}
-      </div>
+      <div className="current-time">{currentTimeVideo}</div>
       <div className="slider-duration">
         <Slider
           onChange={handleRewindVideo}
@@ -39,12 +35,8 @@ const VideoControlPanel = props => {
           onAfterChange={handleOnAfterChange}
         />
       </div>
-      <div className="duration-time">
-        {durationVideo}
-      </div>
-      <div className="volume-icon">
-        {volumeIcon}
-      </div>
+      <div className="duration-time">{durationVideo}</div>
+      <div className="volume-icon">{volumeIcon}</div>
       <div className="volume-slider">
         <Slider
           value={volumeValue}

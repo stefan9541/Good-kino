@@ -6,19 +6,18 @@ import "antd/dist/antd.css";
 import Header from "../header";
 import ScrollUpButtonComponent from "../scroll-up-button";
 import MainContentRoutes from "../main-content-routes";
-// import { ColorContext } from "../good-kino-service-context";
+import RealTimeNotification from "../../socket-io-connect/io-connect";
 
 const App = () => {
   return (
-    // <ColorContext.Provider value={{ color: "blue" }}>
     <Row id="container">
+      <RealTimeNotification />
       <Header />
 
       <ScrollUpButtonComponent />
 
       <MainContentRoutes />
     </Row>
-    // </ColorContext.Provider>
   );
 };
 

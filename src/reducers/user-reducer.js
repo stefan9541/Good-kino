@@ -31,6 +31,7 @@ const userReducer = (state = initialState, action) => {
 
     case "FETCH_USER_DATA_FAILURE":
       return {
+        ...state,
         loading: false,
         isAuth: false,
         error: action.payload
